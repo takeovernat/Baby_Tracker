@@ -57,8 +57,8 @@ finally
     }
 
 }//func
-//const userObj = {username: "natnael", password: "123456", age: "23", email: "fdkfdj@yahoo.com"};
-//adduser(userObj).catch(console.dir);
+const userObj = {username: "ron", password: "123444", age: "28", email: "gkkkk@yahoo.com"};
+adduser(userObj).catch(console.dir);
 
 
 async function maketable(name){
@@ -103,8 +103,5 @@ async function auth(username, password){
         await client.close();
     }
 }
-
-
-//auth("globoynat", "cool").catch(console.dir);
 
 

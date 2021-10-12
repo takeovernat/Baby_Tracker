@@ -1,4 +1,4 @@
-const e = require('express');
+
 const express = require('express')
 const app = express()
 const mysql = require('mysql')
@@ -10,10 +10,10 @@ const db = mysql.createConnection({
     database: 'babytracker'
 });
 
-function Insert_Into_Admin_first (id, name, username, child_id){
+function Insert_Into_child_first (id, admin_id, age, height, weight, diet_id){ //tested
 app.get('/insert', (req, res)=> {
-    var sql = 'INSERT INTO Admin ( id, name, username, child_id) values ( ?, ?, ?, ?);';
-    let todo = [id, name, username, child_id]
+    var sql = 'INSERT INTO child ( id, admin_id, age, height, weight, diet_id) values ( ?, ?, ?, ?,?,?);';
+    let todo = [id, admin_id, age, height, weight, diet_id]
     db.query(sql, todo, (err, result) => {
         if(err){
             console.log(err);
@@ -26,10 +26,10 @@ app.get('/insert', (req, res)=> {
 });
 }
 
-function Insert_Into_Admin (name, username, child_id){
+function Insert_Into_child ( admin_id, age, height, weight, diet_id){ //in case we want to do id auto increment
     app.get('/insert', (req, res)=> {
-        var sql = 'INSERT INTO Admin ( name, username, child_id) values ( ?, ?, ?);';
-        let todo = [name, username, child_id]
+        var sql = 'INSERT INTO child ( admin_id, age, height, weight, diet_id) values ( ?, ?, ?,?,?);';
+        let todo = [admin_id, age, height, weight, diet_id]
         db.query(sql, todo, (err, result) => {
             if(err){
                 console.log(err);
@@ -41,11 +41,12 @@ function Insert_Into_Admin (name, username, child_id){
         });
     });
     }
+//Insert_Into_child_first(3, 12, 22, 23, 30.4, 3);
 
-    function deleteAdmin (username){
+    function deletechild(id){ //test
         app.get('/delete', (req, res)=> {
-            var sql = 'DELETE FROM admin WHERE username = (?);';
-            let todo = [username]
+            var sql = 'DELETE FROM child WHERE id = (?);';
+            let todo = [id]
             db.query(sql, todo, (err, result) => {
                 if(err){
                     console.log(err);
@@ -56,15 +57,11 @@ function Insert_Into_Admin (name, username, child_id){
         
             });
         });
-        }
-//deleteAdmin("jackstar_01");
-//Insert_Into_Admin('jack', 'jackstar_01', 1);
+    }
 
+//deletechild(3);
 
-
-
-
-app.listen(3001, ()=>{
+app.listen(3004, ()=>{
 
     console.log("server running!");
 })

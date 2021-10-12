@@ -6,11 +6,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Navstack from './navigation';
 
-//import login from '../baby_tracker_front/screens/loginscreen'
-
-
-
-
 
 export default function App() {
   return (

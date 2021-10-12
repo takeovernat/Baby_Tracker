@@ -184,7 +184,8 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-        margin: 10
+        backgroundColor: '#f5b0d4',
+        //margin: 10
     },
     textInput: {
         borderRadius: 10,

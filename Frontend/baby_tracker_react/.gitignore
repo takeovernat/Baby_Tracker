@@ -1,8 +1,10 @@
 node_modules/
 .expo/
 npm-debug.*
+*.lock
 *.jks
 *.p8
+*.json
 *.p12
 *.key
 *.mobileprovision

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { MainNav } from './navigation/MainNav';
+
 
 import Navstack from './navigation';
 
@@ -10,7 +12,7 @@ import Navstack from './navigation';
 export default function App() {
   return (
     <NavigationContainer>
-      <Navstack/>
+      <MainNav/>
     </NavigationContainer>
   );
 }

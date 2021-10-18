@@ -25,7 +25,7 @@ function HomeScreen({ navigation }) {
 function SettingsScreen({navigation}){
   return(
     <View style={{margintop:20}}>
-    <Text style={{margintop:10}}> "Settings"</Text>
+    <Text style={{margintop:10}}> "Settings yuh"</Text>
     </View>
   );
 }

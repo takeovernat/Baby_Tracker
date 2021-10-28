@@ -1,6 +1,6 @@
 
 const dbconfig = {
-  HOST: "localhost",
+  HOST: "172.20.12.197",
   USER: "root",
   PASSWORD: "password",
   DB: "babytracker"

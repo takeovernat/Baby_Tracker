@@ -1,19 +1,7 @@
-/*
-import React, {useState} from "react";
-import { StyleSheet, Text, View, Button } from 'react-native';
-import Navstack from "../navigation";
 
+import React, {useEffect, useState} from "react";
 
-const ProfileScreen = ({ navigation, route }) => {
-    route.params.changestate("false")
-     return (<Text>This iss {route.params.name}'s profile and state is {route.params.state}</Text>);
-   };
-   
-
-   export default ProfileScreen;
-   */
-
-   import React,{useState} from 'react';
+//import Navstack from "../navigation";
 import { 
     Button,
     ScrollView,
@@ -34,12 +22,21 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
 import { useTheme } from 'react-native-paper';
+import { MainNav } from "../navigation/MainNav";
 
-//import { AuthContext } from '../components/context';
+import axios from 'axios';
 
-//import Users from '../model/users';
 
 const SignInScreen = ({navigation}) => {
+
+    useEffect(() => {
+       // console.log(Auth);
+       
+       // (Auth === true) ? console.log("true from signin") : console.log("false from signin");
+        
+    });
+    
+    
 
     const [data, setData] = React.useState({
         username: '',
@@ -49,6 +46,22 @@ const SignInScreen = ({navigation}) => {
         isValidUser: true,
         isValidPassword: true,
     });
+const [Users, setUsers] = useState([]);
+const [isValidLogin, setisValidLogin] = useState(false);
+
+useEffect(()=> {
+    getUsers();
+    }, []);
+
+const getUsers = () => {
+    axios 
+        .get('http://127.0.0.1:3003/')
+        .then((res)=> {
+            setUsers(res.data);
+            //console.log(res.data);
+        })
+        .catch((err) => console.log(err));
+};
 
     const { colors } = useTheme();
 
@@ -108,31 +121,67 @@ const SignInScreen = ({navigation}) => {
             });
         }
     }
+    /*
+const Login = (username, password) => {
 
-    const loginHandle = (userName, password) => {
-        /*
-        const foundUser = Users.filter( item => {
-            return userName == item.username && password == item.password;
-        } );
-
-        if ( data.username.length == 0 || data.password.length == 0 ) {
-            Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
-                {text: 'Okay'}
-            ]);
-            return;
-        }
-
-        if ( foundUser.length == 0 ) {
-            Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-                {text: 'Okay'}
-            ]);
-            return;
-        }
-        signIn(foundUser);
-        */
-       
+    if ( username.length == 0 || password.length == 0 ) {
+        Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
+            {text: 'Okay'}
+        ]);
+        return;
     }
 
+    if ( foundUser.length == 0 ) {
+        Alert.alert('Invalid User!', 'Username or password is incorrect.', [
+            {text: 'Okay'}
+        ]);
+        return;
+    }
+
+    Users.forEach((user) => {        
+    if(user.username === username && user.password === password){
+        setisValidLogin(true);
+    //console.log(user.username);
+    }
+    });
+    if(isValidLogin){
+        console.log("youd nav here or sum");
+        
+
+    }
+    else{
+        alert('Invalid login');
+    }
+};
+*/
+    const loginHandle = (userName, password) => {
+        
+        //console.log("-----> ", Users.length)
+       const foundUser = async () =>{
+            for(let i = 0; i<Users.length; i++){
+                
+               if (Users[i].username === userName && Users[i].password === password){
+                   //console.log("found it and it is -> ", Users[i].username);
+                   //return Users[i].username;
+                    navigation.navigate("options", {
+                        screen: 'DashBoard',
+                        params: {}
+                    });
+               }
+               
+            }
+       }
+            //console.log(item.username, item.password, " ", userName, " ", password);
+            //return userName == item.username && password == item.password;
+
+        const UserInfo = foundUser();
+        //const user_username = UserInfo[0];
+        //const user_password = UserInfo[1];
+       //console.log(UserInfo[0]);
+        
+    }
+
+    
     //const [username, setUsername] = useState('');
     //const [pass, setpass] = useState('');
 
@@ -159,7 +208,7 @@ const SignInScreen = ({navigation}) => {
     
                         <View>
                             <View style={styles.textInputContainer}>
-                                <TouchableOpacity style={styles.button} onPress={console.log("")}>
+                                <TouchableOpacity style={styles.button} onPress={loginHandle("ron", "123444")}>
                                     <Text>Login</Text>
                                 </TouchableOpacity>
                             </View>

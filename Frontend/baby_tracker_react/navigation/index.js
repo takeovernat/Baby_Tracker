@@ -4,9 +4,22 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import welcome from '../screens/welcome';
 import SignInScreen from '../screens/signin';
 import options from '../screens/options'
+import { useEffect } from 'react';
+
 
 const stack = createNativeStackNavigator();
-const Navstack = () => {
+const Navstack = ({Auth, SetAuth}) => {
+    
+    //useEffect(() => {
+      //  SetAuth(false);
+    //});
+    
+
+    (Auth === true) ? console.log("true from index") : console.log("false from index");
+    
+
+
+
     return (
        
             <stack.Navigator  initialRouteName={welcome} >
@@ -21,6 +34,7 @@ const Navstack = () => {
                 name = "login"
                 component={SignInScreen}
                 options={{title: 'login'}}
+                initialParams={{'Auth':Auth}}
                 />
             </stack.Navigator>
         

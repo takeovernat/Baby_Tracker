@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import SignInScreen from '../screens/signin';
+
 
 
 
@@ -23,22 +25,24 @@ function HomeScreen({ navigation }) {
   );
 }
 function SettingsScreen({navigation}){
-  return(
-    <View style={{margintop:20}}>
-    <Text style={{margintop:10}}> "Settings yuh"</Text>
+  
+
+  return (
+    <View style={{marginTop:30}}>
+      <Text>Signed in!</Text>
     </View>
   );
 }
 
 function ChildrenScreen({navigation}){
   return(
-    <View style={{margintop:50}}>
-    <Text style={{margintop:10}}> "Childrens"</Text>
+    <View style={{marginTop:50}}>
+    <Text style={{marginTop:10}}> "Childrens"</Text>
     </View>
   );
 }
 
-const Tab = createMaterialBottomTabNavigator();
+
 
 function NotificationsScreen({ navigation }) {
   return (
@@ -69,6 +73,8 @@ function MyDrawer() {
   );
 }
 
+
+const Tab = createMaterialBottomTabNavigator();
 function MainNav() {
   return (
     

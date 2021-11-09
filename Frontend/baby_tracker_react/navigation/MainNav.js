@@ -6,21 +6,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import SignInScreen from '../screens/signin';
-
+import AuthContext from '../context';
 
 
 
 function HomeScreen({ navigation }) {
+  const { signOut } = React.useContext(AuthContext);
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
         onPress={navigation.openDrawer}
         title="Open navigation drawer"
       />
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
+        
+        <Button title="Sign out" onPress={signOut} />
     </View>
   );
 }

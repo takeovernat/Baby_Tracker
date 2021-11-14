@@ -14,11 +14,7 @@ const Navstack = ({Auth, SetAuth}) => {
       //  SetAuth(false);
     //});
     
-
     (Auth === true) ? console.log("true from index") : console.log("false from index");
-    
-
-
 
     return (
        
@@ -36,6 +32,8 @@ const Navstack = ({Auth, SetAuth}) => {
                 options={{title: 'login'}}
                 initialParams={{'Auth':Auth}}
                 />
+                <stack.Screen
+                name = "signup" component={forms} options={{headerShown: false}} />
             </stack.Navigator>
         
     );

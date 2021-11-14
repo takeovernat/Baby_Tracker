@@ -5,6 +5,7 @@ import {
     SafeAreaView,
     View, 
     Text, 
+    Image,
     TouchableOpacity, 
     TextInput,
     Platform,
@@ -22,7 +23,9 @@ import { useTheme } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MainNav } from '../navigation/MainNav';
+import Navstack from '../navigation';
 import AuthContext from '../context';
+import FlatButton from '../styles/button';
 
 export default function SignUpScreen({navigation}){
     const [username, setUsername] = React.useState('');
@@ -31,37 +34,41 @@ export default function SignUpScreen({navigation}){
     const { signIn } = React.useContext(AuthContext);
   
     return (
-        
+
             <SafeAreaView style={styles.container}>
+                <Text style={styles.text}>Baby Tracker</Text>
+                <Image
+                style={styles.image}
+                source={{uri:'https://cdn-icons-png.flaticon.com/512/941/941515.png'}}/>
                 <View style={styles.open}></View>
                 <View style={styles.textInputContainer}>
                     <TextInput
                         //value={username}
                         placeholder="username"
-                        placeholderTextColor="grey"
+                        placeholderTextColor="black"
+                        placeholderTextFont="Noteworthy"
                         style={styles.textInput}
                         onChangeText={(text) => setUsername(text)}
                     />
                     <TextInput
                         placeholder="password"
-                        placeholderTextColor="grey"
+                        placeholderTextColor="black"
                         secureTextEntry={true}
                         style={styles.textInput}
-                        //value={pass}
                         onChangeText={(pass) => setPassword(pass) }
                     />
 
                     <View>
                         <View style={styles.textInputContainer}>
-                            <TouchableOpacity style={styles.button} onPress={() => signIn({ username, password })}>
-                                <Text>Login</Text>
-                            </TouchableOpacity>
+                            <FlatButton text='Login' onPress={() => signIn({ username, password })}/>
                         </View>
                     </View>
                 </View>
                 <View style={styles.signup}>
-                    <Text style={styles.txtHello}>Don't have an account?</Text>
-                    <Button title="Sign Up" />
+                    <Text style={styles.note}>Don't have an account?</Text>
+                    <FlatButton text="Sign Up" onPress={()=> (
+                        <Navstack/>
+                    )}/>
                 </View>
             </SafeAreaView>
         
@@ -79,11 +86,27 @@ export default function SignUpScreen({navigation}){
         backgroundColor: '#f5b0d4',
         //margin: 10
     },
+    image: {
+        height: 100, 
+        width: 75,
+        aspectRatio: .9,
+        marginTop: -10,
+        marginBottom: 40 
+        //resizeMode: 'contain',
+  },
+    text:{
+        fontFamily: 'Noteworthy',
+        fontSize: 43,
+        fontWeight: "bold",
+        justifyContent: 'center',
+        paddingVertical: 20,
+        paddingHorizontal: 70
+    },
     textInput: {
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: 'grey',
-        color: 'grey',
+        borderColor: 'black',
+        color: 'black',
         marginTop: 5,
         padding: 18,
         width: '75%'
@@ -92,27 +115,15 @@ export default function SignUpScreen({navigation}){
         width: Dimensions.get('window').width,
         alignItems: 'center'
     },
-    txtHello: {
-        marginTop: 30,
-        fontSize: 15,
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: 'white'
-    },
-
-    button: {
-        borderWidth: 0,
-        width: '40%',
-        alignItems: 'center',
-        borderRadius: 20,
-        height: 50,
-        justifyContent: 'center',
-        marginTop: 40,
-        backgroundColor: '#FFDEFA'
+    note:{
+        fontFamily: 'Noteworthy',
+        fontSize: 24,
+        fontWeight: "bold",
     },
     
     signup: {
-        marginTop: 200
+        marginTop: 180,
+        marginBottom: 500
     },
 
 });

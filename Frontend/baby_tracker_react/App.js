@@ -144,6 +144,7 @@ export default function App({ navigation }) {
                 title: 'Sign in',
                 // When logging out, a pop animation feels intuitive
                 animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+                headerShown: false
               }}
             />
           ) : (

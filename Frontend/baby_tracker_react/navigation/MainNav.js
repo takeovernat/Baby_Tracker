@@ -61,32 +61,31 @@ function MainNav() {
   return (
     
       <Tab.Navigator initialRouteName="Home"
-      barStyle={{backgroundColor:'#FFDEFA'}}
-      inactiveColor='black'
-      labeled={false}
-      activeColor='black'
+      inactiveColor='#EDBFB7'
+      labeled={true}
+      activeColor='#6E9887' 
       barStyle={{backgroundColor:'black'}}
       >
       <Tab.Screen name="DashBoard" component={MyDrawer}
           options={{
             tabBarLabel: 'Dashboard',
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="view-dashboard" color="#EDBFB7" size={24} />
+              <MaterialCommunityIcons name="view-dashboard" color={color} size={24} />
             ),
           }}
         />
       <Tab.Screen name = "children" component={ChildrenScreen}
       options={{
-        tabBarLabel: 'notification',
+        tabBarLabel: 'notifications',
         tabBarIcon: ({ color }) => (
-        <MaterialCommunityIcons name="bell" size={24} color="#EDBFB7" />        ),
+        <MaterialCommunityIcons name="bell" size={24} color={color} />        ),
       }}
       />
       <Tab.Screen name="Settings" component={SettingsScreen} 
       options={{
         tabBarLabel: 'Settings',
         tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="account-settings" size={24} color="#EDBFB7" />
+          <MaterialCommunityIcons name="account-settings" size={24} color={color} />
         ),
       }}
       />

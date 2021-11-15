@@ -31,15 +31,7 @@ const Stack = createStackNavigator();
 export default function App({ navigation }) {
   const [users, setUsers] = React.useState([]);
 
-  const getUsers = (async) => {
-  axios
-      .get('http://localhost:3003/users')
-      .then((res) => {
-          setUsers(res.data);
-          console.log(res.data);
-      })
-      .catch((err) => console.log(err));
-};
+
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {

@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import SignInScreen from '../screens/signin';
+import SignInScreen from '../screens/mighthaveusefulcode';
 import AuthContext from '../context';
 import SettingsScreen from '../screens/settings';
 import FlatButton from '../styles/button';
@@ -25,8 +25,22 @@ const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
   return(
-    <Drawer.Navigator>
-      <Drawer.Screen name="Dashboard" component={HomeScreen} />
+    <Drawer.Navigator screenOptions={{
+      drawerStyle: {
+        backgroundColor: 'black',
+        width: 300,
+      },
+    }}>
+      <Drawer.Screen name="Dashboard" component={HomeScreen} options={{
+           title: 'Dashboard',
+           drawerIcon: ({focused, size}) => (
+              <MaterialCommunityIcons
+                 name="view-dashboard"
+                 size={22}
+                 color={focused ? '#7cc' : '#ccc'}
+              />
+           ),
+        }} />
       <Drawer.Screen name = "Children" component={ChildrenScreen}/>
       <Drawer.Screen name = "Logout" component={ChildrenScreen}/>
 

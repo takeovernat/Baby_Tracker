@@ -1,19 +1,18 @@
 import * as React from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
+import { Button, Text, TextInput, View, Alert } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { AppearanceProvider, useColorScheme } from 'react-native-appearance';
 import { MainNav } from './navigation/MainNav';
 import welcomescreen, {welcome} from './screens/welcome';
-import SignUpScreen from './screens/signup';
+import SignUpScreen from './screens/login';
 import AuthContext from './context';
+import index from './navigation/index'
+import axios from 'axios';
 
-function SplashScreen() {
-  return (
-    <View style={{marginTop:30}}>
-      <Text>Loading...</Text>
-    </View>
-  );
-}
+
+
 
 function HomeScreen() {
   const { signOut } = React.useContext(AuthContext);
@@ -26,33 +25,21 @@ function HomeScreen() {
   );
 }
 
-function SignInScreen() {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const { signIn } = React.useContext(AuthContext);
-
-  return (
-    <View>
-      <TextInput
-        placeholder="Username"
-        value={username}
-        onChangeText={setUsername}
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      <Button title="Sign in" onPress={() => signIn({ username, password })} />
-    </View>
-  );
-}
 
 const Stack = createStackNavigator();
 
 export default function App({ navigation }) {
+  const [users, setUsers] = React.useState([]);
+
+  const getUsers = (async) => {
+  axios
+      .get('http://localhost:3003/users')
+      .then((res) => {
+          setUsers(res.data);
+          console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+};
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -108,10 +95,9 @@ export default function App({ navigation }) {
   const authContext = React.useMemo(
     () => ({
       signIn: async (data) => {
-        // In a production app, we need to send some data (usually username, password) to server and get a token
-        // We will also need to handle errors if sign in failed
-        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
-        // In the example, we'll use a dummy token
+        
+  
+    
 
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
       },
@@ -130,7 +116,7 @@ export default function App({ navigation }) {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
+      <NavigationContainer theme={DarkTheme} >
         <Stack.Navigator>
           {state.isLoading ? (
             // We haven't finished checking for the token yet
@@ -139,14 +125,16 @@ export default function App({ navigation }) {
             // No token found, user isn't signed in
             <Stack.Screen
               name="SignIn"
-              component={SignUpScreen}
+              component={index}
               options={{
-                title: 'Sign in',
-                // When logging out, a pop animation feels intuitive
+                title:'',
+                headerTintColor:true,
                 animationTypeForReplace: state.isSignout ? 'pop' : 'push',
                 headerShown: false
               }}
+    
             />
+
           ) : (
             // User is signed in
             <Stack.Screen name="Home" component={MainNav} 

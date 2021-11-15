@@ -51,22 +51,30 @@ export default function SignUpScreen({navigation}){
     };
 
     const login = async (username, password) => {
-       // getUsers();
-    
-        //console.log(users)
         if(username.length === 0 || password.length === 0){
                Alert.alert('Invalid entry!', 'Username or password cannot be empty.', [
                     {text: 'Okay'}
                   ]);
                   return;
                   }
-        //console.log(users)          
+        //console.log(users)   
+        try{       
         users.forEach((user) => {
             console.log(user.username, user.password)
             if (user.username === username && user.password === password) {
                 signIn(username, password)
+                throw BreakException
+ 
             }
         });
+        }
+        catch(e){
+            if(e!=BreakException) throw e;
+        }
+
+        Alert.alert('Invalid entry!', 'Username or password is wrong.', [
+            {text: 'Okay'}
+          ]);
         
       
     };

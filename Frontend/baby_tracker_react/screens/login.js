@@ -15,7 +15,7 @@ import {
     Dimensions,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
-
+import axios from 'axios';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -26,12 +26,56 @@ import { MainNav } from '../navigation/MainNav';
 import Navstack from '../navigation';
 import AuthContext from '../context';
 import FlatButton from '../styles/button';
+import forms from '../screens/forms'
 
 export default function SignUpScreen({navigation}){
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
-  
+    const [isValidLogin, setIsValidLogin] = React.useState(false);
+    const [users, setUsers] = React.useState([]);
     const { signIn } = React.useContext(AuthContext);
+    
+    React.useEffect(() => {
+         getUsers();
+         //console.log(users)
+     }, []);
+
+    const getUsers = async () => {
+    axios
+      .get('http://localhost:3003/users')
+      .then((res)=> {
+          setUsers(res.data);
+          //console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+    };
+
+    const login = async (username, password) => {
+       // getUsers();
+    
+        //console.log(users)
+        if(username.length === 0 || password.length === 0){
+               Alert.alert('Invalid entry!', 'Username or password cannot be empty.', [
+                    {text: 'Okay'}
+                  ]);
+                  return;
+                  }
+        //console.log(users)          
+        users.forEach((user) => {
+            console.log(user.username, user.password)
+            if (user.username === username && user.password === password) {
+                signIn(username, password)
+            }
+        });
+        // if (isValidLogin) {
+        //     signIn(username, password)
+        // } else {
+        //     console.log("else")
+        //     alert('Invalid login');
+        // }
+    };
+
+    
   
     return (
 
@@ -44,32 +88,33 @@ export default function SignUpScreen({navigation}){
                 <View style={styles.textInputContainer}>
                     <TextInput
                         //value={username}
-                        placeholder="username"
+                        placeholder = 'username'
                         placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
                         style={styles.textInput}
-                        onChangeText={(text) => setUsername(text)}
+                        autoCapitalize='none'
+                        onChangeText={(user) => setUsername(user.trim())}
                     />
                     <TextInput
                         placeholder="password"
                         placeholderTextColor="black"
                         secureTextEntry={true}
                         style={styles.textInput}
-                        onChangeText={(pass) => setPassword(pass) }
+                        onChangeText={(pass) => setPassword(pass.trim()) }
                     />
 
                     <View>
                         <View style={styles.textInputContainer}>
-                            <FlatButton text='Login' onPress={() => signIn({ username, password })}/>
+                            <FlatButton style={{marginBottom:100}} text='Login' onPress={()=> login(username, password)}/>
                         </View>
                     </View>
                 </View>
                 <View style={styles.signup}>
                     <Text style={styles.note}>Don't have an account?</Text>
-                    <FlatButton text="Sign Up" onPress={()=> (
-                        <Navstack/>
-                    )}/>
                 </View>
+                <FlatButton style={{}}  text="Sign Up" onPress={()=> (
+                        navigation.navigate('signup')
+                    )}/>
             </SafeAreaView>
         
     );
@@ -113,17 +158,17 @@ export default function SignUpScreen({navigation}){
     },
     textInputContainer: {
         width: Dimensions.get('window').width,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 15
     },
     note:{
         fontFamily: 'Noteworthy',
-        fontSize: 24,
+        fontSize: 20,
         fontWeight: "bold",
     },
     
     signup: {
         marginTop: 180,
-        marginBottom: 500
     },
 
 });

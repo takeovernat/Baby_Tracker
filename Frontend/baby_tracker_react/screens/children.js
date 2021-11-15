@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 
 const ChildrenScreen = () => (
       <View style={styles.container}>
-      <Text style={{marginTop:10}}> "Childrens"</Text>
+      <Text style={{marginTop:10}}> "notification"</Text>
       </View>
     );
   
@@ -13,7 +13,7 @@ const ChildrenScreen = () => (
     container: {
         flex: 1,
         paddingTop: 30,
-        backgroundColor: '#f5b0d4',
+        backgroundColor: '#EDBFB7',
         alignItems: 'center',
         justifyContent: 'flex-start',
     },

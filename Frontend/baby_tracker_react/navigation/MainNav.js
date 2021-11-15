@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Button, View, Text} from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerItem } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -10,40 +10,48 @@ import AuthContext from '../context';
 import SettingsScreen from '../screens/settings';
 import FlatButton from '../styles/button';
 import ChildrenScreen from '../screens/children';
+import Dashboard from '../screens/Dashboard'
 
-function HomeScreen({ navigation }) {
-  const { signOut } = React.useContext(AuthContext);
-  return (
-      <View style={styles.container}>
-          <FlatButton text="Sign out" onPress={signOut} />
-      </View>
-  );
-}
 
 
 const Drawer = createDrawerNavigator();
 
 function MyDrawer() {
   return(
+    
     <Drawer.Navigator screenOptions={{
       drawerStyle: {
         backgroundColor: 'black',
         width: 300,
+        initialRouteName:"Dashboard",
       },
+      headerTintColor:'black'
+      
     }}>
-      <Drawer.Screen name="Dashboard" component={HomeScreen} options={{
+      <Drawer.Screen name="Dashboard" component={Dashboard} options={{
+           headerStyle:{backgroundColor:"#6E9887"} ,
            title: 'Dashboard',
            drawerIcon: ({focused, size}) => (
               <MaterialCommunityIcons
                  name="view-dashboard"
-                 size={22}
+                 size={size}
                  color={focused ? '#7cc' : '#ccc'}
               />
            ),
         }} />
-      <Drawer.Screen name = "Children" component={ChildrenScreen}/>
-      <Drawer.Screen name = "Logout" component={ChildrenScreen}/>
-
+      <Drawer.Screen name = "Children" component={ChildrenScreen}
+        options={{ headerStyle:{backgroundColor:"#6E9887"},
+        title:"children",            
+        drawerIcon: ({focused, size}) => (
+              <MaterialCommunityIcons
+                 name="account-child"
+                 size={size}
+                 color={focused ? '#7cc' : '#ccc'}
+              />
+           ),
+           }} />
+      
+     
     </Drawer.Navigator>
   );
 }
@@ -55,28 +63,30 @@ function MainNav() {
       <Tab.Navigator initialRouteName="Home"
       barStyle={{backgroundColor:'#FFDEFA'}}
       inactiveColor='black'
+      labeled={false}
+      activeColor='black'
+      barStyle={{backgroundColor:'black'}}
       >
       <Tab.Screen name="DashBoard" component={MyDrawer}
           options={{
             tabBarLabel: 'Dashboard',
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="view-dashboard" color={color} size={26} />
+              <MaterialCommunityIcons name="view-dashboard" color="#EDBFB7" size={24} />
             ),
           }}
         />
-      <Tab.Screen name = "Children" component={ChildrenScreen}
+      <Tab.Screen name = "children" component={ChildrenScreen}
       options={{
-        tabBarLabel: 'Children',
+        tabBarLabel: 'notification',
         tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="account-child" color={color} size={30} />
-        ),
+        <MaterialCommunityIcons name="bell" size={24} color="#EDBFB7" />        ),
       }}
       />
       <Tab.Screen name="Settings" component={SettingsScreen} 
       options={{
         tabBarLabel: 'Settings',
         tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="account-settings-outline" color={color} size={30} />
+          <MaterialCommunityIcons name="account-settings" size={24} color="#EDBFB7" />
         ),
       }}
       />
@@ -89,7 +99,7 @@ const styles = StyleSheet.create({
   container: {
       flex: 1,
       paddingTop: 70,
-      backgroundColor: '#f5b0d4',
+      backgroundColor: '#EDBFB7',
       alignItems: 'center',
       justifyContent: 'flex-start',
   },

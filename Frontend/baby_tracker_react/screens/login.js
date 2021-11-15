@@ -67,12 +67,8 @@ export default function SignUpScreen({navigation}){
                 signIn(username, password)
             }
         });
-        // if (isValidLogin) {
-        //     signIn(username, password)
-        // } else {
-        //     console.log("else")
-        //     alert('Invalid login');
-        // }
+        
+      
     };
 
     
@@ -128,7 +124,7 @@ export default function SignUpScreen({navigation}){
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#f5b0d4',
+        backgroundColor: '#EDBFB7',
         //margin: 10
     },
     image: {

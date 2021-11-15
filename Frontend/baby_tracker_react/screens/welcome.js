@@ -24,7 +24,7 @@ const welcomescreen = ({ navigation }) => {
       container: {
           flex: 1,
           paddingTop: 30,
-          backgroundColor: '#f5b0d4',
+          backgroundColor: '#EDBFB7',
           alignItems: 'center',
           justifyContent: 'flex-start',
       },

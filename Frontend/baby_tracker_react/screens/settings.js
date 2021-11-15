@@ -2,15 +2,18 @@ import FlatButton from "../styles/button";
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
+import AuthContext from '../context';
 const SettingsScreen = () =>{
- return(
+const { signOut } = React.useContext(AuthContext);
+return(
     <View style={styles.container}>
-        <View style={styles.settings}>
-        <Text style={styles.note}>Settings</Text>
-        </View>
-        <View style={{flex: 1, marginTop: 50}}>
+        
+        <Text>Settings</Text>
+        
+        <View style={{marginTop: 50}}>
+         
         <FlatButton text='General'/>
-        <FlatButton text='About'/>
+        <FlatButton text='signout' onPress={signOut}/>
         </View>
     </View>
     );
@@ -20,9 +23,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 30,
-        backgroundColor: '#f5b0d4',
+        backgroundColor: '#EDBFB7',
         justifyContent: 'space-between',
-        alignItems: "stretch",
+        alignItems: "center",
     },
     settings:
     {

@@ -13,23 +13,11 @@ import axios from 'axios';
 
 
 
-
-function HomeScreen() {
-  const { signOut } = React.useContext(AuthContext);
-
-  return (
-    <View>
-      <Text>Signed in!</Text>
-      <Button title="Sign out" onPress={signOut} />
-    </View>
-  );
-}
-
-
 const Stack = createStackNavigator();
 
 export default function App({ navigation }) {
   const [users, setUsers] = React.useState([]);
+  //const [DarkorLight, SetDarkorLight] = React.useState('');
 
 
   const [state, dispatch] = React.useReducer(
@@ -46,6 +34,8 @@ export default function App({ navigation }) {
             ...prevState,
             isSignout: false,
             userToken: action.token,
+            username:action.username,
+
           };
         case 'SIGN_OUT':
           return {
@@ -59,6 +49,7 @@ export default function App({ navigation }) {
       isLoading: true,
       isSignout: false,
       userToken: null,
+      username: null,
     }
   );
 
@@ -66,18 +57,14 @@ export default function App({ navigation }) {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
       let userToken;
-
       try {
         // Restore token stored in `SecureStore` or any other encrypted storage
         // userToken = await SecureStore.getItemAsync('userToken');
       } catch (e) {
         // Restoring token failed
       }
-
       // After restoring token, we may need to validate it in production apps
-
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
+      // This will switch to the App screen or Auth screen and this loading screen will be unmounted and thrown away.
       dispatch({ type: 'RESTORE_TOKEN', token: userToken });
     };
 
@@ -87,21 +74,15 @@ export default function App({ navigation }) {
   const authContext = React.useMemo(
     () => ({
       signIn: async (data) => {
-        
-  
-    
-
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+        console.log("Signed in user ", data)
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', username: data });
       },
       signOut: () => dispatch({ type: 'SIGN_OUT' }),
       signUp: async (data) => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
-        // In the example, we'll use a dummy token
-
+      
+        console.log("Registed user ", data)
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
-      },
+      }
     }),
     []
   );
@@ -129,7 +110,8 @@ export default function App({ navigation }) {
 
           ) : (
             // User is signed in
-            <Stack.Screen name="Home" component={MainNav} 
+            <Stack.Screen name="Home" component={MainNav}
+            initialParams={{username:state.username}} 
             options={{headerShown: false}}
             />
           )}

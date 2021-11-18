@@ -17,8 +17,13 @@ mongoose.connect(uri, {
 	useUnifiedTopology: true,
 })
 const connection = mongoose.connection
-connection.once('open', () => {
+connection.once('open', (res, err) => {
+	if(err){
+		console.log("could not connet to database!");
+	}
+	else{
 	console.log('Mongodb connection established successfully')
+	}
 })
 
 const usersRouter = require('./AuthRouter')

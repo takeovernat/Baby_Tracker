@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Button, View, Text} from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -7,11 +7,14 @@ import FlatButton from '../styles/button';
 import AuthContext from '../context';
 
 
-function HomeScreen({ navigation }) {
+function HomeScreen(props) {
+    const username = props.route.params.username
+    //console.log(props.route.params.username);
     const { signOut } = React.useContext(AuthContext);
     return (
         <View style={styles.container}>
              <Text>Home</Text>
+             <Text>hello {username}</Text>
             <FlatButton text="Sign out" onPress={signOut} />
         </View>
     );

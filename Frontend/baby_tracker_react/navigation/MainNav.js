@@ -13,10 +13,12 @@ import ChildrenScreen from '../screens/children';
 import Dashboard from '../screens/Dashboard'
 
 
-
+const usernamepass = "";
 const Drawer = createDrawerNavigator();
 
-function MyDrawer() {
+function MyDrawer(props) {
+  const username = props.route.params
+  //console.log("from drawer- ",props.route)
   return(
     
     <Drawer.Navigator screenOptions={{
@@ -28,7 +30,7 @@ function MyDrawer() {
       headerTintColor:'black'
       
     }}>
-      <Drawer.Screen name="Dashboard" component={Dashboard} options={{
+      <Drawer.Screen name="Dashboard" initialParams={username} component={Dashboard} options={{
            headerStyle:{backgroundColor:"#6E9887"} ,
            title: 'Dashboard',
            drawerIcon: ({focused, size}) => (
@@ -57,7 +59,10 @@ function MyDrawer() {
 }
 
 const Tab = createMaterialBottomTabNavigator();
-function MainNav() {
+function MainNav(props) {
+  
+  const username = props.route.params;
+  //console.log("fron maonnav->", username)
   return (
     
       <Tab.Navigator initialRouteName="Home"
@@ -67,6 +72,7 @@ function MainNav() {
       barStyle={{backgroundColor:'black'}}
       >
       <Tab.Screen name="DashBoard" component={MyDrawer}
+          initialParams={username}
           options={{
             tabBarLabel: 'Dashboard',
             tabBarIcon: ({ color }) => (
@@ -127,3 +133,4 @@ const styles = StyleSheet.create({
 });
 
 export {MainNav};
+

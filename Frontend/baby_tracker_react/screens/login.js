@@ -26,12 +26,10 @@ import { MainNav } from '../navigation/MainNav';
 import Navstack from '../navigation';
 import AuthContext from '../context';
 import FlatButton from '../styles/button';
-import forms from '../screens/forms'
 
 export default function SignUpScreen({navigation}){
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [isValidLogin, setIsValidLogin] = React.useState(false);
     const [users, setUsers] = React.useState([]);
     const { signIn } = React.useContext(AuthContext);
     

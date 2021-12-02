@@ -6,15 +6,14 @@ import FlatButton from '../styles/button';
 
 import AuthContext from '../context';
 
-
+ 
 function HomeScreen(props) {
     const username = props.route.params.username
-    //console.log(props.route.params.username);
+    console.log(props)
     const { signOut } = React.useContext(AuthContext);
     return (
         <View style={styles.container}>
-             <Text>Home</Text>
-             <Text>hello {username}</Text>
+             <Text style={styles.text}>Welcome {username} !</Text>
             <FlatButton text="Sign out" onPress={signOut} />
         </View>
     );
@@ -23,9 +22,9 @@ function HomeScreen(props) {
   const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 70,
+        paddingLeft: 20,
         backgroundColor: '#EDBFB7',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'flex-start',
     },
     image: {
@@ -38,7 +37,7 @@ function HomeScreen(props) {
         fontSize: 35,
         justifyContent: 'center',
         fontWeight: "bold",
-        paddingVertical: 20
+        paddingVertical: -30,
     }, 
     button: {
       borderWidth: 0,

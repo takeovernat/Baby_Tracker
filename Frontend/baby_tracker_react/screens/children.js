@@ -2,13 +2,61 @@ import FlatButton from "../styles/button";
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 
-
-const ChildrenScreen = () => (
-      <View style={styles.container}>
-      <Text style={{marginTop:10}}> "notification"</Text>
-      </View>
-    );
+ 
+const ChildrenScreen = (props) => {
   
+      const babies = props.route.params
+      console.log(props.route.params)
+      //babies.map()
+      Object.keys(babies).forEach((key)=>{
+        console.log(babies[key].Name)
+        // console.log(babies[key].age)
+        // console.log(babies[key].lastDiaperChange)
+        // console.log(babies[key].hoursSlept)
+
+        return(
+        <Baby name={babies[key].Name}
+              age={babies[key].age}
+              lastDiaper={babies[key].lastDiaperChange}
+              hoursSlept={babies[key].hoursSlept}
+            />
+      )})
+
+      /*((key, value)=>{
+        console.log(value)
+        Object.keys(value).forEach((k, v)=>{
+          console.log(k + " " + v)
+        })
+      })*/
+
+  return(
+      <View style={styles.container}>
+      <Text style={styles.text}>Children
+      {  
+        Object.keys(babies).forEach((key)=>{
+        console.log(babies[key].Name + "in text\n")
+        // console.log(babies[key].age)
+        // console.log(babies[key].lastDiaperChange)
+        // console.log(babies[key].hoursSlept)
+        
+        return(<Text>{babies.one.Name}</Text>
+          )
+      })
+      }
+      <Text> {babies.one.Name}</Text>
+      </Text>
+      </View>
+    )
+};
+  const Baby = ({ name, age, lastDiaper, hoursSlept }) => {
+    return(
+      <View>
+        <Text>{name}</Text>
+        <Text>{age}</Text>
+        <Text>{lastDiaper}</Text>
+        <Text>{hoursSlept}</Text>
+      </View>
+  )};
   const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -25,7 +73,7 @@ const ChildrenScreen = () => (
   },
     text:{
         fontFamily: 'Noteworthy',
-        fontSize: 47,
+        fontSize: 36,
         justifyContent: 'center',
         fontWeight: "bold",
         marginTop: 20

@@ -96,6 +96,19 @@ export default function App({ navigation }) {
             <Stack.Screen name="Splash" component={welcomescreen} />
           ) : state.userToken == null ? (
             // No token found, user isn't signed in
+            <Stack.Group>
+              <Stack.Screen
+              name="welcome"
+              component={welcomescreen}
+              options={{
+                title:'',
+                headerTintColor:true,
+                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
+                headerShown: false
+              }}
+    
+            />
+
             <Stack.Screen
               name="SignIn"
               component={index}
@@ -107,6 +120,8 @@ export default function App({ navigation }) {
               }}
     
             />
+            
+            </Stack.Group>
 
           ) : (
             // User is signed in

@@ -41,12 +41,12 @@ function MyDrawer(props) {
               />
            ),
         }} />
-      <Drawer.Screen name = "Children" component={ChildrenScreen}
+      <Drawer.Screen name = "notifications" component={SettingsScreen}
         options={{ headerStyle:{backgroundColor:"#6E9887"},
-        title:"children",            
+        title:"notifications",            
         drawerIcon: ({focused, size}) => (
               <MaterialCommunityIcons
-                 name="account-child"
+                 name="bell"
                  size={size}
                  color={focused ? '#7cc' : '#ccc'}
               />
@@ -86,7 +86,7 @@ function MainNav(props) {
       options={{
         tabBarLabel: 'children',
         tabBarIcon: ({ color }) => (
-        <MaterialCommunityIcons name="bell" size={24} color={color} />        ),
+        <MaterialCommunityIcons name="account-child" size={24} color={color} />        ),
       }}
       />
       <Tab.Screen name="Settings" component={SettingsScreen} 
@@ -106,14 +106,15 @@ function MainNav(props) {
 const garbage = {
   one:{
     baby_id:0,
-    Name: "Baby1",
+    Name: "donald",
     age: 1,
     lastDiaperChange: "1638397371",
     hoursSlept: 8
-  },
+  }
+    ,
   two:{
     baby_id: 1,
-    Name: "Baby2",
+    Name: "sarah",
     age: 0.8,
     lastDiaperChange: "1638397354",
     hoursSlept: 5

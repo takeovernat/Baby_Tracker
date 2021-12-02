@@ -31,6 +31,10 @@ const forms = ({navigation})=>{
             alert("You have entered an invalid email address!")
             return (false)
         }
+        else if(name.length < 3 || name === " " || name === "  " || name == "\t"){
+            alert("please enter a valid name") 
+            return (false)
+        }
         else {
             const newUser = {
                 username: username,

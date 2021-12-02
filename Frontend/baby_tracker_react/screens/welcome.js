@@ -4,6 +4,7 @@ import Navstack from "../navigation";
 import FlatButton from "../styles/button"
 
 const welcomescreen = ({ navigation }) => {
+    console.log(navigation)
     return (
         <View style={styles.container}>
             <Image
@@ -14,7 +15,7 @@ const welcomescreen = ({ navigation }) => {
             <Text style={styles.note}>An interactive way to keep track of your baby's health. 
             Click continue to get started</Text>
             <FlatButton text='Continue' onPress={() =>
-                navigation.navigate('options')
+                navigation.navigate('SignIn')
                 }/>
       </View>
     );
@@ -29,10 +30,11 @@ const welcomescreen = ({ navigation }) => {
           justifyContent: 'flex-start',
       },
       image: {
-          height: 300, 
+          height: 250, 
           width: 100,
           aspectRatio: .8,
-          //resizeMode: 'contain',
+          resizeMode: 'contain',
+          marginTop:60
     },
       text:{
           fontFamily: 'Noteworthy',

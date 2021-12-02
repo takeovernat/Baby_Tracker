@@ -75,6 +75,7 @@ const forms = ({navigation})=>{
                         placeholder="Password"
                         placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
+                        secureTextEntry={true}
                         style={styles.textInput}
                         onChangeText={(pass1) => setpass(pass1.trim())}
             />
@@ -82,6 +83,7 @@ const forms = ({navigation})=>{
                         placeholder="Retype Password"
                         placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
+                        secureTextEntry={true}
                         style={styles.textInput}
                         onChangeText={(pass2) => setPassTwo(pass2.trim())}
             />

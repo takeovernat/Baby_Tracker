@@ -18,11 +18,20 @@ const forms = ({navigation})=>{
     const handlePress = () => {
         if (username.length < 3) {
             alert('username must be atleast 3 characters');
+            return;
         } else if (pass.length < 6) {
             alert('password must be atleast 6 characters');
+            return;
         } else if (pass !== passTwo) {
             alert("passwords don't match");
-        } else {
+            return;
+        } 
+        else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)))
+        {
+            alert("You have entered an invalid email address!")
+            return (false)
+        }
+        else {
             const newUser = {
                 username: username,
                 password: pass,

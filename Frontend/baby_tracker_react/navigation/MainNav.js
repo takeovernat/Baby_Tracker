@@ -62,6 +62,7 @@ const Tab = createMaterialBottomTabNavigator();
 function MainNav(props) {
   
   const username = props.route.params;
+  //console.log(garbage)
   //console.log("fron maonnav->", username)
   return (
     
@@ -81,8 +82,9 @@ function MainNav(props) {
           }}
         />
       <Tab.Screen name = "children" component={ChildrenScreen}
+      initialParams={garbage}
       options={{
-        tabBarLabel: 'notifications',
+        tabBarLabel: 'children',
         tabBarIcon: ({ color }) => (
         <MaterialCommunityIcons name="bell" size={24} color={color} />        ),
       }}
@@ -100,6 +102,26 @@ function MainNav(props) {
     
   );
 }
+
+const garbage = {
+  one:{
+    baby_id:0,
+    Name: "Baby1",
+    age: 1,
+    lastDiaperChange: "1638397371",
+    hoursSlept: 8
+  },
+  two:{
+    baby_id: 1,
+    Name: "Baby2",
+    age: 0.8,
+    lastDiaperChange: "1638397354",
+    hoursSlept: 5
+  }
+  
+}
+
+
 const styles = StyleSheet.create({
   container: {
       flex: 1,

@@ -19,7 +19,7 @@ mongoose.connect(uri, {
 const connection = mongoose.connection
 connection.once('open', (res, err) => {
 	if(err){
-		console.log("could not connet to database!");
+		console.log("could not connect to database!");
 	}
 	else{
 	console.log('Mongodb connection established successfully')

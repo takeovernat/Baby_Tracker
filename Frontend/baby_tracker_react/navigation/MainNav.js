@@ -52,6 +52,21 @@ function MyDrawer(props) {
               />
            ),
            }} />
+        //TODO: fix this to actually show the statistics screen on the sidebar.
+//      <Drawer.Screen name = "Stats" component={Statistics}
+//        options={{ headerStyle:{backgroundColor:"#6E9887"},
+//        title:"Stats",
+//        drawerIcon: ({focused, size}) => (
+//              <MaterialCommunityIcons
+//                name="chart-box-outline" //[^1]
+//                size={size}
+//                color={focused ? '#7cc' : '#ccc'}
+//              />
+//           ),
+//           }} />
+        //[^1]: May want to change this icon. Some other options chart-box, chart-box-plus-outline,
+        //      chart-histogram, chart-line, chart-pie, chart-timeline, chart-scatter-plot.
+        //      More examples: https://materialdesignicons.com/tag/math
       
      
     </Drawer.Navigator>

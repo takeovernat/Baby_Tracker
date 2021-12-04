@@ -27,6 +27,7 @@ import Navstack from '../navigation';
 import AuthContext from '../context';
 import FlatButton from '../styles/button';
 
+const bcrypt = require('bcryptjs')
 export default function SignUpScreen({navigation}){
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -48,6 +49,7 @@ export default function SignUpScreen({navigation}){
       .catch((err) => console.log(err));
     };
 
+
     const login = async (username, password) => {
         if(username.length === 0 || password.length === 0){
                Alert.alert('Invalid entry!', 'Username or password cannot be empty.', [
@@ -55,10 +57,14 @@ export default function SignUpScreen({navigation}){
                   ]);
                   return;
                   }
-        //console.log(users)   
-        try{       
+                //   console.log(bcrypt)
+                //   var salt = bcrypt.genSaltSync(10);
+                //   var hash = bcrypt.hashSync("aaaa", salt);
+                //   console.log("password: " + password + "hash: " + hash)
+        
+        try{
         users.forEach((user) => {
-            console.log(user.username, user.password)
+
             if (user.username === username && user.password === password) {
                 signIn(username, password)
                 throw BreakException
@@ -107,7 +113,8 @@ export default function SignUpScreen({navigation}){
 
                     <View>
                         <View style={styles.textInputContainer}>
-                            <FlatButton style={{marginBottom:100}} text='Login' onPress={()=> login(username, password)}/>
+                            <FlatButton style={{marginBottom:100}} text='Login' onPress={()=> {
+                                login(username, password)}}/>
                         </View>
                     </View>
                 </View>

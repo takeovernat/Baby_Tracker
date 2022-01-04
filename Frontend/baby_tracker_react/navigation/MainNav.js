@@ -52,8 +52,8 @@ function MyDrawer(props) {
               />
            ),
            }} />
-        //TODO: fix this to actually show the statistics screen on the sidebar.
-//      <Drawer.Screen name = "Stats" component={Statistics}
+        {/* //TODO: fix this to actually show the statistics screen on the sidebar. */}
+{/* //      <Drawer.Screen name = "Stats" component={Statistics}
 //        options={{ headerStyle:{backgroundColor:"#6E9887"},
 //        title:"Stats",
 //        drawerIcon: ({focused, size}) => (
@@ -68,7 +68,7 @@ function MyDrawer(props) {
         //      chart-histogram, chart-line, chart-pie, chart-timeline, chart-scatter-plot.
         //      More examples: https://materialdesignicons.com/tag/math
       
-     
+      */}
     </Drawer.Navigator>
   );
 }

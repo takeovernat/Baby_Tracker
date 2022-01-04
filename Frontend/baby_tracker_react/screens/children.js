@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import { Icon , Header} from "react-native-elements";
 import axios from "axios";
+import children from '../components/children'
 
 let babies = []
 
@@ -19,30 +20,9 @@ let babies = []
  {
    return babies.map((baby)=>{
      return(
-      <ListItem.Swipeable
-      leftContent={
-        <Button
-          title="Info"
-          icon={{ name: 'face', color: 'red' }}
-          buttonStyle={{ minHeight: '100%' }}
-        />
-      }
-      rightContent={
-        <Button
-          title="Delete"
-          icon={{ name: 'delete', color: 'white' }}
-          buttonStyle={{ minHeight: '100%' }}
-          color='red'
-        />
-      }
-    >
-      <Icon name="face" />
-      <ListItem.Content>
-        <ListItem.Title> {baby.name}</ListItem.Title>
-      </ListItem.Content>
-      
-      <ListItem.Chevron />
-    </ListItem.Swipeable>
+      <Childrencomponent cardtitle="John Doe" cardsub="child 1" title="Day #1" Content="status - healthy">
+
+      </Childrencomponent>
 
      )
    })
@@ -53,7 +33,7 @@ const ChildrenScreen = () => {
   
   getChildren()
   return(
-      <View style={styles.container}>
+      <View>
         <Text style={styles.text}>Children</Text>
         <ScrollView>
           <View> 
@@ -86,7 +66,8 @@ const ChildrenScreen = () => {
         fontSize: 36,
         justifyContent: 'center',
         fontWeight: "bold",
-        marginTop: 20
+        marginTop: 20,
+        color: "white"
     }, 
     note:{
       fontFamily: 'Noteworthy',

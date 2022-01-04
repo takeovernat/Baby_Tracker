@@ -4,9 +4,11 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import FlatButton from '../styles/button';
 import { ListItem , Header, SearchBar, Avatar, Divider}  from "react-native-elements";
-
-
+//import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import Childrencomponent from '../components/children';
 import AuthContext from '../context';
+import { ScrollView } from 'react-native-gesture-handler';
+import Childstatlist from '../components/childstatlist';
 
  
 function HomeScreen(props) {
@@ -16,50 +18,29 @@ function HomeScreen(props) {
     console.log(props)
     const { signOut } = React.useContext(AuthContext);
     return (
-        <View style={styles.container}>
+      <ScrollView>
+
+      
+        <View >
              <Text style={styles.text}>Welcome {username} !</Text>
              <Divider
   orientation="horizontal"
   width={5}
 />
-             <View>
-        <SearchBar
-        selectionColor='white'
-        placeholder="Type Here..."
-        onChangeText={setSearch}
-        value={Search}
-      />
-      </View >
-      <View style={{marginTop:100}}>
-      <ListItem>
-  <Avatar
-    title="child1"
-    rounded={true}
-    source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Andromeda_Galaxy_560mm_FL.jpg" }}
-  />
-  <ListItem.Content>
-    <ListItem.Title>Ronald</ListItem.Title>
-    <ListItem.Subtitle style={{fontSize:12}}>age: 1</ListItem.Subtitle>
-  </ListItem.Content>
-  </ListItem>
+      <View style={{}} >
+        <Childstatlist>
 
-    </View> 
+        </Childstatlist>
+        </View>
+     
+        <View>
+          <Childrencomponent cardtitle="John Doe" cardsub="child 1" title="Day #1" Content="status - healthy">
 
-    <View style={{marginTop:10}}>
-    <ListItem>
-  <Avatar
-    title="child2"
-    rounded={true}
-    source={{ uri: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Andromeda_Galaxy_560mm_FL.jpg" }}
-  />
-  <ListItem.Content>
-    <ListItem.Title>Sarah</ListItem.Title>
-    <ListItem.Subtitle style={{fontSize:12}}>age: 2</ListItem.Subtitle>
-  </ListItem.Content>
-  </ListItem>
+          </Childrencomponent>
         </View>
             
         </View>
+        </ScrollView>
     );
   }
 

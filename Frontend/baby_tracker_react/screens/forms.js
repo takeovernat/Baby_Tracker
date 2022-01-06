@@ -4,6 +4,7 @@ import Navstack from "../navigation";
 import FlatButton from '../styles/button';
 import AuthContext from '../context';
 import axios from 'axios';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const forms = ({navigation})=>{
 
@@ -52,8 +53,12 @@ const forms = ({navigation})=>{
     };
 
     return(
+        <ScrollView>
+
+       
         <View style={styles.container}>
-            <Text style={styles.text}>Welcome New User</Text>
+            <Text style={styles.text}>HealthyBabies©</Text>
+            <Text style={styles.textsub}> Monitor and take control of your children's health now</Text>
             <TextInput
                         placeholder="Name"
                         onChangeText={(name) => setname(name.trim())}
@@ -96,44 +101,56 @@ const forms = ({navigation})=>{
             </View>
             
             <Text style={styles.note}>have an account?</Text>
-            <FlatButton text="login" onPress={()=> (
+            <Button title="login" onPress={()=> (
                 navigation.pop()
             )}/>
                 
 
         </View>
+        </ScrollView>
     )
 };
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 70,
-        backgroundColor: '#EDBFB7',
         alignItems: 'center',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
+        backgroundColor: '#1A374D',
+        //margin: 10
     },
     text:{
         fontFamily: 'Noteworthy',
-        fontSize: 35,
-        justifyContent: 'center',
+        fontSize: 30,
         fontWeight: "bold",
-        paddingVertical: 40,
-        marginTop: 25
-    }, 
+        justifyContent: 'center',
+        //paddingVertical: 100,
+       // paddingHorizontal: 70,
+        marginTop:150,
+        color: "white"
+    },
+    textsub:{
+        fontFamily: 'Noteworthy',
+        fontSize: 15,
+        color:"white",
+        marginBottom:80
+
+    },
     textInput: {
-        borderRadius: 10,
-        borderWidth: 1,
+        borderRadius: 0,
+        borderWidth: 0,
         borderColor: 'black',
         color: 'black',
-        marginTop: 10,
+        marginTop: 5,
         padding: 18,
-        width: '75%'
+        width: '75%',
+        backgroundColor:"#406882"
     },
     note:{
         fontFamily: 'Noteworthy',
         fontSize: 20,
         fontWeight: "bold",
-        marginTop: 120
+        marginTop: 90,
+        color:"white"
     },
 
 });

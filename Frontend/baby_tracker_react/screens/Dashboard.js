@@ -3,12 +3,13 @@ import { StyleSheet, Button, View, Text} from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import FlatButton from '../styles/button';
-import { ListItem , Header, SearchBar, Avatar, Divider}  from "react-native-elements";
+import { ListItem , SearchBar, Avatar, Divider}  from "react-native-elements";
 //import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import Childrencomponent from '../components/children';
 import AuthContext from '../context';
 import { ScrollView } from 'react-native-gesture-handler';
 import Childstatlist from '../components/childstatlist';
+import Header from '../components/header';
 
  
 function HomeScreen(props) {
@@ -22,12 +23,9 @@ function HomeScreen(props) {
 
       
         <View >
-             <Text style={styles.text}>Welcome {username} !</Text>
-             <Divider
-  orientation="horizontal"
-  width={5}
-/>
-      <View style={{}} >
+            <Header></Header>
+            
+      <View>
         <Childstatlist>
 
         </Childstatlist>
@@ -64,6 +62,7 @@ function HomeScreen(props) {
         justifyContent: 'center',
         fontWeight: "bold",
         paddingVertical: -30,
+        color: 'white'
     }, 
     button: {
       borderWidth: 0,

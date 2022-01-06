@@ -88,16 +88,14 @@ export default function SignUpScreen({navigation}){
     return (
 
             <SafeAreaView style={styles.container}>
-                <Text style={styles.text}>Baby Tracker</Text>
-                <Image
-                style={styles.image}
-                source={{uri:'https://cdn-icons-png.flaticon.com/512/941/941515.png'}}/>
+                <Text style={styles.text}>HealthyBabies©</Text>
+                
                 <View style={styles.open}></View>
                 <View style={styles.textInputContainer}>
                     <TextInput
                         //value={username}
                         placeholder = 'username'
-                        placeholderTextColor="black"
+                        placeholderTextColor="white"
                         placeholderTextFont="Noteworthy"
                         style={styles.textInput}
                         autoCapitalize='none'
@@ -105,7 +103,7 @@ export default function SignUpScreen({navigation}){
                     />
                     <TextInput
                         placeholder="password"
-                        placeholderTextColor="black"
+                        placeholderTextColor="white"
                         secureTextEntry={true}
                         style={styles.textInput}
                         onChangeText={(pass) => setPassword(pass.trim()) }
@@ -137,7 +135,7 @@ export default function SignUpScreen({navigation}){
         flex: 1,
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#EDBFB7',
+        backgroundColor: '#1A374D',
         //margin: 10
     },
     image: {
@@ -150,20 +148,23 @@ export default function SignUpScreen({navigation}){
   },
     text:{
         fontFamily: 'Noteworthy',
-        fontSize: 43,
+        fontSize: 37,
         fontWeight: "bold",
         justifyContent: 'center',
         paddingVertical: 20,
-        paddingHorizontal: 70
+        paddingHorizontal: 70,
+        marginTop:200,
+        color: "white"
     },
     textInput: {
-        borderRadius: 10,
-        borderWidth: 1,
+        borderRadius: 0,
+        borderWidth: 0,
         borderColor: 'black',
         color: 'black',
         marginTop: 5,
         padding: 18,
-        width: '75%'
+        width: '75%',
+        backgroundColor:"#406882"
     },
     textInputContainer: {
         width: Dimensions.get('window').width,
@@ -174,6 +175,7 @@ export default function SignUpScreen({navigation}){
         fontFamily: 'Noteworthy',
         fontSize: 20,
         fontWeight: "bold",
+        color:"white"
     },
     
     signup: {

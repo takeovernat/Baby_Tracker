@@ -12,14 +12,20 @@ import FlatButton from '../styles/button';
 import ChildrenScreen from '../screens/children';
 import Dashboard from '../screens/Dashboard'
 import { createStackNavigator } from '@react-navigation/stack';
+import Colors from '../styles/colors';
 
 
 const cStack = createStackNavigator();
 
 function ChildrenStack() {
   return (
-    <cStack.Navigator initialRouteName="Home">
-      <cStack.Screen name="Home" component={ChildrenScreen} />
+    <cStack.Navigator initialRouteName="Children">
+      <cStack.Screen name="Children" component={ChildrenScreen} 
+      options={{
+           
+        headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
+        title: ''}}
+      />
       <cStack.Screen name="Notifications" component={ChildrenScreen} />
       <cStack.Screen name="Profile" component={ChildrenScreen} />
       <cStack.Screen name="Settings" component={ChildrenScreen} />
@@ -40,29 +46,34 @@ function MyDrawer(props) {
         backgroundColor: 'black',
         width: 300,
         initialRouteName:"Dashboard",
+        
       },
-      headerTintColor:'black'
+      headerTintColor:'black',
+      
       
     }}>
       <Drawer.Screen name="Dashboard" initialParams={username} component={Dashboard} options={{
-           headerStyle:{backgroundColor:"#6E9887"} ,
+           
+           headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
            title: 'Dashboard',
+           
            drawerIcon: ({focused, size}) => (
               <MaterialCommunityIcons
                  name="view-dashboard"
                  size={size}
-                 color={focused ? '#7cc' : '#ccc'}
+                 color={focused ? "white" : Colors.primary}
               />
            ),
         }} />
       <Drawer.Screen name = "notifications" component={SettingsScreen}
-        options={{ headerStyle:{backgroundColor:"#6E9887"},
-        title:"notifications",            
+        options={{ headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent"},
+        title:"notifications",
+                    
         drawerIcon: ({focused, size}) => (
               <MaterialCommunityIcons
                  name="bell"
                  size={size}
-                 color={focused ? '#7cc' : '#ccc'}
+                 color={focused ? "white" : Colors.primary}
               />
            ),
            }} />
@@ -79,9 +90,9 @@ function MainNav(props) {
   return (
     
       <Tab.Navigator initialRouteName="Home"
-      inactiveColor='#EDBFB7'
+      inactiveColor={Colors.primary} 
       labeled={true}
-      activeColor='#6E9887' 
+      activeColor="white"
       barStyle={{backgroundColor:'black'}}
       >
       <Tab.Screen name="DashBoard" component={MyDrawer}

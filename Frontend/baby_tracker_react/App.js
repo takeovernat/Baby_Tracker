@@ -89,7 +89,7 @@ export default function App({ navigation }) {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer theme={DarkTheme} >
+      <NavigationContainer >
         <Stack.Navigator>
           {state.isLoading ? (
             // We haven't finished checking for the token yet

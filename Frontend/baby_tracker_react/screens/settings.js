@@ -1,6 +1,7 @@
 import FlatButton from "../styles/button";
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import Colors from "../styles/colors";
 
 import AuthContext from '../context';
 const SettingsScreen = () =>{
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 30,
-        backgroundColor: '#EDBFB7',
+        backgroundColor: Colors.seconary,
         justifyContent: 'space-between',
         alignItems: "center",
     },

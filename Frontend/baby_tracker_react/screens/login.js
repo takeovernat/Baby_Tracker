@@ -95,21 +95,28 @@ export default function SignUpScreen({navigation}){
                     <TextInput
                         //value={username}
                         placeholder = 'username'
-                        placeholderTextColor="white"
+                        placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
                         style={styles.textInput}
                         autoCapitalize='none'
                         onChangeText={(user) => setUsername(user.trim())}
+                        selectionColor="#1A374D"
                     />
                     <TextInput
                         placeholder="password"
-                        placeholderTextColor="white"
+                        placeholderTextColor="black"
                         secureTextEntry={true}
                         style={styles.textInput}
                         onChangeText={(pass) => setPassword(pass.trim()) }
+                        selectionColor="#1A374D"
                     />
 
                     <View>
+                     <View>
+                     <Button style={styles.forgot}  color="white" title="forgot password?" onPress={()=> (
+                        navigation.navigate('signup')
+                    )}/>
+                    </View>   
                         <View style={styles.textInputContainer}>
                             <FlatButton style={{marginBottom:100}} text='Login' onPress={()=> {
                                 login(username, password)}}/>
@@ -119,7 +126,7 @@ export default function SignUpScreen({navigation}){
                 <View style={styles.signup}>
                     <Text style={styles.note}>Don't have an account?</Text>
                 </View>
-                <FlatButton style={{}}  text="Sign Up" onPress={()=> (
+                <Button style={{}}  color="white" title="Sign Up" onPress={()=> (
                         navigation.navigate('signup')
                     )}/>
             </SafeAreaView>
@@ -160,7 +167,7 @@ export default function SignUpScreen({navigation}){
         borderRadius: 0,
         borderWidth: 0,
         borderColor: 'black',
-        color: 'black',
+        color: 'white',
         marginTop: 5,
         padding: 18,
         width: '75%',
@@ -177,7 +184,9 @@ export default function SignUpScreen({navigation}){
         fontWeight: "bold",
         color:"white"
     },
-    
+    forgot:{
+        justifyContent:"flex-start",
+    },
     signup: {
         marginTop: 180,
     },

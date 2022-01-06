@@ -53,7 +53,7 @@ const forms = ({navigation})=>{
     };
 
     return(
-        <ScrollView>
+        // <ScrollView > 
 
        
         <View style={styles.container}>
@@ -65,6 +65,7 @@ const forms = ({navigation})=>{
                         placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
                         style={styles.textInput}
+                        selectionColor="#1A374D"
                     />
             <TextInput
                         placeholder="Username"
@@ -72,6 +73,7 @@ const forms = ({navigation})=>{
                         placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
                         style={styles.textInput}
+                        selectionColor="#1A374D"
             />
             <TextInput
                         placeholder="Email"
@@ -79,6 +81,7 @@ const forms = ({navigation})=>{
                         placeholderTextFont="Noteworthy"
                         style={styles.textInput}
                         onChangeText={(email) => setemail(email.trim())}
+                        selectionColor="#1A374D"
             />
             <TextInput
                         placeholder="Password"
@@ -87,6 +90,7 @@ const forms = ({navigation})=>{
                         secureTextEntry={true}
                         style={styles.textInput}
                         onChangeText={(pass1) => setpass(pass1.trim())}
+                        selectionColor="#1A374D"
             />
             <TextInput
                         placeholder="Retype Password"
@@ -95,19 +99,23 @@ const forms = ({navigation})=>{
                         secureTextEntry={true}
                         style={styles.textInput}
                         onChangeText={(pass2) => setPassTwo(pass2.trim())}
+                        selectionColor="#1A374D"
             />
             <View style={{marginTop:20}}>
                         <FlatButton  text="Sign Up" onPress={handlePress} />
             </View>
             
-            <Text style={styles.note}>have an account?</Text>
-            <Button title="login" onPress={()=> (
+                <Text style={styles.note}>have an account?</Text>
+                <View style={{paddingBottom:20}}>
+                <Button color="white" title="login" onPress={()=> (
                 navigation.pop()
             )}/>
+            </View>
+            
                 
 
         </View>
-        </ScrollView>
+        // </ScrollView>
     )
 };
 const styles = StyleSheet.create({
@@ -139,7 +147,7 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         borderWidth: 0,
         borderColor: 'black',
-        color: 'black',
+        color: 'white',
         marginTop: 5,
         padding: 18,
         width: '75%',
@@ -149,7 +157,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Noteworthy',
         fontSize: 20,
         fontWeight: "bold",
-        marginTop: 90,
+        marginTop: 100,
         color:"white"
     },
 

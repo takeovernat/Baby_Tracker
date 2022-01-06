@@ -10,6 +10,7 @@ import AuthContext from '../context';
 import { ScrollView } from 'react-native-gesture-handler';
 import Childstatlist from '../components/childstatlist';
 import Header from '../components/header';
+import Colors from '../styles/colors';
 
  
 function HomeScreen(props) {
@@ -19,19 +20,19 @@ function HomeScreen(props) {
     console.log(props)
     const { signOut } = React.useContext(AuthContext);
     return (
-      <ScrollView>
+      <ScrollView style={styles.container}>
 
       
         <View >
             <Header></Header>
             
-      <View>
+      <View style={styles.stats}>
         <Childstatlist>
 
         </Childstatlist>
         </View>
      
-        <View>
+        <View style={styles.children}>
           <Childrencomponent cardtitle="John Doe" cardsub="child 1" title="Day #1" Content="status - healthy">
 
           </Childrencomponent>
@@ -45,9 +46,8 @@ function HomeScreen(props) {
   const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingLeft: 10,
-        paddingRight:10,
-        backgroundColor: '#EDBFB7',
+  
+        backgroundColor: "white",
         //alignItems: 'flex-start',
         //justifyContent: 'flex-start',
     },
@@ -64,6 +64,11 @@ function HomeScreen(props) {
         paddingVertical: -30,
         color: 'white'
     }, 
+    children:{
+    paddingLeft:10,
+    paddingRight:10
+
+    },
     button: {
       borderWidth: 0,
       width: '40%',
@@ -74,6 +79,12 @@ function HomeScreen(props) {
       marginTop: 40,
       backgroundColor: '#FFDEFA'
   },
+  stats:{
+    marginBottom:5,
+    marginTop:5,
+    paddingLeft:10,
+    paddingRight:10
+  }
   });
   
   export default HomeScreen

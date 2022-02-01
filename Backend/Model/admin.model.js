@@ -1,10 +1,14 @@
 const sql = require('../db');
 
 const Admin = function(admin){
-    this.id = admin.id;
-    this.name = admin.name;
+    this.first_name = admin.first_name;
+    this.last_name = admin.last_name;
     this.username = admin.username;
-    this.child_id = admin.child_id;
+    this.password = admin.password;
+    this.email = admin.email;
+    this.age = admin.age;
+    this.children=admin.children;
+ 
 }
 
 Admin.create = (newAdmin, result) => {
@@ -14,13 +18,13 @@ Admin.create = (newAdmin, result) => {
           result(err, null);
           return;
         }
-    console.log("created Admin: ", { id: res.id, ...newAdmin });
-    result(null, { id: res.id, ...newAdmin });
+    console.log("created Admin: ", { id: res.username, ...newAdmin });
+    result(null, { id: res.username, ...newAdmin });
   });
 };
 
-Admin.findById = (id, result) => {
-    sql.query(`SELECT * FROM Admin WHERE id = ${id}`, (err, res) => {
+Admin.findByUsername = (username, result) => {
+    sql.query(`SELECT * FROM Admin WHERE username = ${username}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -51,8 +55,8 @@ Admin.findById = (id, result) => {
     });
   };
 
-  Admin.remove = (id, result) => {
-    sql.query("DELETE FROM Admin WHERE id = ?", id, (err, res) => {
+  Admin.remove = (username, result) => {
+    sql.query("DELETE FROM Admin WHERE username = ?", username, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(null, err);
@@ -65,7 +69,7 @@ Admin.findById = (id, result) => {
         return;
       }
   
-      console.log("deleted Admin with id: ", id);
+      console.log("deleted Admin with username: ", username);
       result(null, res);
     });
   };
@@ -83,10 +87,10 @@ Admin.findById = (id, result) => {
 };
 
 
-  Admin.updateById = (id, Admin, result) => {
+  Admin.updateByUsername = (username, Admin, result) => {
     sql.query(
-      "UPDATE Admin SET email = ?, name = ?, active = ? WHERE id = ?",
-      [Admin.name, Admin.username],
+      "UPDATE Admin SET email = ?, password = ? WHERE id = ?",
+      [Admin.email, Admin.password],
       (err, res) => {
         if (err) {
           console.log("error: ", err);
@@ -100,8 +104,8 @@ Admin.findById = (id, result) => {
           return;
         }
   
-        console.log("updated Admin: ", { id: id, ...Admin });
-        result(null, { id: id, ...Admin });
+        console.log("updated Admin: ", { username: username, ...Admin });
+        result(null, { username: username, ...Admin });
       }
     );
   };

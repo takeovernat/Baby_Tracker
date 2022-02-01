@@ -1,9 +1,9 @@
 
 const dbconfig = {
-  HOST: "172.20.12.197",
+  HOST: "127.0.0.1",
   USER: "root",
   PASSWORD: "password",
-  DB: "babytracker"
+  DB: "HealthyBaby"
 }
 
 const express = require('express')

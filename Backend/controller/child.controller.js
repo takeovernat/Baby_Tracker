@@ -46,6 +46,22 @@ exports.create = (req, res) => {
     });
   };
 
+  exports.findbyAdminUsername=(req,res) =>{
+  Child.findbyAdmin(req.params.admin_username, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `Not found Child that belongs to username ${req.params.admin_username}.`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error retrieving Children belonging to " + req.params.admin_username
+        });
+      }
+    } else res.send(data);
+  });
+};
+
   exports.findAll = (req, res) => {
     Child.getAll((err, data) => {
       if (err)

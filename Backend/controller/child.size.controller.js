@@ -1,4 +1,4 @@
-const Child_progress = require("../Model/childprogress.model");
+const Child_size = require("../Model/child.size.model");
 
 // Create and Save a new Customer
 exports.create = (req, res) => {
@@ -10,38 +10,34 @@ exports.create = (req, res) => {
     }
   
     // Create a Customer
-    const child_progress = new Child_progress({
-        child_id: req.body.id,
+    const child_size = new Child_size({
+        child_id: req.body.child_id,
         height: req.body.height,
         weight: req.body.weight,
-        status: req.body.status,
-        day: req.body.day,
-        pee_count: req.body.pee_count,
-        bowel_count: req.body.bowel_count,
-        hours_slept: req.body.hours_slept
+        date : req.body.date
     });
   
     // Save Customer in the database
-    Child_progress.create(child_progress, (err, data) => {
+    Child_size.create(child_size, (err, data) => {
       if (err)
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the child's progress."
+            err.message || "Some error occurred while creating the child's size data."
         });
       else res.send(data);
     });
   };
 
   exports.findOne = (req, res) => {
-    Child_progress.findById(req.params.id, (err, data) => {
+    Child_size.findbyChildId(req.params.child_id, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found Child_progress with id ${req.params.id}.`
+            message: `Not found Child size data with id ${req.params.child_id}.`
           });
         } else {
           res.status(500).send({
-            message: "Error retrieving Child_progress with id " + req.params.child_id
+            message: "Error retrieving Child size data with id " + req.params.child_id
           });
         }
       } else res.send(data);
@@ -49,11 +45,11 @@ exports.create = (req, res) => {
   };
 
   exports.findAll = (req, res) => {
-    Child_progress.getAll((err, data) => {
+    Child_size.getAll((err, data) => {
       if (err)
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving Child_progresss."
+            err.message || "Some error occurred while retrieving Child size data."
         });
       else res.send(data);
     });

@@ -47,7 +47,7 @@ function HomeScreen(props) {
     container: {
         flex: 1,
   
-        backgroundColor: "white",
+        backgroundColor: Colors.seconary,
         //alignItems: 'flex-start',
         //justifyContent: 'flex-start',
     },

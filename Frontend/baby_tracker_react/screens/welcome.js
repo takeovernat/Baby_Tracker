@@ -22,7 +22,7 @@ const welcomescreen = ({ navigation }) => {
   
   return (
     <View>
-        <ImageBackground source={image} resizeMode="cover" style={{flex:1, height:windowHeight, opacity:0.3}}>
+        <ImageBackground source={image} resizeMode="cover" style={{flex:1, height:windowHeight, opacity:1}}>
         </ImageBackground>
       {/* <Image
         style={styles.image}
@@ -38,7 +38,7 @@ const welcomescreen = ({ navigation }) => {
       <View style={styles.button}>
       <Button
         title="Continue"
-        color="white"
+        color="black"
         onPress={() => navigation.navigate("SignIn")}
       />
       </View>
@@ -82,10 +82,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     fontWeight: "bold",
     marginTop: 200,
-    opacity:2,
+    opacity:3,
     paddingLeft:60,
     paddingRight:60,
-    color:"white",
+    color:"black",
     alignItems:"center"
   },
   note: {
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     paddingHorizontal: 20,
     opacity:1,
-    color:"white",
+    color:"black",
     paddingLeft: 60,
     paddingRight: 60,
     alignItems:"center"
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   link:{
       marginTop:280,
-      color: "white",
+      color: "black",
       fontSize:30,
       fontFamily:fonts.primary,
       alignContent: "center",

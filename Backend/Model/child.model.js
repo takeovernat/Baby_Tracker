@@ -1,13 +1,14 @@
 const sql = require('../db');
 
 const Child = function(child){
-    this.id = child.id;
-    this.admin_id = child.admin_id;
-    this.age = child.age;
-    this.height = child.height;
-    this.weight = child.weight;
-    this.diet_id = child.diet_id;
+    this.child_id = child.child_id;
+    this.admin_username = child.admin_username;
+    this.first_name = child.first_name;
+    this.last_name = child.last_name;
+    this.age_months = child.age_months;
+  
 }
+
 
 Child.create = (newchild, result) => {
     sql.query("INSERT INTO Child SET ?", newchild, (err, res) => {
@@ -16,13 +17,13 @@ Child.create = (newchild, result) => {
           result(err, null);
           return;
         }
-    console.log("created Child: ", { id: res.id, ...newchild });
-    result(null, { id: res.id, ...newchild });
+    console.log("created Child: ", { child_id: res.child_id, ...newchild });
+    result(null, { child_id: res.child_id, ...newchild });
   });
 };
 
-Child.findById = (id, result) => {
-    sql.query(`SELECT * FROM Child WHERE id = ${id}`, (err, res) => {
+Child.findById = (child_id, result) => {
+    sql.query(`SELECT * FROM Child WHERE child_id = ${child_id}`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -39,6 +40,27 @@ Child.findById = (id, result) => {
       result({ kind: "not_found" }, null);
     });
   };
+
+Child.findbyAdmin = (admin_username, result) =>{
+  sql.query(`SELECT * FROM Child WHERE admin_username = "${admin_username}"`,(err, res)=>{
+    if(err){
+      console.log("error: ", err);
+      result(err,null);
+      return;
+    }
+
+
+    if(res.length){
+      console.log("found Child/s: ", res);
+      result(null, res);
+      return;
+    }
+    result({kind: "not_found"}, null);
+  
+  });
+
+
+}
 
   Child.getAll = result => {
     sql.query("SELECT * FROM child", (err, res) => {

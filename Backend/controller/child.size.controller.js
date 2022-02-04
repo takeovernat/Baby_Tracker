@@ -14,7 +14,7 @@ exports.create = (req, res) => {
         child_id: req.body.child_id,
         height: req.body.height,
         weight: req.body.weight,
-        date : req.body.date
+        record : req.body.record
     });
   
     // Save Customer in the database

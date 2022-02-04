@@ -1,7 +1,7 @@
 const sql = require('../db');
 
 const Child = function(child){
-    this.child_id = child.child_id;
+    
     this.admin_username = child.admin_username;
     this.first_name = child.first_name;
     this.last_name = child.last_name;
@@ -21,6 +21,15 @@ Child.create = (newchild, result) => {
     result(null, { child_id: res.child_id, ...newchild });
   });
 };
+//Testing create function
+// const testchild = {
+//   "admin_username":"nate",
+//   "first_name": "jj",
+//   "last_name": "robers",
+//   "age_months" : 1 
+// }
+
+// Child.create(testchild)
 
 Child.findById = (child_id, result) => {
     sql.query(`SELECT * FROM Child WHERE child_id = ${child_id}`, (err, res) => {

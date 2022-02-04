@@ -8,7 +8,7 @@ module.exports = app => {
   
     app.get("/Admin", Admin.findAll);
 
-    app.get("/Admin/:id", Admin.findOne);
+    app.get("/Admin/:username", Admin.findOne);
 
     app.post("/Child", Child.create);
 
@@ -29,23 +29,6 @@ module.exports = app => {
     app.get("/Child_health", Child_health.findAll);
 
     app.get("/Child_health/:child_id", Child_health.findOne);
+
     
-    
-
-
-
-    // Retrieve all Customers
-    //app.get("/customers", customers.findAll);
-  
-    // Retrieve a single Customer with customerId
-    //app.get("/customers/:customerId", customers.findOne);
-  
-    // Update a Customer with customerId
-    //app.put("/customers/:customerId", customers.update);
-  
-    // Delete a Customer with customerId
-    //app.delete("/customers/:customerId", customers.delete);
-  
-    // Create a new Customer
-    //app.delete("/customers", customers.deleteAll);
   };

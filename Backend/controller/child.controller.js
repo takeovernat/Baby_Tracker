@@ -11,12 +11,13 @@ exports.create = (req, res) => {
   
     // Create a Customer
     const child = new Child({
-    id : req.body.id,
-    admin_id : req.body.admin_id,
+    child_id : req.body.child_id,
+    admin_username : req.body.admin_username,
     age : req.body.age,
-    height : req.body.height,
-    weight : req.body.weight,
-    diet_id : req.body.diet_id
+    first_name : req.body.first_name,
+    last_name : req.body.last_name,
+    age_months : req.body.age_months
+
     });
   
     // Save Customer in the database

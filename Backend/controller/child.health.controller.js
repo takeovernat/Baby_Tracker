@@ -1,4 +1,5 @@
 const Child_health = require("../Model/child.health.model");
+const Child = require("../Model/child.model");
 
 // Create and Save a new Customer
 exports.create = (req, res) => {
@@ -14,14 +15,13 @@ exports.create = (req, res) => {
         
         child_id : req.body.child_id,
         meal_count : req.body.meal_count,
-        weight : req.body.weight,
         daily_calories : req.body.daily_calories,
         diaper_change_hard : req.body.diaper_change_hard,
         diaper_change_soft : req.body.diaper_change_soft,
         water_intake_cups : req.body.water_intake_cups ,
         child_movement : req.body.child_movement,
         sleep_time : req.body.sleep_time,
-        date : req.body.date
+        record : req.body.record
 
     });
   
@@ -36,6 +36,7 @@ exports.create = (req, res) => {
     });
   };
 
+ 
   exports.findOne = (req, res) => {
     Child_health.findByChildId(req.params.child_id, (err, data) => {
       if (err) {

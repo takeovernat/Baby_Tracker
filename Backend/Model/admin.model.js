@@ -19,12 +19,27 @@ Admin.create = (newAdmin, result) => {
           return;
         }
     console.log("created Admin: ", { id: res.username, ...newAdmin });
-    result(null, { id: res.username, ...newAdmin });
+    result(null, { username: res.username, ...newAdmin });
   });
 };
+//just a couple more questions, when is your date of birth, how many children do you have? 
+//do you have a new born or fetus etc...
+//test for admin create
+// const TestAdmin ={
+//   "first_name" : "Ron",
+//   "last_name" : "Artest",
+//     "username" : "ron",
+//     "password" : "$2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu",
+//     "email" : "hoopindreams35@gmail.com",
+//     "age" : 22,
+//     "children" : 2,
+
+ 
+// }
+// Admin.create(TestAdmin)
 
 Admin.findByUsername = (username, result) => {
-    sql.query(`SELECT * FROM Admin WHERE username = ${username}`, (err, res) => {
+    sql.query(`SELECT * FROM Admin WHERE username = "${username}"`, (err, res) => {
       if (err) {
         console.log("error: ", err);
         result(err, null);
@@ -49,12 +64,22 @@ Admin.findByUsername = (username, result) => {
         result(null, err);
         return;
       }
-  
-      console.log("Admins: ", res);
+      
+      // console.log("Admins: ", deserializeBytes(res[0].password));
+      // console.log ("mine: $2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu")
+      // if(deserializeBytes(res[0].password) === "$2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu"){
+      //   console.log("matches")
+      // }
       result(null, res);
     });
   };
+  //function for deserializing the hash binary saved in my sql
+  function deserializeBytes(array) {
+    //console.log(new TextDecoder().decode(array))
+   return new TextDecoder().decode(array)
+  }
 
+  //Admin.getAll()
   Admin.remove = (username, result) => {
     sql.query("DELETE FROM Admin WHERE username = ?", username, (err, res) => {
       if (err) {

@@ -4,14 +4,13 @@ const sql = require('../db');
 const Child_health = function(child){
     this.child_id = child.child_id;
     this.meal_count = child.meal_count;
-    this.weight = child.weight;
     this.daily_calories = child.daily_calories;
     this.diaper_change_hard = child.diaper_change_hard;
     this.diaper_change_soft = child.diaper_change_soft;
     this.water_intake_cups = child.water_intake_cups ;
     this.child_movement = child.child_movement,
     this.sleep_time = child.sleep_time,
-    this.date = child.date;
+    this.record = child.record;
 
 }
 
@@ -26,6 +25,22 @@ Child_health.create = (newchild_health, result) => {
     result(null, { child_id: res.child_id, ...newchild_health});
   });
 };
+
+//test health create record
+// const Testhealth = {
+//   "child_id": 3,
+//   "meal_count": 4,
+//   "daily_calories": 1200,
+//   "diaper_change_hard": 2,
+//   "diaper_change_soft": 3,
+//   "water_intake_cups": 4,
+//   "child_movement": false ,
+//   "sleep_time": 10,
+//   "record": "2020/07/12"
+
+
+// }
+// Child_health.create(Testhealth)
 
 Child_health.findByChildId = (child_id, result) =>{
     sql.query(`select * from Child_health_tracker where child_id = ${child_id}`,(err,res)=>{

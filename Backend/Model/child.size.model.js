@@ -5,12 +5,12 @@ const Child_size = function(child){
     this.child_id = child.child_id;
     this.height = child.height;
     this.weight = child.weight;
-    this.date = child.date;
+    this.record = child.record;
 
 }
 
 Child_size.create = (newchild_size, result) => {
-    sql.query("INSERT INTO Child_progress SET ?", newchild_size, (err, res) => {
+    sql.query("INSERT INTO Child_size_tracker SET ?", newchild_size, (err, res) => {
         if (err) {
           console.log("error: ", err);
           result(err, null);
@@ -20,6 +20,15 @@ Child_size.create = (newchild_size, result) => {
     result(null, { child_id: res.child_id, ...newchild_size});
   });
 };
+//test create function
+// const child_s = {
+//   "child_id" : 2,
+//   "height" : 22,
+//   "weight" : 200,
+//   "record" : "2020/10/12"
+// }
+// Child_size.create(child_s)
+
 
  Child_size.findbyChildId= (child_id, result) =>{
   sql.query(`select * from child_size_tracker where child_id = ${child_id}` ,(err, res)=>{

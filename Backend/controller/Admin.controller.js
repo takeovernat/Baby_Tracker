@@ -8,17 +8,22 @@ exports.create = (req, res) => {
         message: "Content can not be empty!"
       });
     }
+    console.log("body - ", req.body)
   
     // Create a Customer
     const admin = new Admin({
-      email: req.body.id,
-      name: req.body.name,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
       username: req.body.username,
-      child_id: req.body.child_id
+      password: req.body.password,
+      email: req.body.email,
+      age: req.body.age,
+      children: req.body.children
     });
   
     // Save Customer in the database
     Admin.create(admin, (err, data) => {
+      //console.log("admin- ", admin)
       if (err)
         res.status(500).send({
           message:
@@ -29,21 +34,22 @@ exports.create = (req, res) => {
   };
 
   exports.findOne = (req, res) => {
-    Admin.findById(req.params.id, (err, data) => {
+    Admin.findByUsername(req.params.username, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
-            message: `Not found Admin with id ${req.params.id}.`
+            message: `Not found Admin with username ${req.params.username}.`
           });
         } else {
           res.status(500).send({
-            message: "Error retrieving Admin with id " + req.params.id
+            message: "Error retrieving Admin with username " + req.params.username
           });
         }
       } else res.send(data);
     });
   };
-
+  
+  
   exports.findAll = (req, res) => {
     Admin.getAll((err, data) => {
       if (err)

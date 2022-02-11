@@ -33,10 +33,10 @@ Admin.create = (newAdmin, result) => {
 //do you have a new born or fetus etc...
 //test for admin create
 // const TestAdmin ={
-//   "first_name" : "jdfkld",
-//   "last_name" : "dick",
-//     "username" : "dick",
-//     "password" : "123456",
+//   "first_name" : "Ron",
+//   "last_name" : "Harris",
+//     "username" : "ron",
+//     "password" : "$2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu",
 //     "email" : "hoopindreams35@gmail.com",
 //     "age" : 44,
 //     "children" : 26,

@@ -26,65 +26,77 @@ import { MainNav } from '../navigation/MainNav';
 import Navstack from '../navigation';
 import AuthContext from '../context';
 import FlatButton from '../styles/button';
+import md5 from 'md5'
 
-const bcrypt = require('bcryptjs')
 export default function SignUpScreen({navigation}){
-    const [username, setUsername] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [users, setUsers] = React.useState([]);
-    const { signIn } = React.useContext(AuthContext);
-    
+    const [username, setUsername] = React.useState(''); //holds username
+    const [password, setPassword] = React.useState(''); //holds password
+    const [users, setUsers] = React.useState([]); //holds all admins from axios request
+    const { signIn } = React.useContext(AuthContext); //usecontext forch signing in user
+    //const [passwordhash, setPasswordHash] = React.useState('');
+    //use effect makes sure the func inside is executed as soon as the page is rendered
     React.useEffect(() => {
          getUsers();
          //console.log(users)
      }, []);
 
+     // the get users function above
     const getUsers = async () => {
+        let passer="";
     axios
-      .get('http://localhost:3003/users')
+      .get('http://localhost:3000/Admin')
       .then((res)=> {
           setUsers(res.data);
-          //console.log(res.data);
       })
       .catch((err) => console.log(err));
     };
+    
+//login function // authenticates user easy to understand
+    const login = async (username) => {
 
-
-    const login = async (username, password) => {
+        
         if(username.length === 0 || password.length === 0){
                Alert.alert('Invalid entry!', 'Username or password cannot be empty.', [
                     {text: 'Okay'}
                   ]);
                   return;
                   }
-                //   console.log(bcrypt)
-                //   var salt = bcrypt.genSaltSync(10);
-                //   var hash = bcrypt.hashSync("aaaa", salt);
-                //   console.log("password: " + password + "hash: " + hash)
-        
+        else if (username.length < 6){
+            Alert.alert('Invalid entry!', 'Username must be atleast 6 characters.', [
+                {text: 'Okay'}
+              ]);
+              return;
+        }
         try{
-        users.forEach((user) => {
-
-            if (user.username === username && user.password === password) {
-                signIn(username, password)
-                throw BreakException
- 
-            }
-        });
-        }
-        catch(e){
-            if(e!=BreakException) throw e;
-        }
-
-        Alert.alert('Invalid entry!', 'Username or password is wrong.', [
-            {text: 'Okay'}
-          ]);
-        
-      
-    };
-
+            let passer='';
+            users.forEach((user) => {
     
-  
+                if (user.username === username) {
+                    user.password.data.map ( (one) => {
+                              passer += (String.fromCharCode(one))
+                             //console.log(String.fromCharCode(one))
+                        
+                          })
+                        if(md5(password) === passer){
+                         console.log("passwords match")
+                         signIn(username, password)
+                        } 
+                        else{
+                            Alert.alert('Invalid entry!', 'Username or password is wrong.', [
+                                {text: 'Okay'}
+                              ]);
+                            //console.log("no match")
+                        }
+     
+                }
+            });
+            }
+            catch(e){
+                console.log(e);
+            }
+        
+    };
+    //what the page actually returns visible
     return (
 
             <SafeAreaView style={styles.container}>

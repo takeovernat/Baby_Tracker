@@ -8,9 +8,9 @@ import children from '../components/children'
 
 let babies = []
 
- const getChildren = () => {
+ const getChildren = (username) => {
   axios
-    .get('http://localhost:3000/Admin')
+    .get(`http://localhost:3000/Child/${username}`)
     .then((res)=> {
       babies = res.data
     })
@@ -18,6 +18,8 @@ let babies = []
   };
  function display ()
  {
+   console.log ("babies- ", babies)
+
    return babies.map((baby)=>{
      return(
       <Childrencomponent cardtitle="John Doe" cardsub="child 1" title="Day #1" Content="status - healthy">
@@ -30,8 +32,9 @@ let babies = []
  }
 
 const ChildrenScreen = () => {
-  
-  getChildren()
+  const username = props.route.params.username
+
+  getChildren(username)
   return(
       <View>
         <Text style={styles.text}>Children</Text>

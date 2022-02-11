@@ -105,7 +105,7 @@ function MainNav(props) {
           }}
         />
       <Tab.Screen name = "children" component={ChildrenStack}
-      initialParams={garbage}
+      initialParams={username}
       options={{
         tabBarLabel: 'children',
         tabBarIcon: ({ color }) => (

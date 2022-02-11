@@ -1,15 +1,22 @@
 const sql = require('../db');
 
+const Hashes = require('jshashes')
+
+
+var MD5 = new Hashes.MD5
+
+
 const Admin = function(admin){
     this.first_name = admin.first_name;
     this.last_name = admin.last_name;
     this.username = admin.username;
-    this.password = admin.password;
+    this.password = MD5.hex(admin.password)
     this.email = admin.email;
     this.age = admin.age;
     this.children=admin.children;
  
 }
+
 
 Admin.create = (newAdmin, result) => {
     sql.query("INSERT INTO Admin SET ?", newAdmin, (err, res) => {
@@ -26,18 +33,18 @@ Admin.create = (newAdmin, result) => {
 //do you have a new born or fetus etc...
 //test for admin create
 // const TestAdmin ={
-//   "first_name" : "Ron",
-//   "last_name" : "Artest",
-//     "username" : "ron",
-//     "password" : "$2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu",
+//   "first_name" : "jdfkld",
+//   "last_name" : "dick",
+//     "username" : "dick",
+//     "password" : "123456",
 //     "email" : "hoopindreams35@gmail.com",
-//     "age" : 22,
-//     "children" : 2,
+//     "age" : 44,
+//     "children" : 26,
 
  
 // }
 // Admin.create(TestAdmin)
-
+//finds admin by username 
 Admin.findByUsername = (username, result) => {
     sql.query(`SELECT * FROM Admin WHERE username = "${username}"`, (err, res) => {
       if (err) {
@@ -57,6 +64,7 @@ Admin.findByUsername = (username, result) => {
     });
   };
 
+  //gets all admins
   Admin.getAll = result => {
     sql.query("SELECT * FROM Admin", (err, res) => {
       if (err) {
@@ -65,21 +73,11 @@ Admin.findByUsername = (username, result) => {
         return;
       }
       
-      // console.log("Admins: ", deserializeBytes(res[0].password));
-      // console.log ("mine: $2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu")
-      // if(deserializeBytes(res[0].password) === "$2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu"){
-      //   console.log("matches")
-      // }
       result(null, res);
     });
   };
-  //function for deserializing the hash binary saved in my sql
-  function deserializeBytes(array) {
-    //console.log(new TextDecoder().decode(array))
-   return new TextDecoder().decode(array)
-  }
 
-  //Admin.getAll()
+  //removed admin by username
   Admin.remove = (username, result) => {
     sql.query("DELETE FROM Admin WHERE username = ?", username, (err, res) => {
       if (err) {
@@ -98,7 +96,7 @@ Admin.findByUsername = (username, result) => {
       result(null, res);
     });
   };
-
+//remove all admins
   Admin.removeAll = result =>{
       sql.query("DELETE FROM Admin", (err, res) => {
       if (err) {
@@ -111,7 +109,7 @@ Admin.findByUsername = (username, result) => {
   });
 };
 
-
+//update admin by username
   Admin.updateByUsername = (username, Admin, result) => {
     sql.query(
       "UPDATE Admin SET email = ?, password = ? WHERE id = ?",

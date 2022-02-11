@@ -5,9 +5,10 @@ import FlatButton from '../styles/button';
 import AuthContext from '../context';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
+import md5 from 'md5'
 
 const forms = ({navigation})=>{
-
+    
     const [username, setUsername] = useState('');
     const [pass, setpass] = useState('');
     const [name, setname] = useState("");
@@ -38,12 +39,14 @@ const forms = ({navigation})=>{
         }
         else {
             const newUser = {
+                first_name: name,
                 username: username,
-                password: pass,
+                email: email,
+                password: md5(pass),
                 email:email
             };
             axios
-                .post('http://localhost:3003/users/add', newUser)
+                .post('http://localhost:3000/admin/', newUser)
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log( err.response.request._response ));
            

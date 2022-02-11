@@ -6,6 +6,7 @@ import Colors from "../styles/colors";
 import AuthContext from '../context';
 const SettingsScreen = () =>{
 const { signOut } = React.useContext(AuthContext);
+
 return(
     <View style={styles.container}>
         

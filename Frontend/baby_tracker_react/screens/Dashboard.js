@@ -24,7 +24,7 @@ function HomeScreen(props) {
 
       
         <View >
-            <Header></Header>
+            <Header title={"welcome "+ username}subtitle="calm down"></Header>
             
       <View style={styles.stats}>
         <Childstatlist>

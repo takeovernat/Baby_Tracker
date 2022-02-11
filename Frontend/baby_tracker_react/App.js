@@ -19,7 +19,8 @@ export default function App({ navigation }) {
   const [users, setUsers] = React.useState([]);
   //const [DarkorLight, SetDarkorLight] = React.useState('');
 
-
+//use refuced that dispaches actions where we want them, actions are sign in and out
+//it also holds our global states kike usertoken usernane etc
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -53,6 +54,7 @@ export default function App({ navigation }) {
     }
   );
 
+  //not being used right now, its for restoring session tokens
   React.useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
@@ -71,6 +73,7 @@ export default function App({ navigation }) {
     bootstrapAsync();
   }, []);
 
+  //we call the function signIn which is a use memo, it call the action sign in with the dispacher from recduer above
   const authContext = React.useMemo(
     () => ({
       signIn: async (data) => {
@@ -81,12 +84,14 @@ export default function App({ navigation }) {
       signUp: async (data) => {
       
         console.log("Registed user ", data)
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', username: data });
       }
     }),
     []
   );
 
+  //creates a stack for auth like welcome, signin, signuop screesn and last one is a nested stack called mainnav,
+  //mainnav is located in navigaion/mainnav, 
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer >
@@ -100,29 +105,19 @@ export default function App({ navigation }) {
               <Stack.Screen
               name="welcome"
               component={welcomescreen}
-              options={{
-                title:'',
-                headerTintColor:true,
-                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-                headerShown: false
+              options={{ title:'', headerTintColor:true, animationTypeForReplace: state.isSignout ? 'pop' : 'push', headerShown: false
               }}
-    
             />
 
             <Stack.Screen
               name="SignIn"
               component={index}
-              options={{
-                title:'',
-                headerTintColor:true,
-                animationTypeForReplace: state.isSignout ? 'pop' : 'push',
-                headerShown: false
+              options={{title:'',headerTintColor:true,animationTypeForReplace: state.isSignout ? 'pop' : 'push',headerShown: false
               }}
     
             />
             
             </Stack.Group>
-
           ) : (
             // User is signed in
             <Stack.Screen name="Home" component={MainNav}

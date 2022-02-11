@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: "Noteworthy",
-    fontSize: 40,
+    fontSize: 37,
     justifyContent: "center",
     fontWeight: "bold",
     marginTop: 200,

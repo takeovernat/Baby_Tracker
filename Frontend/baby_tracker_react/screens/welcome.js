@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginHorizontal: 20,
     opacity:1,
-    color:'black' ,
+    color:'black',
     marginLeft: 60,
     marginRight: 60,
     alignItems:"center",

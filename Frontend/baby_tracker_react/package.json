@@ -20,6 +20,7 @@
     "bcrypt-react-native": "^1.1.1",
     "bcryptjs": "^2.4.3",
     "expo": "~42.0.1",
+    "expo-linear-gradient": "^11.0.3",
     "expo-secure-store": "^11.0.3",
     "expo-status-bar": "~1.0.4",
     "md5": "^2.3.0",

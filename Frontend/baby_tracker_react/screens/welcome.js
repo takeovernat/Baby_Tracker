@@ -4,6 +4,8 @@ import Navstack from "../navigation";
 import FlatButton from "../styles/button";
 import { Dimensions, Linking } from "react-native";
 import fonts from "../styles/fonts";
+import { ScreenHeight, ScreenWidth } from "react-native-elements/dist/helpers";
+//import { red100 } from "react-native-paper/lib/typescript/styles/colors";
 const welcomescreen = ({ navigation }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [isDark, setDark] = useState(false)
@@ -11,7 +13,8 @@ const welcomescreen = ({ navigation }) => {
       setIsEnabled((previousState) => !previousState);
      
   }
-  const image = {uri:"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F38%2F2020%2F05%2F07%2FMagnolia-Bath-Time-2000.jpg"}
+  //const image = {uri:"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F38%2F2020%2F05%2F07%2FMagnolia-Bath-Time-2000.jpg"}
+  const image = {uri:"https://images.pexels.com/photos/3875080/pexels-photo-3875080.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"}
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   useEffect(() => {
@@ -22,7 +25,7 @@ const welcomescreen = ({ navigation }) => {
   
   return (
     <View>
-        <ImageBackground source={image} resizeMode="cover" style={{flex:1, height:windowHeight, opacity:1}}>
+        <ImageBackground source={image} resizeMode="cover" style={{flex:1, height:ScreenHeight, opacity:1}}>
         </ImageBackground>
       {/* <Image
         style={styles.image}
@@ -31,10 +34,13 @@ const welcomescreen = ({ navigation }) => {
         }}
       /> */}
       <Text style={styles.text}>HealthyBabies©</Text>
+      
+      <View style={{alignItems:"center", justifyContent: "center"}}>
       <Text style={styles.note}>
         An interactive way to keep track of your children's health. Click continue
         to get started
       </Text>
+      </View>
       <View style={styles.button}>
       <Button
         title="Continue"
@@ -46,7 +52,7 @@ const welcomescreen = ({ navigation }) => {
       <View style={{alignItems:"center"}}>
       <Text style={styles.link}
       onPress={() => Linking.openURL('http://google.com')}>
-        any questions?
+        Questions?
         </Text>
       </View>
       
@@ -70,18 +76,24 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   image: {
-    height: 300,
-    width: 100,
+    height: ScreenHeight,
+    width: ScreenWidth,
     aspectRatio: 0.8,
     resizeMode: "contain",
-    marginTop: 60,
+    marginTop: 1,
   },
   text: {
     fontFamily: "Noteworthy",
     fontSize: 37,
     justifyContent: "center",
     fontWeight: "bold",
-    marginTop: 200,
+    borderRadius: 30,
+    borderWidth: 3,
+    borderColor: 'black',
+    borderStyle: 'solid',
+    backgroundColor: 'rgba(158, 150, 150, .3)' ,
+    marginHorizontal: 3,
+    marginTop: 50,
     opacity:3,
     paddingLeft:60,
     paddingRight:60,
@@ -92,13 +104,19 @@ const styles = StyleSheet.create({
     fontFamily: "Noteworthy",
     fontSize: 20,
     justifyContent: "center",
-    paddingVertical: 0,
-    paddingHorizontal: 20,
+    marginTop: 50,
+    marginHorizontal: 20,
     opacity:1,
-    color:"black",
-    paddingLeft: 60,
-    paddingRight: 60,
-    alignItems:"center"
+    color:'black' ,
+    marginLeft: 60,
+    marginRight: 60,
+    alignItems:"center",
+    padding: 20,
+    borderRadius: 100,
+    borderWidth: 3,
+    borderColor: 'black',
+    borderStyle: 'solid',
+    backgroundColor: 'rgba(158, 150, 150, .4)' ,
   },
   button:{
       marginTop:100,
@@ -107,7 +125,8 @@ const styles = StyleSheet.create({
       alignItems:"center"
   },
   link:{
-      marginTop:280,
+      marginTop:250,
+      marginBottom:50,
       color: "black",
       fontSize:30,
       fontFamily:fonts.primary,

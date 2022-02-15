@@ -32,9 +32,9 @@ let babies = []
  }
 
 const ChildrenScreen = () => {
-  const username = props.route.params.username
+  //const username = props.route.params.username
 
-  getChildren(username)
+  //getChildren(username)
   return(
       <View>
         <Text style={styles.text}>Children</Text>

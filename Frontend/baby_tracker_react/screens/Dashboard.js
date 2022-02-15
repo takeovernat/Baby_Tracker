@@ -17,7 +17,7 @@ function HomeScreen(props) {
     const [Search, setSearch] = useState('')
     const [open, setOpen] = useState(false)
     const username = props.route.params.username
-    console.log(props)
+    // console.log(props)
     const { signOut } = React.useContext(AuthContext);
     return (
       <ScrollView style={styles.container}>
@@ -42,7 +42,6 @@ function HomeScreen(props) {
         </ScrollView>
     );
   }
-
   const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -3,21 +3,23 @@ const sql = require('../db');
 const Hashes = require('jshashes')
 
 
-var MD5 = new Hashes.MD5
-
+//var MD5 = new Hashes.MD5
+//import md5 from 'md5'
+var MD5 = require("crypto-js/md5");
+//console.log(MD5("123456").toString());
 
 const Admin = function(admin){
     this.first_name = admin.first_name;
     this.last_name = admin.last_name;
     this.username = admin.username;
-    this.password = MD5.hex(admin.password)
+    this.password = admin.password;
     this.email = admin.email;
     this.age = admin.age;
     this.children=admin.children;
  
 }
 
-
+//onsole.log(MD5("123321").toString())
 Admin.create = (newAdmin, result) => {
     sql.query("INSERT INTO Admin SET ?", newAdmin, (err, res) => {
         if (err) {
@@ -25,7 +27,7 @@ Admin.create = (newAdmin, result) => {
           result(err, null);
           return;
         }
-    console.log("created Admin: ", { id: res.username, ...newAdmin });
+    console.log("created Admin: ", { username: res.username, ...newAdmin });
     result(null, { username: res.username, ...newAdmin });
   });
 };
@@ -33,10 +35,10 @@ Admin.create = (newAdmin, result) => {
 //do you have a new born or fetus etc...
 //test for admin create
 // const TestAdmin ={
-//   "first_name" : "jdfkld",
-//   "last_name" : "dick",
-//     "username" : "dick",
-//     "password" : "123456",
+//   "first_name" : "Ron",
+//   "last_name" : "Harris",
+//     "username" : "ron",
+//     "password" : "$2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu",
 //     "email" : "hoopindreams35@gmail.com",
 //     "age" : 44,
 //     "children" : 26,

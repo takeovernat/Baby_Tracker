@@ -42,7 +42,7 @@ const forms = ({navigation})=>{
                 first_name: name,
                 username: username,
                 email: email,
-                password: md5(pass),
+                password: md5(pass.trim()),
                 email:email
             };
             axios
@@ -50,9 +50,12 @@ const forms = ({navigation})=>{
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log( err.response.request._response ));
            
-        }
-
-        signUp(username, pass, email)
+                console.log("in forms, pss len ", pass.trim().length)
+                console.log("plain ", pass)
+                console.log("sent ", newUser.password)
+            }
+            
+       // signUp(username, pass, email)
     };
 
     return(
@@ -105,20 +108,14 @@ const forms = ({navigation})=>{
                         selectionColor="#1A374D"
             />
             <View style={{marginTop:20}}>
-                        <FlatButton  text="Sign Up" onPress={handlePress} />
+                <FlatButton  text="Sign Up" onPress={handlePress} />
+                <View style={{marginBottom:20, marginTop:20}}>
+                    <Text style={styles.note}>Have an account?</Text>
+                    <FlatButton text="Login" onPress={()=> (
+                    navigation.pop())}/>
+                </View>
             </View>
-            
-                <Text style={styles.note}>have an account?</Text>
-                <View style={{paddingBottom:20}}>
-                <Button color="white" title="login" onPress={()=> (
-                navigation.pop()
-            )}/>
-            </View>
-            
-                
-
         </View>
-        // </ScrollView>
     )
 };
 const styles = StyleSheet.create({
@@ -127,7 +124,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: '#1A374D',
-        //margin: 10
     },
     text:{
         fontFamily: 'Noteworthy',
@@ -136,7 +132,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         //paddingVertical: 100,
        // paddingHorizontal: 70,
-        marginTop:150,
+        marginTop:100,
         color: "white"
     },
     textsub:{
@@ -160,8 +156,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Noteworthy',
         fontSize: 20,
         fontWeight: "bold",
-        marginTop: 100,
-        color:"white"
+        color:"white",
+        marginTop: 40
     },
 
 });

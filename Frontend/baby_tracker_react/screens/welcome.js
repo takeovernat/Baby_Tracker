@@ -95,10 +95,23 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     paddingHorizontal: 20,
     opacity:1,
+<<<<<<< HEAD
+    color:'black',
+    marginLeft: 60,
+    marginRight: 60,
+    alignItems:"center",
+    padding: 20,
+    borderRadius: 100,
+    borderWidth: 3,
+    borderColor: 'black',
+    borderStyle: 'solid',
+    backgroundColor: 'rgba(158, 150, 150, .4)' ,
+=======
     color:"black",
     paddingLeft: 60,
     paddingRight: 60,
     alignItems:"center"
+>>>>>>> parent of 2749f17 (Merge branch 'main' of https://github.com/takeovernat/Baby_Tracker)
   },
   button:{
       marginTop:100,

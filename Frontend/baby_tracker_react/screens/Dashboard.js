@@ -33,7 +33,7 @@ function HomeScreen(props) {
         </View>
      
         <View style={styles.children}>
-          <Childrencomponent cardtitle="John Doe" cardsub="child 1" title="Day #1" Content="status - healthy">
+          <Childrencomponent cardtitle="nate Doe" cardsub="child 1" title="Day #1" Content="status - healthy">
 
           </Childrencomponent>
         </View>

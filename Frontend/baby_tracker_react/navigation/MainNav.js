@@ -29,9 +29,11 @@ function ChildrenStack() {
       <cStack.Screen name="Notifications" component={ChildrenScreen} />
       <cStack.Screen name="Profile" component={ChildrenScreen} />
       <cStack.Screen name="Settings" component={ChildrenScreen} />
+
     </cStack.Navigator>
   );
 }
+
 
 const usernamepass = "";
 const Drawer = createDrawerNavigator();
@@ -48,15 +50,22 @@ function MyDrawer(props) {
         initialRouteName:"Dashboard",
         
       },
-      headerTintColor:'black',
+      headerTintColor:'white',
       
       
     }}>
       <Drawer.Screen name="Dashboard" initialParams={username} component={Dashboard} options={{
            
            headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
-           title: 'Dashboard',
-           
+           title: '',
+           drawerLabel: "Home",
+           drawerLabelStyle:{
+             color:Colors.primary
+           },
+          // drawerType: "slide",
+          drawerHideStatusBarOnOpen: true,
+          //drawerActiveTintColor: "red",
+           //drawerInactiveBackgroundColor: "black",
            drawerIcon: ({focused, size}) => (
               <MaterialCommunityIcons
                  name="view-dashboard"
@@ -67,8 +76,12 @@ function MyDrawer(props) {
         }} />
       <Drawer.Screen name = "notifications" component={SettingsScreen}
         options={{ headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent"},
-        title:"notifications",
-                    
+        title:"",
+        drawerLabelStyle:{
+           
+          color:Colors.primary
+        },
+        drawerLabel: "Notification",       
         drawerIcon: ({focused, size}) => (
               <MaterialCommunityIcons
                  name="bell"

@@ -61,26 +61,22 @@ export default function SignUpScreen({navigation}){
                   ]);
                   return;
                   }
-        else if (username.length < 5){
+        else if (username.length < 6){
             Alert.alert('Invalid entry!', 'Username must be atleast 6 characters.', [
                 {text: 'Okay'}
               ]);
               return;
         }
         try{
-            var found = false;
             let passer='';
             users.forEach((user) => {
-                
+    
                 if (user.username === username) {
-                    found= true;
                     user.password.data.map ( (one) => {
                               passer += (String.fromCharCode(one))
-                            //console.log(String.fromCharCode(one))
+                             //console.log(String.fromCharCode(one))
                         
                           })
-                        //   console.log(passer.length)
-                        //   console.log(md5(password).length)
                         if(md5(password) === passer){
                          console.log("passwords match")
                          signIn(username, password)
@@ -93,18 +89,11 @@ export default function SignUpScreen({navigation}){
                         }
      
                 }
-                
             });
             }
             catch(e){
                 console.log(e);
             }
-            if(!found){
-                Alert.alert('Invalid entry!', 'Username or password is wrong.', [
-                    {text: 'Okay'}
-                  ]);
-            }
-            
         
     };
     //what the page actually returns visible
@@ -138,7 +127,7 @@ export default function SignUpScreen({navigation}){
                         <View style={styles.textInputContainer}>
                             <FlatButton style={{marginBottom:100}} text='Login' onPress={()=> {
                                 login(username, password)}}/>
-                            <Button style={styles.forgot}  color="white" title="Forgot password?" onPress={()=> (
+                            <FlatButton text="Forgot password?" onPress={()=> (
                             navigation.navigate('signup') )}/>
                         </View>
                         <View>

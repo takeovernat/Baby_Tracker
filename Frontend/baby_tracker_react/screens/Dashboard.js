@@ -33,7 +33,7 @@ function HomeScreen(props) {
         </View>
      
         <View style={styles.children}>
-          <Childrencomponent cardtitle="nate Doe" cardsub="child 1" title="Day #1" Content="status - healthy">
+          <Childrencomponent cardtitle="John Doe" cardsub="child 1" title="Day #1" Content="status - healthy">
 
           </Childrencomponent>
         </View>
@@ -42,6 +42,11 @@ function HomeScreen(props) {
         </ScrollView>
     );
   }
+  const New = true
+function NewUser (props)
+{
+
+}
   const styles = StyleSheet.create({
     container: {
         flex: 1,

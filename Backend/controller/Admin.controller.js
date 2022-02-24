@@ -69,18 +69,18 @@ exports.create = (req, res) => {
       });
     }
   
-    Admin.updateById(
-      req.params.id,
+    Admin.updateByUsername(
+      req.params.username,
       new Admin(req.body),
       (err, data) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
-              message: `Not found Admin with id ${req.params.id}.`
+              message: `Not found Admin with id ${req.params.username}.`
             });
           } else {
             res.status(500).send({
-              message: "Error updating Customer with id " + req.params.id
+              message: "Error updating Admin with username " + req.params.username
             });
           }
         } else res.send(data);

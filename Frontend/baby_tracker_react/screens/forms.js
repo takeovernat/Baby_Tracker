@@ -55,7 +55,7 @@ const forms = ({navigation})=>{
                 console.log("sent ", newUser.password)
             }
             
-       // signUp(username, pass, email)
+        signUp(username, pass, email)
     };
 
     return(

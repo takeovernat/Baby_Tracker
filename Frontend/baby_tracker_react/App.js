@@ -10,15 +10,14 @@ import SignUpScreen from './screens/login';
 import AuthContext from './context';
 import index from './navigation/index'
 import axios from 'axios';
-
-
+import QuestionStack from './screens/childrenquestionare';
 
 const Stack = createStackNavigator();
-
+//console.log("heyyyy")
 export default function App({ navigation }) {
   const [users, setUsers] = React.useState([]);
   //const [DarkorLight, SetDarkorLight] = React.useState('');
-
+  //console.log("heyyyy")
 //use refuced that dispaches actions where we want them, actions are sign in and out
 //it also holds our global states kike usertoken usernane etc
   const [state, dispatch] = React.useReducer(
@@ -89,6 +88,26 @@ export default function App({ navigation }) {
     }),
     []
   );
+  const load = (props)=>{
+
+    React.useEffect(() => {
+      axios
+          .get(`http://localhost:3000/child/admin/${state.username}`)
+          .then((res)=> {
+              console.log(res.data);
+              props.navigation.navigate('Home');
+              //sethasChild(true)
+            })
+            .catch((err) =>  props.navigation.replace('initial'))
+    
+    
+    })
+    return(
+      <View style={{ marginTop:400, marginLeft:150}}>
+        <Text style={{fontSize:22}}>Loading...</Text>
+      </View>
+    );
+  }
 
   //creates a stack for auth like welcome, signin, signuop screesn and last one is a nested stack called mainnav,
   //mainnav is located in navigaion/mainnav, 
@@ -120,10 +139,25 @@ export default function App({ navigation }) {
             </Stack.Group>
           ) : (
             // User is signed in
-            <Stack.Screen name="Home" component={MainNav}
+            
+            <Stack.Group>
+              
+               
+              <Stack.Screen name="load" component={load}
             initialParams={{username:state.username}} 
             options={{headerShown: false}}
             />
+              <Stack.Screen name="initial" component={QuestionStack}
+            initialParams={{username:state.username}} 
+            options={{headerShown: false}}
+            />
+              <Stack.Screen name="Home" component={MainNav}
+            initialParams={{username:state.username}} 
+            options={{headerShown: false}}
+            />
+
+              </Stack.Group>
+            
           )}
         </Stack.Navigator>
       </NavigationContainer>

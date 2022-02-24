@@ -30,5 +30,7 @@ module.exports = app => {
 
     app.get("/Child_health/:child_id", Child_health.findOne);
 
+    app.post("/Admin/:username",Admin.update);
+
     
   };

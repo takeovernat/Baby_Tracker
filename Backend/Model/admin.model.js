@@ -116,8 +116,8 @@ Admin.findByUsername = (username, result) => {
 //update admin by username
   Admin.updateByUsername = (username, Admin, result) => {
     sql.query(
-      "UPDATE Admin SET email = ?, password = ? WHERE id = ?",
-      [Admin.email, Admin.password],
+      "UPDATE Admin SET age = ?, children = ? WHERE username = ?",
+      [Admin.age, Admin.children, username],
       (err, res) => {
         if (err) {
           console.log("error: ", err);

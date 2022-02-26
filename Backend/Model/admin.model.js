@@ -16,6 +16,7 @@ const Admin = function(admin){
     this.email = admin.email;
     this.age = admin.age;
     this.children=admin.children;
+    this.phone = admin.phone
  
 }
 

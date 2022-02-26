@@ -14,6 +14,7 @@ const forms = ({navigation})=>{
     const [name, setname] = useState("");
     const [passTwo, setPassTwo] = useState('');
     const [email, setemail] = useState('');
+    const [phone, setphone] = useState('');
 
     const { signUp } = React.useContext(AuthContext);
 
@@ -37,31 +38,31 @@ const forms = ({navigation})=>{
             alert("please enter a valid name") 
             return (false)
         }
+        else if(phone.length != 10)
+        {
+            console.log(phone.length)
+            alert("please enter a valid phone number")
+            return ("false")
+        }
         else {
             const newUser = {
                 first_name: name,
                 username: username,
                 email: email,
                 password: md5(pass.trim()),
-                email:email
+                email:email,
+                phone: phone
             };
             axios
                 .post('http://localhost:3000/admin/', newUser)
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log( err.response.request._response ));
-           
-                console.log("in forms, pss len ", pass.trim().length)
-                console.log("plain ", pass)
-                console.log("sent ", newUser.password)
             }
             
         signUp(username, pass, email)
     };
 
     return(
-        // <ScrollView > 
-
-       
         <View style={styles.container}>
             <Text style={styles.text}>HealthyBabies©</Text>
             <Text style={styles.textsub}> Monitor and take control of your children's health now</Text>
@@ -79,6 +80,14 @@ const forms = ({navigation})=>{
                         placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
                         style={styles.textInput}
+                        selectionColor="#1A374D"
+            />
+            <TextInput
+                        placeholder="Phone Number"
+                        placeholderTextColor="black"
+                        placeholderTextFont="Noteworthy"
+                        style={styles.textInput}
+                        onChangeText={(phone) => setphone(phone.trim())}
                         selectionColor="#1A374D"
             />
             <TextInput

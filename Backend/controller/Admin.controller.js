@@ -18,7 +18,8 @@ exports.create = (req, res) => {
       password: req.body.password,
       email: req.body.email,
       age: req.body.age,
-      children: req.body.children
+      children: req.body.children,
+      phone: req.body.phone
     });
   
     // Save Customer in the database

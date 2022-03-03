@@ -15,26 +15,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Colors from '../styles/colors';
 
 
-const cStack = createStackNavigator();
-
-function ChildrenStack() {
-  return (
-    <cStack.Navigator initialRouteName="Children">
-      <cStack.Screen name="Children" component={ChildrenScreen} 
-      options={{
-           
-        headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
-        title: ''}}
-      />
-      <cStack.Screen name="Notifications" component={ChildrenScreen} />
-      <cStack.Screen name="Profile" component={ChildrenScreen} />
-      <cStack.Screen name="Settings" component={ChildrenScreen} />
-
-    </cStack.Navigator>
-  );
-}
-
-
 const usernamepass = "";
 const Drawer = createDrawerNavigator();
 
@@ -117,7 +97,7 @@ function MainNav(props) {
             ),
           }}
         />
-      <Tab.Screen name = "children" component={ChildrenStack}
+      <Tab.Screen name = "children" component={ChildrenScreen}
       initialParams={username}
       options={{
         tabBarLabel: 'children',
@@ -137,25 +117,6 @@ function MainNav(props) {
       </Tab.Navigator>
     
   );
-}
-
-const garbage = {
-  one:{
-    baby_id:0,
-    Name: "donald",
-    age: 1,
-    lastDiaperChange: "1638397371",
-    hoursSlept: 8
-  }
-    ,
-  two:{
-    baby_id: 1,
-    Name: "sarah",
-    age: 0.8,
-    lastDiaperChange: "1638397354",
-    hoursSlept: 5
-  }
-  
 }
 
 

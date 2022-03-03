@@ -80,7 +80,6 @@ const appearance = () => {
     </View>
 )}
 const signout = (props) => {
-    console.log(props.route.params.signout)
     {props.route.params.signout()}
     return(
         <View>
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 60,
-        backgroundColor: Colors.seconary,
+        backgroundColor: Colors.primary,
     },
     icon: {
         height: 40, 
@@ -136,13 +135,13 @@ const styles = StyleSheet.create({
         fontSize: 37,
         fontWeight: "bold",
         paddingLeft:20,
-        color:"black",
+        color:"#EDBFB7",
         marginBottom: 30
     },
     tab:{
         paddingHorizontal: 10,
         flexDirection: "row",
-        borderColor: "black",
+        borderColor: "#EDBFB7",
         borderWidth: 2,
         borderTopWidth: 0,
         borderLeftWidth: 0,
@@ -151,6 +150,7 @@ const styles = StyleSheet.create({
     note:{
       fontFamily: 'Noteworthy',
       fontSize: 23,
+      color: "#EDBFB7",
       justifyContent: 'center',
       paddingVertical: 20,
       paddingHorizontal: 20

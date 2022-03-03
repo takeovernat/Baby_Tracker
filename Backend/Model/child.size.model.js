@@ -31,7 +31,7 @@ Child_size.create = (newchild_size, result) => {
 
 
  Child_size.findbyChildId= (child_id, result) =>{
-  sql.query(`select * from child_size_tracker where child_id = ${child_id}` ,(err, res)=>{
+  sql.query(`select * from child_size_tracker where child_id = ${child_id} order by record desc` ,(err, res)=>{
     if(err){
       console.log("erorr:", err);
       result(err, null);

@@ -43,7 +43,7 @@ Child_health.create = (newchild_health, result) => {
 // Child_health.create(Testhealth)
 
 Child_health.findByChildId = (child_id, result) =>{
-    sql.query(`select * from Child_health_tracker where child_id = ${child_id}`,(err,res)=>{
+    sql.query(`select * from Child_health_tracker where child_id = ${child_id} order by record desc`,(err,res)=>{
       if(err){
         console.log("error: ", err);
         result(err, null);

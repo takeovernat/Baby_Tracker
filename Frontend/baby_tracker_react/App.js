@@ -11,8 +11,11 @@ import AuthContext from './context';
 import index from './navigation/index'
 import axios from 'axios';
 import QuestionStack from './screens/childrenquestionare';
+import * as SecureStore from 'expo-secure-store';
 
 const Stack = createStackNavigator();
+
+
 //console.log("heyyyy")
 export default function App({ navigation }) {
   const [users, setUsers] = React.useState([]);
@@ -53,12 +56,37 @@ export default function App({ navigation }) {
     }
   );
 
+  async function save(key, value) {
+    console.log("saving key...")
+    await SecureStore.setItemAsync(key, value);
+  }
+
+  async function getValueFor(key) {
+    let result = await SecureStore.getItemAsync(key);
+    if (result) {
+     // alert("🔐 Here's your value 🔐 \n" + result);
+      return result
+    } else {
+      //alert('session not found! logging out');
+      return '';
+    }
+  }
+
+   const deleteVal = async(val)=>{
+    let res = await SecureStore.deleteItemAsync(val)
+    console.log('deleted saved value for user...token related')
+  }
   //not being used right now, its for restoring session tokens
   React.useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
       let userToken;
       try {
+        const val = getValueFor('user');
+        val==='' ? console.log('no session saved 86') :
+          dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', username: data });
+
+        
         // Restore token stored in `SecureStore` or any other encrypted storage
         // userToken = await SecureStore.getItemAsync('userToken');
       } catch (e) {
@@ -77,9 +105,13 @@ export default function App({ navigation }) {
     () => ({
       signIn: async (data) => {
         console.log("Signed in user ", data)
+        save('user',data)
+        //getValueFor('user')
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token', username: data });
       },
-      signOut: () => dispatch({ type: 'SIGN_OUT' }),
+      signOut: async () => {
+        deleteVal('user')
+        dispatch({ type: 'SIGN_OUT' })},
       signUp: async (data) => {
       
         console.log("Registed user ", data)

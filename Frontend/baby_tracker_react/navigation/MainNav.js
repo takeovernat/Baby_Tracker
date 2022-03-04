@@ -36,11 +36,11 @@ function MyDrawer(props) {
     }}>
       <Drawer.Screen name="Dashboard" initialParams={username} component={Dashboard} options={{
            
-           headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
+           headerStyle:{backgroundColor:"black", shadowColor: "transparent" } ,
            title: '',
            drawerLabel: "Home",
            drawerLabelStyle:{
-             color:Colors.primary
+             color:"white"
            },
           // drawerType: "slide",
           drawerHideStatusBarOnOpen: true,
@@ -55,11 +55,10 @@ function MyDrawer(props) {
            ),
         }} />
       <Drawer.Screen name = "notifications" component={SettingsScreen}
-        options={{ headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent"},
+        options={{ headerStyle:{backgroundColor:"black", shadowColor: "transparent"},
         title:"",
-        drawerLabelStyle:{
-           
-          color:Colors.primary
+        drawerLabelStyle:{ 
+          color: "white"
         },
         drawerLabel: "Notification",       
         drawerIcon: ({focused, size}) => (

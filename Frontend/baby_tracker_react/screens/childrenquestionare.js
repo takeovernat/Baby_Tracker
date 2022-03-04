@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import {SafeAreaView, TextInput, View, Text, StyleSheet, Button } from "react-native";
+import {SafeAreaView, TextInput, View, Text, StyleSheet, Button, Image } from "react-native";
 import { color } from "react-native-reanimated";
 import Colors from "../styles/colors";
 import { Icon } from 'react-native-elements'
@@ -18,6 +18,7 @@ const Q1 = (props)=>{
 
     //console.log("q1", username.replace(/[0-9:",{}()]+/g,''))
   const name = username.replace(/[0-9:",{}()]+/g,'')
+  //handle press func
     const handlepress = ()=>{
       
       
@@ -33,7 +34,7 @@ const Q1 = (props)=>{
     };
 
           axios
-          .post(`http://localhost:3000/Admin${name.trim()}` , {
+          .post(`http://localhost:3000/Admin/${name.trim()}` , {
             age:age,
             children:children
           },config)
@@ -41,10 +42,10 @@ const Q1 = (props)=>{
           .then((res)=> {
               console.log(res.data);
           })
-          .catch((err) => console.log("error getting res from db/admin/uname post/update"));
+          .catch((err) => console.log(`error getting res from db/admin/uname post/update ${age}, ${children}`));
         
           
-          props.navigation.replace('Q2',{children})
+          props.navigation.replace('Q2',{children, name})
             } 
             else if(children > 3 || typeof(children) == String){
               props.navigation.replace('DenyThree')
@@ -79,7 +80,6 @@ const Q1 = (props)=>{
             onPress={ handlepress} 
                 
             />
-      
 
         </View>
                 
@@ -93,9 +93,10 @@ const Q2 = (props)=>{
     const children = props.route.params.children
     //console.log("ch - ", props.route.params.navigate('Home'))
     //const name = '';
-    const username = props.route.params.username;
+    const username = props.route.params.name;
     const nav = props.route.params;
-    
+   //console.log(props.route.params)
+    //console.log(username)
     return (
       <View style={styles.container} >
           
@@ -130,15 +131,29 @@ const Q2 = (props)=>{
             color="grey"  
             onPress={()=> 
               
-              {
+              {//onpress
                // console.log(children)
+               axios
+               .post('http://localhost:3000/child', {
+                 admin_username: username,
+                 first_name:first,
+                 last_name : last,
+                 age_months: age,
+                 gender : 'm'
+                })
+                .then((res)=> {
+                  console.log(res.data)
+                })
+                .catch((err) => console.log(err));
+                
                 if(children==1){
-                nav.replace('Home')
+                
+                props.navigation.navigate('complete')
               }
               else{
                // console.log(props.navigation)
-                console.log(children)
-               props.navigation.replace('Q3',{children},{first})
+                //console.log("nig===>",children)
+               props.navigation.replace('Q3',{first,children, username})
               }
             
             }//{f
@@ -156,8 +171,9 @@ const Q3 = (props)=>{
     const username = props.route.params.username;
     const nav = props.route.params;
     const firstkidname = props.route.params.first;
-    const children = ""
-   console.log( props)
+    const children = props.route.params.children;
+    //console.log(props)
+   //23console.log( props)
     return (
       <View style={styles.container} >
           
@@ -183,8 +199,22 @@ const Q3 = (props)=>{
             color="grey"  
             onPress={()=>
             {
+
+              axios
+               .post('http://localhost:3000/child', {
+                 admin_username: username,
+                 first_name:text,
+                 last_name : number,
+                 age_months: age,
+                 gender : 'm'
+                })
+                .then((res)=> {
+                  console.log( "created child obj in db",res.data)
+                })
+                .catch((err) => console.log(err));
+               
              if(children == 2){
-               nav.replace('Home')
+               props.navigation.navigate('complete')
 
              }
              else{
@@ -206,6 +236,7 @@ const Q4 = (props)=>{
   const username = props.route.params.username;
     const nav = props.route.params;
     const secondkidname = props.route.params.text
+    const children = props.route.params.children
     
     //const name = '';
     return (
@@ -231,7 +262,27 @@ const Q4 = (props)=>{
         <Icon  
             name="arrow-forward-ios" 
             color="grey"  
-            onPress={()=> nav.navigate('Home')}
+            onPress={()=> 
+              
+              {
+            
+                axios
+                .post('http://localhost:3000/child', {
+                  admin_username: username,
+                  first_name:text,
+                  last_name : number,
+                  age_months: age,
+                  gender : 'm'
+                 })
+                 .then((res)=> {
+                   console.log( "created child obj in db",res.data)
+                 })
+                 .catch((err) => console.log(err));
+                props.navigation.navigate('complete')
+              
+            }
+            
+            }
             />
         </View>
     
@@ -275,6 +326,24 @@ const DenyThree = (props) =>{
            </View>
         </View>
     )
+}
+
+const Complete = (props)=>{
+  //console.log(props)
+  const nav = props.route.params;
+return (
+  <View style={{marginTop:140}}>
+    <Text style={styles.fontynomargin}>All Set</Text>
+    <Image style={styles.img} source={require("../assets/thumb1.png")} />
+    <Text style={styles.fontyp}>setting up your profile...</Text>
+    <Icon  style={styles.arrow1}
+            name="arrow-forward-ios" 
+            color="grey"  
+            onPress={()=>nav.replace('Home')}
+            />
+  </View>
+
+);
 }
 
 
@@ -347,6 +416,12 @@ const DenyThree = (props) =>{
               headerMode:'none', headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
               title: ''}}
             />
+            <questionstack.Screen name="complete" component={Complete} 
+            initialParams={nav}
+            options={{  
+              headerMode:'none',
+              title: ''}}
+            />
       
           </questionstack.Navigator>
         );
@@ -355,6 +430,14 @@ const DenyThree = (props) =>{
       const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
       const styles = StyleSheet.create({
+
+        img:{
+          height:160,
+          width: 160,
+          alignSelf: "center",
+          //backgroundColor:"black"
+          //marginTop: 120
+        },
         fonty: {
             marginTop:180,
             marginBottom:30,
@@ -363,6 +446,24 @@ const DenyThree = (props) =>{
             
 
         },
+        fontyp: {
+            marginTop: 20,
+            fontFamily: "Academy Engraved LET",
+            fontSize: 25,
+            alignSelf: "center"
+            
+
+        },
+
+
+        fontynomargin: {
+          marginTop:150,
+          fontFamily: "Academy Engraved LET",
+          fontSize: 50,
+          alignSelf: "center",
+          
+
+      },
         container:{
             margin:10,
             padding:10,
@@ -378,7 +479,14 @@ const DenyThree = (props) =>{
               marginTop:100 ,
               paddingLeft: 340,
               
-          }
+          },
+          arrow1:{
+            marginTop:150 ,
+            alignSelf:"flex-end",
+            paddingRight: 30,
+            
+        }
+
 
       });
       

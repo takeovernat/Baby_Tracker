@@ -6,6 +6,7 @@ const Child = function(child){
     this.first_name = child.first_name;
     this.last_name = child.last_name;
     this.age_months = child.age_months;
+    this.gender = child.gender;
   
 }
 

@@ -151,14 +151,19 @@ const childDetails = props => {
   )
 }
 let children
- const ChildrenScreen = (props) => {
- const [isLoading, setLoading] = useState(true);
  
+const ChildrenScreen = (props) => {
+ const [isLoading, setLoading] = useState(true);
  useEffect( () => {
   const fetchChildren = async () => {
   children = (await axios.get(`http://localhost:3000/Child/admin/${props.route.params.username}`)).data[0]
+//  console.log(children)
+
   children = {...children, ...(await axios.get(`http://localhost:3000/child_health/${children.child_id}`)).data[0]}
+
   children = {...children, ...(await axios.get(`http://localhost:3000/child_size/${children.child_id}`)).data[0]}
+  console.log(children)
+
   setLoading(false)
   }
   fetchChildren()
@@ -167,9 +172,11 @@ let children
 if (isLoading)
   {
     return(
+      
       <View style={styles.container}>
         <Text style={styles.text}>
-            LOADING...
+            LOADING... //todo
+            must figure out if loading or user has no children..
         </Text>
       </View>
     )
@@ -193,7 +200,7 @@ if (isLoading)
     container: {
         flex: 1,
         paddingTop: 30,
-        backgroundColor: Colors.primary,
+        backgroundColor: "black",
         //alignItems: 'center',
         justifyContent: 'flex-start',
     },

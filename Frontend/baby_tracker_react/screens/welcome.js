@@ -15,10 +15,10 @@ const welcomescreen = ({ navigation }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   useEffect(() => {
-    console.log("toggled")
+    //console.log("toggled")
    
 }, [isDark])
-  console.log(navigation);
+  //console.log(navigation);
   
   return (
     <View>

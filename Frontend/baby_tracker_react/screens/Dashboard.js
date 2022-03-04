@@ -51,7 +51,7 @@ function NewUser (props)
     container: {
         flex: 1,
   
-        backgroundColor: Colors.seconary,
+        backgroundColor: "black",
         //alignItems: 'flex-start',
         //justifyContent: 'flex-start',
     },

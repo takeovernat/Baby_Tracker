@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native'
+import Colors from './colors';
 
 export default function FlatButton({text, onPress}) {
     return(
@@ -17,7 +18,7 @@ export default function FlatButton({text, onPress}) {
             paddingHorizontal: 10,
             paddingVertical: 10,
             marginBottom: 20,
-            backgroundColor: 'white'
+            backgroundColor: Colors.seconary
         },
         buttonText: {
             color: 'black',

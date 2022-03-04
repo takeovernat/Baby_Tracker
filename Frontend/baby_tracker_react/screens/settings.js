@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: 60,
-        backgroundColor: Colors.primary,
+        backgroundColor: "black",
     },
     icon: {
         height: 40, 

@@ -28,6 +28,7 @@ import AuthContext from '../context';
 import FlatButton from '../styles/button';
 import md5 from 'md5'
 
+
 export default function SignUpScreen({navigation}){
     const [username, setUsername] = React.useState(''); //holds username
     const [password, setPassword] = React.useState(''); //holds password
@@ -49,7 +50,11 @@ export default function SignUpScreen({navigation}){
           setUsers(res.data);
       })
       .catch((err) => console.log(err));
+
+
     };
+
+    
     
 //login function // authenticates user easy to understand
     const login = async (username) => {
@@ -79,10 +84,9 @@ export default function SignUpScreen({navigation}){
                             //console.log(String.fromCharCode(one))
                         
                           })
-                        //   console.log(passer.length)
-                        //   console.log(md5(password).length)
-                        if(md5(password) === passer){
-                         console.log("passwords match")
+                          
+                          if(md5(password) === passer){
+                              console.log(`Autherized ${username}`)       
                          signIn(username, password)
                         } 
                         else{
@@ -138,7 +142,7 @@ export default function SignUpScreen({navigation}){
                         <View style={styles.textInputContainer}>
                             <FlatButton style={{marginBottom:100}} text='Login' onPress={()=> {
                                 login(username, password)}}/>
-                            <Button style={styles.forgot}  color="white" title="Forgot password?" onPress={()=> (
+                            <Button style={styles.forgot}  color="black" title="Forgot password?" onPress={()=> (
                             navigation.navigate('signup') )}/>
                         </View>
                         <View>
@@ -149,7 +153,7 @@ export default function SignUpScreen({navigation}){
                 <View style={styles.signup}>
                     <Text style={styles.note}>Don't have an account?</Text>
                 </View>
-                <FlatButton text="Sign Up" onPress={()=> (
+                <Button color="black"title="Sign Up" onPress={()=> (
                         navigation.navigate('signup')
                     )}/>
             </SafeAreaView>
@@ -184,13 +188,13 @@ export default function SignUpScreen({navigation}){
         paddingVertical: 20,
         paddingHorizontal: 70,
         marginTop:100,
-        color: "white"
+        color: "black"
     },
     textInput: {
         borderRadius: 0,
         borderWidth: 0,
         borderColor: 'black',
-        color: 'white',
+        color: 'black',
         marginTop: 5,
         padding: 18,
         width: '75%',
@@ -205,7 +209,7 @@ export default function SignUpScreen({navigation}){
         fontFamily: 'Noteworthy',
         fontSize: 20,
         fontWeight: "bold",
-        color:"white"
+        color:"black"
     },
     forgot:{
         justifyContent:"flex-start",

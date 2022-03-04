@@ -5,7 +5,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 const LeftContent = props => <Avatar.Icon {...props} icon="account-circle" />
 
 const Childrencomponent = (props) => (
-  <Card>
+  <Card style={{backgroundColor:"#FDEFF4"}}>
     <Card.Title title= {props.cardtitle} subtitle={props.cardsub} left={LeftContent} />
     <Card.Content>
       <Title>{props.title}</Title>

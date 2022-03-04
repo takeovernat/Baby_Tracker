@@ -6,17 +6,40 @@ import AuthContext from '../context';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 import md5 from 'md5'
+import { Alert } from 'react-native';
 
 const forms = ({navigation})=>{
-    
+    const [users, setUsers] = React.useState([]); //holds all admins from axios request
     const [username, setUsername] = useState('');
     const [pass, setpass] = useState('');
     const [name, setname] = useState("");
     const [passTwo, setPassTwo] = useState('');
     const [email, setemail] = useState('');
     const [phone, setphone] = useState('');
-
+ 
+ 
     const { signUp } = React.useContext(AuthContext);
+    
+    React.useEffect(() => {
+        getUsers();
+        //console.log(users)
+    }, []);
+
+    // the get users function above
+   const getUsers = async () => {
+       let passer="";
+   axios
+     .get('http://localhost:3000/Admin')
+     .then((res)=> {
+         setUsers(res.data);
+     })
+     .catch((err) => console.log(err));
+
+     
+   };
+
+  
+    
 
     const handlePress = () => {
         if (username.length < 3) {
@@ -45,6 +68,20 @@ const forms = ({navigation})=>{
             return ("false")
         }
         else {
+            //
+            console.log("*******************")
+            let a = true;
+            users.forEach((user) => {
+               if( user.username == username ){
+                   console.log("match")
+                a = false;
+               } 
+            
+                
+            });
+            //console.log("a->",a)
+            //if username doesnt exist in database
+           if(a){  
             const newUser = {
                 first_name: name,
                 username: username,
@@ -57,9 +94,18 @@ const forms = ({navigation})=>{
                 .post('http://localhost:3000/admin/', newUser)
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log( err.response.request._response ));
-            }
+                
+                signUp(username, pass, email)
+                }//if
+                else{
+                    Alert.alert('Username taken!', [
+                        {text: 'Okay'}
+                    ]);
+                }
+
+
+            }//else
             
-        signUp(username, pass, email)
     };
 
     return(
@@ -120,7 +166,7 @@ const forms = ({navigation})=>{
                 <FlatButton  text="Sign Up" onPress={handlePress} />
                 <View style={{marginBottom:20, marginTop:20}}>
                     <Text style={styles.note}>Have an account?</Text>
-                    <FlatButton text="Login" onPress={()=> (
+                    <Button color="black" title="Login" onPress={()=> (
                     navigation.pop())}/>
                 </View>
             </View>
@@ -142,12 +188,12 @@ const styles = StyleSheet.create({
         //paddingVertical: 100,
        // paddingHorizontal: 70,
         marginTop:100,
-        color: "white"
+        color: "black"
     },
     textsub:{
         fontFamily: 'Noteworthy',
         fontSize: 15,
-        color:"white",
+        color:"black",
         marginBottom:80
 
     },
@@ -155,7 +201,7 @@ const styles = StyleSheet.create({
         borderRadius: 0,
         borderWidth: 0,
         borderColor: 'black',
-        color: 'white',
+        color: 'black',
         marginTop: 5,
         padding: 18,
         width: '75%',
@@ -165,7 +211,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Noteworthy',
         fontSize: 20,
         fontWeight: "bold",
-        color:"white",
+        color:"black",
         marginTop: 40
     },
 

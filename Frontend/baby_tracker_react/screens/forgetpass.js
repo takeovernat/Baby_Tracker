@@ -1,76 +1,87 @@
-import React, {useState} from 'react';
-import { 
-    Button,
-    ScrollView,
-    SafeAreaView,
-    View, 
-    Text, 
-    Image,
-    TouchableOpacity, 
-    TextInput,
-    Platform,
-    StyleSheet ,
-    StatusBar,
-    Alert,
-    Dimensions,
-} from 'react-native';
-import * as Animatable from 'react-native-animatable';
-import axios from 'axios';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
+import React, { useState, useEffect } from "react";
+import { ImageBackground, StyleSheet, Text, View, Button, Image, Switch, TextInput, currency,SafeAreaView } from "react-native";
+import Navstack from "../navigation";
+import FlatButton from "../styles/button";
+import { Dimensions, Linking } from "react-native";
 import fonts from "../styles/fonts";
-import { useTheme } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { MainNav } from '../navigation/MainNav';
-import Navstack from '../navigation';
-import AuthContext from '../context';
-import FlatButton from '../styles/button';
-import md5 from 'md5'
 
 
 
 const forgetpass = ({ navigation }) => {
-  const toggleSwitch = () => {
-      setIsEnabled((previousState) => !previousState);
-      return (
-        <View >
-          <Text > Demo Form </Text>
-          <View>
-            <TextInput 
-              placeholder="Email" />
-            <TextInput
-              secureTextEntry={true}
-              placeholder="Password"
-            />
-            <Text>
-              Selected: {currency}
-            </Text>
-          </View>
-          <View style={styles.signup}>
+
+  return (
+    <SafeAreaView style={styles.container}>
+                <Text style={styles.text}>HealthyBabies©</Text>
+                
+                
+                <View style={styles.signup}>
                     <Text style={styles.note}>Don't have an account?</Text>
                 </View>
-                <FlatButton text="Sign Up" onPress={()=> (
+                <Button color="black"title="Sign Up" onPress={()=> (
                         navigation.navigate('signup')
                     )}/>
-        </View>
-      );
-    };
-
-
-    const styles = StyleSheet.create({
-      container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ebebeb'
-      },
-      text: {
-        color: '#101010',
-        fontSize: 24,
-        fontWeight: 'bold'
-      }
-    })
+            </SafeAreaView>
+  );
 };
+
+
+const styles = StyleSheet.create({
+  btnSignupContainer: {
+      alignItems: 'center'
+  },
+  container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      backgroundColor: '#1A374D',
+      //margin: 10
+  },
+  image: {
+      height: 100, 
+      width: 75,
+      aspectRatio: .9,
+      marginTop: -10,
+      marginBottom: 40 
+      //resizeMode: 'contain',
+},
+  text:{
+      fontFamily: 'Noteworthy',
+      fontSize: 30,
+      fontWeight: "bold",
+      justifyContent: 'center',
+      paddingVertical: 20,
+      paddingHorizontal: 70,
+      marginTop:100,
+      color: "black"
+  },
+  textInput: {
+      borderRadius: 0,
+      borderWidth: 0,
+      borderColor: 'black',
+      color: 'black',
+      marginTop: 5,
+      padding: 18,
+      width: '75%',
+      backgroundColor:"#406882"
+  },
+  textInputContainer: {
+      width: Dimensions.get('window').width,
+      alignItems: 'center',
+      marginTop: 15
+  },
+  note:{
+      fontFamily: 'Noteworthy',
+      fontSize: 20,
+      fontWeight: "bold",
+      color:"black"
+  },
+  forgot:{
+      justifyContent:"flex-start",
+  },
+  signup: {
+      marginTop: 180,
+  },
+})
+
 
 export default forgetpass;

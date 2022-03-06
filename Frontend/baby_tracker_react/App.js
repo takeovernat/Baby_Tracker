@@ -12,6 +12,7 @@ import index from './navigation/index'
 import axios from 'axios';
 import QuestionStack from './screens/childrenquestionare';
 import * as SecureStore from 'expo-secure-store';
+import forgetpass from './screens/forgetpass';
 
 
 const Stack = createStackNavigator();

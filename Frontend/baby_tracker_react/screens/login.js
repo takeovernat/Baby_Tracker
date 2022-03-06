@@ -144,6 +144,8 @@ export default function SignUpScreen({navigation}){
                                 login(username, password)}}/>
                             <Button style={styles.forgot}  color="black" title="Forgot password?" onPress={()=> (
                             navigation.navigate('signup') )}/>
+                            <Button style={styles.forgot}  color="white" title="Forgot password?" onPress={()=> 
+                            navigation.navigate('ResetPassword')}/>
                         </View>
                         <View>
 

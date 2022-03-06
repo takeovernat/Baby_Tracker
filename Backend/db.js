@@ -1,9 +1,9 @@
 
 const dbconfig = {
-  HOST: "127.0.0.1",
-  USER: "root",
-  PASSWORD: "password",
-  DB: "HealthyBaby"
+  HOST: "sql3.freemysqlhosting.net",
+  USER: "sql3471944",
+  PASSWORD: "z7gMceaE6a",
+  DB: "sql3471944"
 }
 
 const express = require('express')

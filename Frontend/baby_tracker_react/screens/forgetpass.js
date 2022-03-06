@@ -25,7 +25,6 @@ const forgetpass = ({ navigation }) => {
 };
 
 
-
 const styles = StyleSheet.create({
   btnSignupContainer: {
       alignItems: 'center'

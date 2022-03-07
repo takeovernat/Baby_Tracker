@@ -12,8 +12,21 @@ const forgetpass = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
                 <Text style={styles.text}>HealthyBabies©</Text>
-                
-                
+                    <Text style={styles.note}>Please enter your email to reset your password</Text>
+                <TextInput
+                        //value={username}
+                        placeholder = 'Email'
+                        placeholderTextColor="black"
+                        placeholderTextFont="Noteworthy"
+                        style={styles.textInput}
+                        autoCapitalize='none'
+                        onChangeText={(user) => setUsername(user.trim())}
+                        selectionColor="#1A374D"
+                    />
+                <View style={styles.textInputContainer}>
+                            <FlatButton style={{marginBottom:100}} text='Recover' onPress={()=> {
+                                }}/>
+                </View>
                 <View style={styles.signup}>
                     <Text style={styles.note}>Don't have an account?</Text>
                 </View>
@@ -36,14 +49,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#1A374D',
       //margin: 10
   },
-  image: {
-      height: 100, 
-      width: 75,
-      aspectRatio: .9,
-      marginTop: -10,
-      marginBottom: 40 
-      //resizeMode: 'contain',
-},
+
   text:{
       fontFamily: 'Noteworthy',
       fontSize: 30,
@@ -59,7 +65,7 @@ const styles = StyleSheet.create({
       borderWidth: 0,
       borderColor: 'black',
       color: 'black',
-      marginTop: 5,
+      marginTop: -5,
       padding: 18,
       width: '75%',
       backgroundColor:"#406882"
@@ -67,7 +73,7 @@ const styles = StyleSheet.create({
   textInputContainer: {
       width: Dimensions.get('window').width,
       alignItems: 'center',
-      marginTop: 15
+      marginTop: -20
   },
   note:{
       fontFamily: 'Noteworthy',
@@ -75,9 +81,7 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
       color:"black"
   },
-  forgot:{
-      justifyContent:"flex-start",
-  },
+
   signup: {
       marginTop: 180,
   },

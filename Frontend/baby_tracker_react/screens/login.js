@@ -35,6 +35,9 @@ export default function SignUpScreen({navigation}){
     const [password, setPassword] = React.useState(''); //holds password
     const [users, setUsers] = React.useState([]); //holds all admins from axios request
     const { signIn } = React.useContext(AuthContext); //usecontext forch signing in user
+    const bckImage = {uri:"https://www.xtrafondos.com/wallpapers/vertical/baby-yoda-el-mandaloriano-4240.jpg"}
+    const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
     //const [passwordhash, setPasswordHash] = React.useState('');
     //use effect makes sure the func inside is executed as soon as the page is rendered
     React.useEffect(() => {
@@ -113,15 +116,13 @@ export default function SignUpScreen({navigation}){
         
     };
 
-        const bckImage = {uri:"https://www.xtrafondos.com/wallpapers/vertical/baby-yoda-el-mandaloriano-4240.jpg"}
-    const windowHeight = Dimensions.get('window').height;
-    const windowWidth = Dimensions.get('window').width;
+
     //what the page actually returns visible
     return (
 
             <SafeAreaView style={styles.container}>
                 <ImageBackground source={bckImage} resizeMode="cover" style={{flex:1, height:windowHeight, opacity:1}}>
-        </ImageBackground>
+                </ImageBackground>
                 <Text style={styles.text}>HealthyBabies©</Text>
                 
                 <View style={styles.open}></View>

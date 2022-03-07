@@ -38,7 +38,7 @@ const welcomescreen = ({ navigation }) => {
       <View style={styles.button}>
       <Button
         title="Continue"
-        color="rgba(71, 122, 151, .8)"
+        color="black"
         onPress={() => navigation.navigate("SignIn")}
       />
       </View>
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     paddingHorizontal: 20,
     opacity:1,
-    color:'rgb(36, 54, 50)',
+    color:'rgb(10, 10, 10)',
     marginTop: 400,
     marginLeft: 20,
     marginRight: 20,

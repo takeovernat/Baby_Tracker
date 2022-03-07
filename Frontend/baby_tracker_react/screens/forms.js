@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Dimensions} from 'react-native';
+import { StyleSheet, ImageBackground, Text, View, Button, TextInput, Dimensions} from 'react-native';
 import Navstack from "../navigation";
 import FlatButton from '../styles/button';
 import AuthContext from '../context';
@@ -16,6 +16,9 @@ const forms = ({navigation})=>{
     const [passTwo, setPassTwo] = useState('');
     const [email, setemail] = useState('');
     const [phone, setphone] = useState('');
+    const bckImage = {uri:"https://www.xtrafondos.com/wallpapers/vertical/baby-yoda-el-mandaloriano-4240.jpg"}
+    const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
  
  
     const { signUp } = React.useContext(AuthContext);
@@ -110,8 +113,11 @@ const forms = ({navigation})=>{
 
     return(
         <View style={styles.container}>
+            <ImageBackground source={bckImage} resizeMode="cover" style={{flex:1, height:windowHeight, opacity:1}}>
+            </ImageBackground>
             <Text style={styles.text}>HealthyBabies©</Text>
             <Text style={styles.textsub}> Monitor and take control of your children's health now</Text>
+            <View style={styles.textInputContainer}>
             <TextInput
                         placeholder="Name"
                         onChangeText={(name) => setname(name.trim())}
@@ -162,11 +168,12 @@ const forms = ({navigation})=>{
                         onChangeText={(pass2) => setPassTwo(pass2.trim())}
                         selectionColor="#1A374D"
             />
-            <View style={{marginTop:20}}>
-                <FlatButton  text="Sign Up" onPress={handlePress} />
+            </View>
+            <View style={styles.signup}>
+                <FlatButton style={styles.signup} text="Sign Up" onPress={handlePress} />
                 <View style={{marginBottom:20, marginTop:20}}>
                     <Text style={styles.note}>Have an account?</Text>
-                    <Button color="black" title="Login" onPress={()=> (
+                    <FlatButton style={styles.login} text="Login" onPress={()=> (
                     navigation.pop())}/>
                 </View>
             </View>
@@ -175,44 +182,71 @@ const forms = ({navigation})=>{
 };
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#1A374D',
+        backgroundColor: 'rgba(51,64,83,255)',
+        paddingBottom: 150
     },
     text:{
+        alignItems: 'center',
         fontFamily: 'Noteworthy',
         fontSize: 30,
         fontWeight: "bold",
         justifyContent: 'center',
-        //paddingVertical: 100,
-       // paddingHorizontal: 70,
-        marginTop:100,
-        color: "black"
+        paddingVertical: 10,
+        paddingHorizontal: 90,
+        marginTop:50,
+        color: "white"
     },
     textsub:{
+        alignItems: 'center',
         fontFamily: 'Noteworthy',
         fontSize: 15,
-        color:"black",
-        marginBottom:80
-
+        fontWeight: "bold",
+        justifyContent: 'center',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        marginBottom: 30,
+        color: "white"
+    },
+    textInputContainer: {
+        width: Dimensions.get('window').width,
+        alignItems: 'center',
     },
     textInput: {
-        borderRadius: 0,
-        borderWidth: 0,
-        borderColor: 'black',
-        color: 'black',
-        marginTop: 5,
-        padding: 18,
+        borderRadius: 25,
+        borderWidth: 1,
+        borderColor: 'rgba(71, 122, 151, .5)',
+        color: 'white',
+        marginTop: '2%',
+        padding: 15,
         width: '75%',
-        backgroundColor:"#406882"
+        backgroundColor:"rgba(71, 122, 151, .9)"
     },
+    signup:{
+        alignItems: 'center',
+        color:"white",
+        width:"45%",
+        marginTop: 15,
+        marginBottom: 15,
+        marginHorizontal:100,
+    },
+
     note:{
         fontFamily: 'Noteworthy',
         fontSize: 20,
         fontWeight: "bold",
-        color:"black",
-        marginTop: 40
+        color:"white",
+        marginTop: 25,
+        marginBottom: 10,
+    },
+    
+    login:{
+        alignItems: 'center',
+        color:"white",
+        width:"45%",
+        marginTop: 15,
+        marginBottom: 15,
+        marginHorizontal:100,
     },
 
 });

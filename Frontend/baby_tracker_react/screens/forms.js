@@ -41,7 +41,6 @@ const forms = ({navigation})=>{
      
    };
 
-  
     
 
     const handlePress = () => {

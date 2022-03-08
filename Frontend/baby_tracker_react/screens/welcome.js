@@ -46,7 +46,7 @@ const welcomescreen = ({ navigation }) => {
       <View style={{alignItems:"center"}}>
       <Text style={styles.link}
       onPress={() => Linking.openURL('http://google.com')}>
-        any questions?
+        Any Questions?
         </Text>
       </View>
       
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     fontSize: 37,
     justifyContent: "center",
     fontWeight: "bold",
-    marginTop: 200,
+    marginTop: 50,
     opacity:3,
     paddingLeft:60,
     paddingRight:60,
@@ -97,7 +97,8 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
     paddingHorizontal: 20,
     opacity:1,
-    color:'black',
+    color:'rgb(10, 10, 10)',
+    marginTop: 400,
     marginLeft: 20,
     marginRight: 20,
     alignItems:"center",
@@ -109,16 +110,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(158, 150, 150, .4)' ,
   },
   button:{
-      borderRadius:20,
-      marginTop:100,
-      paddingLeft:40,
-      paddingRight:40,
-      alignItems:"center"
+    borderRadius:10,
+    borderWidth: 2,
+    borderColor: 'rgb(71, 122, 151)',
+    borderStyle: 'solid',
+    backgroundColor: 'rgba(71, 122, 151, .8)' ,
+    marginTop:10,
+    marginHorizontal: 160,
+    alignItems:"center"
   },
   link:{
-      marginTop:280,
+      marginTop:125,
       color: "black",
-      fontSize:30,
+      fontSize:20,
       fontFamily:fonts.primary,
       alignContent: "center",
       justifyContent: "center"

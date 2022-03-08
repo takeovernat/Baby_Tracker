@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { 
     Button,
+    ImageBackground,
     ScrollView,
     SafeAreaView,
     View, 
@@ -34,6 +35,9 @@ export default function SignUpScreen({navigation}){
     const [password, setPassword] = React.useState(''); //holds password
     const [users, setUsers] = React.useState([]); //holds all admins from axios request
     const { signIn } = React.useContext(AuthContext); //usecontext forch signing in user
+    const bckImage = {uri:"https://www.xtrafondos.com/wallpapers/vertical/baby-yoda-el-mandaloriano-4240.jpg"}
+    const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
     //const [passwordhash, setPasswordHash] = React.useState('');
     //use effect makes sure the func inside is executed as soon as the page is rendered
     React.useEffect(() => {
@@ -111,17 +115,21 @@ export default function SignUpScreen({navigation}){
             
         
     };
+
+
     //what the page actually returns visible
     return (
 
             <SafeAreaView style={styles.container}>
+                <ImageBackground source={bckImage} resizeMode="cover" style={{flex:1, height:windowHeight, opacity:1}}>
+                </ImageBackground>
                 <Text style={styles.text}>HealthyBabies©</Text>
                 
                 <View style={styles.open}></View>
                 <View style={styles.textInputContainer}>
                     <TextInput
                         //value={username}
-                        placeholder = 'username'
+                        placeholder = 'Username'
                         placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
                         style={styles.textInput}
@@ -130,7 +138,7 @@ export default function SignUpScreen({navigation}){
                         selectionColor="#1A374D"
                     />
                     <TextInput
-                        placeholder="password"
+                        placeholder="Password"
                         placeholderTextColor="black"
                         secureTextEntry={true}
                         style={styles.textInput}
@@ -139,13 +147,11 @@ export default function SignUpScreen({navigation}){
                     />
 
                     <View>   
-                        <View style={styles.textInputContainer}>
-                            <FlatButton style={{marginBottom:100}} text='Login' onPress={()=> {
+                        <View style={styles.formBottoms}>
+                            <FlatButton style={styles.login} text='Login' onPress={()=> {
                                 login(username, password)}}/>
-
-                            <Button style={styles.forgot}  color="black" title="Forgot password?" onPress={()=> 
-                            navigation.navigate('ResetPassword')}/>
-                            
+                            <FlatButton style={styles.forgot}  text="Forgot password?" onPress={()=> (
+                            navigation.navigate('signup') )}/>
 
                         </View>
                         <View>
@@ -155,10 +161,10 @@ export default function SignUpScreen({navigation}){
                 </View>
                 <View style={styles.signup}>
                     <Text style={styles.note}>Don't have an account?</Text>
-                </View>
-                <Button color="black"title="Sign Up" onPress={()=> (
+                    <FlatButton style={styles.forgot}  text="Sign Up" onPress={()=> (
                         navigation.navigate('signup')
                     )}/>
+                </View>
             </SafeAreaView>
         
     );
@@ -169,56 +175,61 @@ export default function SignUpScreen({navigation}){
         alignItems: 'center'
     },
     container: {
-        flex: 1,
-        alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#1A374D',
-        //margin: 10
+        backgroundColor: 'rgba(51,64,83,255)',
+        paddingBottom: 150
     },
-    image: {
-        height: 100, 
-        width: 75,
-        aspectRatio: .9,
-        marginTop: -10,
-        marginBottom: 40 
-        //resizeMode: 'contain',
-  },
     text:{
+        alignItems: 'center',
         fontFamily: 'Noteworthy',
         fontSize: 30,
         fontWeight: "bold",
         justifyContent: 'center',
         paddingVertical: 20,
-        paddingHorizontal: 70,
-        marginTop:100,
-        color: "black"
+        paddingHorizontal: 90,
+        marginTop:50,
+        color: "white"
     },
     textInput: {
-        borderRadius: 0,
-        borderWidth: 0,
-        borderColor: 'black',
-        color: 'black',
-        marginTop: 5,
-        padding: 18,
+        borderRadius: 25,
+        borderWidth: 1,
+        borderColor: 'rgba(71, 122, 151, .5)',
+        color: 'white',
+        marginTop: '2%',
+        padding: 15,
         width: '75%',
-        backgroundColor:"#406882"
+        backgroundColor:"rgba(71, 122, 151, .9)"
     },
     textInputContainer: {
         width: Dimensions.get('window').width,
         alignItems: 'center',
-        marginTop: 15
+        marginTop: 120
+    },
+    formBottoms: {
+        width: Dimensions.get('window').width,
+        alignItems: 'center',
+        marginTop: 125
+    },
+    login: {
+        color:"white",
+        marginTop: 50,
+    },
+    forgot:{
+        color:"white",
+        width:"45%",
+        marginBottom: 15,
+        marginHorizontal:100,
     },
     note:{
         fontFamily: 'Noteworthy',
         fontSize: 20,
         fontWeight: "bold",
-        color:"black"
-    },
-    forgot:{
-        justifyContent:"flex-start",
+        marginBottom: 5,
+        color:"white",
     },
     signup: {
-        marginTop: 180,
+        alignItems: 'center',
+        marginTop: "30%",
     },
 
 });

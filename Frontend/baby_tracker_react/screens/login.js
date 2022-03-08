@@ -152,6 +152,7 @@ export default function SignUpScreen({navigation}){
                                 login(username, password)}}/>
                             <FlatButton style={styles.forgot}  text="Forgot password?" onPress={()=> (
                             navigation.navigate('signup') )}/>
+
                         </View>
                         <View>
 

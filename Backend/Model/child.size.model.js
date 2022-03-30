@@ -6,7 +6,8 @@ const Child_size = function(child){
     this.height = child.height;
     this.weight = child.weight;
     this.record = child.record;
-
+    
+    
 }
 
 Child_size.create = (newchild_size, result) => {

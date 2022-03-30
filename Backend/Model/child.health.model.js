@@ -12,6 +12,15 @@ const Child_health = function(child){
     this.sleep_time = child.sleep_time,
     this.record = child.record;
 
+    /*
+  mealcount 
+  daily cals
+  diaper change hard soft
+  water intake
+  active
+  sleep
+  date
+    */
 }
 
 Child_health.create = (newchild_health, result) => {

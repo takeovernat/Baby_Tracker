@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { StyleSheet, Button, View, Text} from 'react-native';
+import { StyleSheet, Button, View, Text, Image} from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import FlatButton from '../styles/button';
@@ -11,12 +11,37 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Childstatlist from '../components/childstatlist';
 import Header from '../components/header';
 import Colors from '../styles/colors';
-
+import progressStack from './progressQ';
+import { createStackNavigator } from '@react-navigation/stack';
  
+function dashStack (props){
+  const username = props.route.params.username
+  const dashoardStack = createStackNavigator();
+return(
+
+    <dashoardStack.Navigator initialRouteName='home'>
+      <dashoardStack.Screen name="home" component={HomeScreen} 
+            options={{   
+                headerMode:'none',
+              headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
+              title: ''}}
+            />
+            <dashoardStack.Screen name='progress' component={progressStack}
+            options={{   
+                headerMode:'none',
+              headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
+              title: ''}}
+            />
+
+      </dashoardStack.Navigator>
+);
+}
+
 function HomeScreen(props) {
+
     const [Search, setSearch] = useState('')
     const [open, setOpen] = useState(false)
-    const username = props.route.params.username
+    //const username = props.route.params.username
     // console.log(props)
     const { signOut } = React.useContext(AuthContext);
     return (
@@ -24,9 +49,13 @@ function HomeScreen(props) {
 
       
         <View >
-            <Header title={"welcome "+ username}subtitle="calm down"></Header>
+            <Header title={"welcome "+ ''}subtitle="calm down"></Header>
             
       <View style={styles.stats}>
+
+      <Image onPress={()=> props.navigate.navigation('progress')} style={styles.image} source={require("../assets/checkin.png")}  />
+      <Button title="check in for 10/18/2022${date()}" onPress={()=> props.navigation.navigate('progress')}/>
+
         <Childstatlist>
 
         </Childstatlist>
@@ -56,9 +85,10 @@ function NewUser (props)
         //justifyContent: 'flex-start',
     },
     image: {
-        height: 200, 
+        height: 100, 
         width: 100,
-        aspectRatio: .8,
+        aspectRatio: 1,
+        alignSelf: 'center'
   },
     text:{
         fontFamily: 'Noteworthy',
@@ -91,5 +121,5 @@ function NewUser (props)
   }
   });
   
-  export default HomeScreen
+  export default dashStack;
 

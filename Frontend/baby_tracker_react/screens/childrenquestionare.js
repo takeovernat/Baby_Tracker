@@ -9,7 +9,8 @@ import AuthContext from '../context';
 import { Ionicons } from '@expo/vector-icons';
 import axios from "axios";
 import { Dimensions } from "react-native";
-
+import { Alert } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Q1 = (props)=>{
     const [age, onChangeAge] = React.useState(null);
@@ -55,9 +56,10 @@ const Q1 = (props)=>{
     }
     return (
       <View style={styles.container} >
-          
+          <ScrollView keyboardShouldPersistTaps='handled'> 
           <Text style={styles.fonty}> Hey {name} can we get to know you a litte more?</Text>
           <SafeAreaView>
+      {/* <ScrollView keyboardShouldPersistTaps='handled'>  */}
       <TextInput
         style={styles.input}
         onChangeText={onChangeAge}
@@ -65,6 +67,9 @@ const Q1 = (props)=>{
         placeholder="What is your age?"
         keyboardType="numeric"
       />
+      {/* </ScrollView> */}
+
+      {/* <ScrollView keyboardShouldPersistTaps='handled'>  */}
       <TextInput
         style={styles.input}
         onChangeText={onChangeChildren}
@@ -72,6 +77,7 @@ const Q1 = (props)=>{
         placeholder="How many children do you want to register? 3 max"
         keyboardType="numeric"
         />
+        {/* </ScrollView> */}
     </SafeAreaView>
         <View style={styles.arrow}>
         <Icon  
@@ -82,7 +88,7 @@ const Q1 = (props)=>{
             />
 
         </View>
-                
+           </ScrollView>     
      </View>
     );
 }
@@ -97,9 +103,43 @@ const Q2 = (props)=>{
     const nav = props.route.params;
    //console.log(props.route.params)
     //console.log(username)
+    const handlePress = ()=>{
+        //console.log(isNaN(first))
+        //console.log(typeof(age))
+              if(first.length < 3 || first == null || first == ' ') alert('please enter a valid first name'); return;
+              console.log('here1')
+              if(last.length < 3 || last == null || last == ' ' || isNaN(last)) alert('please enter a valid last name'); return;
+              console.log('here2')
+              if(age == '0' || age == ' ' || age == null || age.length > 2) alert('please enter a valid age'); return;
+              console.log('here3')
+               axios
+               .post('http://localhost:3000/child', {
+                 admin_username: username,
+                 first_name:first,
+                 last_name : last,
+                 age_months: age,
+                 gender : 'm'
+                })
+                .then((res)=> {
+                  console.log(res.data)
+                })
+                .catch((err) => console.log(err));
+                
+                if(children==1){
+                
+                props.navigation.navigate('complete')
+              }
+              else{
+               // console.log(props.navigation)
+                //console.log("nig===>",children)
+               props.navigation.replace('Q3',{first,children, username})
+              }
+            
+            
+    }
     return (
       <View style={styles.container} >
-          
+          <ScrollView keyboardShouldPersistTaps='handled'> 
           <Text style={styles.fonty}> Tell us more about your child👶🏼</Text>
           <SafeAreaView>
       <TextInput
@@ -129,37 +169,10 @@ const Q2 = (props)=>{
         <Icon  
             name="arrow-forward-ios" 
             color="grey"  
-            onPress={()=> 
-              
-              {//onpress
-               // console.log(children)
-               axios
-               .post('http://localhost:3000/child', {
-                 admin_username: username,
-                 first_name:first,
-                 last_name : last,
-                 age_months: age,
-                 gender : 'm'
-                })
-                .then((res)=> {
-                  console.log(res.data)
-                })
-                .catch((err) => console.log(err));
-                
-                if(children==1){
-                
-                props.navigation.navigate('complete')
-              }
-              else{
-               // console.log(props.navigation)
-                //console.log("nig===>",children)
-               props.navigation.replace('Q3',{first,children, username})
-              }
-            
-            }//{f
-          }//{
+            onPress={handlePress}//{
             />
-        </View>          
+        </View>     
+        </ScrollView>     
       </View>
     );
 }
@@ -175,8 +188,9 @@ const Q3 = (props)=>{
     //console.log(props)
    //23console.log( props)
     return (
+      
       <View style={styles.container} >
-          
+          <ScrollView keyboardShouldPersistTaps='handled'> 
           <Text style={styles.fonty}> Sweet! we hope {firstkidname} is doing great! How abour your second one?</Text>
           
           <SafeAreaView>
@@ -224,7 +238,8 @@ const Q3 = (props)=>{
             }
           }
             />
-        </View>     
+        </View>
+        </ScrollView>     
       </View>
     );
 }
@@ -241,7 +256,7 @@ const Q4 = (props)=>{
     //const name = '';
     return (
       <View style={styles.container} >
-          
+          <ScrollView keyboardShouldPersistTaps='handled'> 
           <Text style={styles.fonty}> Hi {secondkidname}!!! Last but not least who is it? 👀</Text>
     
           <SafeAreaView>
@@ -286,7 +301,7 @@ const Q4 = (props)=>{
             />
         </View>
     
-          
+          </ScrollView>
             
       </View>
     );
@@ -470,11 +485,11 @@ return (
             backgroundColor: 'rgb(247,242,242)'
         },
         input: {
-            height: 40,
-            margin: 12,
-            borderWidth: 0.22,
-            padding: 10,
-          },
+          height: 40,
+          margin: 10,
+          borderWidth: 0.6,
+          padding: 5,
+        },
           arrow:{
               marginTop:100 ,
               paddingLeft: 340,

@@ -229,7 +229,7 @@ export default function SignUpScreen({navigation}){
     },
     signup: {
         alignItems: 'center',
-        marginTop: "30%",
+        marginTop: "20%",
     },
 
 });

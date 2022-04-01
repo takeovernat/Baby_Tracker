@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import {SafeAreaView, TextInput, View, Text, StyleSheet, Button, Image } from "react-native";
+import {SafeAreaView, TextInput, View, Text, StyleSheet, Button, Image, ScrollView } from "react-native";
 import { color } from "react-native-reanimated";
 import Colors from "../styles/colors";
 import { Icon } from 'react-native-elements'
@@ -30,6 +30,7 @@ const Q1 = (props)=>{
     height
     weight*/
       <View style={styles.container} >
+        <ScrollView keyboardShouldPersistTaps='handled'> 
             <Image style={styles.img} source={require("../assets/baby.png")}/>
           <Text style={styles.fontyQ1}>welcome back! report progress everyday so we can give a detailed output </Text>
           <SafeAreaView>
@@ -58,7 +59,7 @@ const Q1 = (props)=>{
             />
 
         </View>
-                
+      </ScrollView>
      </View>
     );
 }
@@ -82,6 +83,7 @@ const Q2 = (props)=>{
     height
     weight*/
       <View style={styles.container} >
+        <ScrollView keyboardShouldPersistTaps='handled'> 
            <Image style={styles.img} source={require("../assets/water-1542.png")}/>
           <Text style={styles.fontyQ2}>remember the recomended water intake for kids under 12 months is 0.5 to 1 cup a day </Text>
           
@@ -106,7 +108,7 @@ const Q2 = (props)=>{
             />
 
         </View>
-                
+             </ScrollView>   
      </View>
     );
 }
@@ -131,6 +133,7 @@ const Q3 = (props)=>{
   height
   weight*/
     <View style={styles.container} >
+      <ScrollView keyboardShouldPersistTaps='handled'> 
          <Image style={styles.img} source={require("../assets/diaper.png")}/>
         <Text style={styles.fontyQ2}>normally toddlers have bowel movements 2-3 times and pee 4-8 times daily </Text>
         
@@ -163,7 +166,7 @@ const Q3 = (props)=>{
           />
 
       </View>
-              
+           </ScrollView>   
    </View>
   );
 }
@@ -186,6 +189,7 @@ const Q4 = (props)=>{
   height
   weight*/
     <View style={styles.container} >
+      <ScrollView keyboardShouldPersistTaps='handled'> 
          <Image style={styles.imgsleep} source={require("../assets/sleepbaby.png")}/>
         <Text style={styles.fontyQ2}>toddlers should get atleast 12 hours asleep, see your doctor if your toddler sleeps less than 10 </Text>
         
@@ -218,7 +222,7 @@ const Q4 = (props)=>{
           />
 
       </View>
-              
+         </ScrollView>     
    </View>
   );
 }

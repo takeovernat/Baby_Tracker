@@ -1,6 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import {SafeAreaView, TextInput, View, Text, StyleSheet, Button, Image } from "react-native";
+import {SafeAreaView, TextInput, View, Text, StyleSheet, Button, Image, KeyboardAvoidingView, TouchableOpacity } from "react-native";
+import {Pressable} from 'react-native';
 import { color } from "react-native-reanimated";
 import Colors from "../styles/colors";
 import { Icon } from 'react-native-elements'
@@ -11,6 +12,7 @@ import axios from "axios";
 import { Dimensions } from "react-native";
 import { Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import RadioButton from "../components/radiobutton"
 
 const Q1 = (props)=>{
     const [age, onChangeAge] = React.useState(null);
@@ -78,6 +80,9 @@ const Q1 = (props)=>{
         keyboardType="numeric"
         />
         {/* </ScrollView> */}
+
+      
+        
     </SafeAreaView>
         <View style={styles.arrow}>
         <Icon  
@@ -104,14 +109,13 @@ const Q2 = (props)=>{
    //console.log(props.route.params)
     //console.log(username)
     const handlePress = ()=>{
-        //console.log(isNaN(first))
-        //console.log(typeof(age))
-              if(first.length < 3 || first == null || first == ' ') alert('please enter a valid first name'); return;
-              console.log('here1')
-              if(last.length < 3 || last == null || last == ' ' || isNaN(last)) alert('please enter a valid last name'); return;
-              console.log('here2')
-              if(age == '0' || age == ' ' || age == null || age.length > 2) alert('please enter a valid age'); return;
-              console.log('here3')
+   
+              if( first == null || first.length < 3 ||  first == ' ') {alert('please enter a valid first name'); return;}
+              
+              else if(last == null || last.length < 3 || last == ' ' ) {alert('please enter a valid last name'); return;}
+              
+              else if(age == null || age == '0' ||  age.length > 2) {alert('please enter a valid age'); return;}
+              
                axios
                .post('http://localhost:3000/child', {
                  admin_username: username,
@@ -180,17 +184,60 @@ const Q3 = (props)=>{
     const [text, onChangeText] = React.useState(null);
     const [number, onChangeNumber] = React.useState(null);
     const [age, onChangeAge] = React.useState(null); 
+    const [gender, onChangeGender] = React.useState(null);
     //const name = '';)
     const username = props.route.params.username;
     const nav = props.route.params;
     const firstkidname = props.route.params.first;
     const children = props.route.params.children;
+
     //console.log(props)
    //23console.log( props)
-    return (
+   const handlePress = () =>{
+    
+    if(text == null ||text.length < 3 ||  text == ' ' ) {alert('please enter a valid first name'); return;}
+              
+    else if(number == null || number.length < 3 ||  number == ' ' ) {alert('please enter a valid last name'); return;}
+    
+    else if(age == null || age == '0' ||  age.length > 2) {alert('please enter a valid age'); return;}
+   
+
+    axios
+    .post('http://localhost:3000/child', {
+      admin_username: username,
+      first_name:text,
+      last_name : number,
+      age_months: age,
+      gender : 'm'
+     })
+     .then((res)=> {
+       console.log( "created child obj in db",res.data)
+     })
+     .catch((err) => console.log(err));
+    
+  if(children == 2){
+    props.navigation.navigate('complete')
+
+  }
+  else{
+   props.navigation.replace('Q4',{text})
+  }
+
+} //handlePress
+
+const handleGender=()=>{
+  
+}
+   
+   return (
       
       <View style={styles.container} >
+          <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
           <ScrollView keyboardShouldPersistTaps='handled'> 
+
           <Text style={styles.fonty}> Sweet! we hope {firstkidname} is doing great! How abour your second one?</Text>
           
           <SafeAreaView>
@@ -206,40 +253,31 @@ const Q3 = (props)=>{
         style={styles.input} onChangeText={onChangeAge} value={age}
         placeholder="age in months" keyboardType="numeric"
         />
+      
+      <View style={styles.radioM}> 
+      <TouchableOpacity style={{display:'flex', flexDirection:'row'}} onPress={()=>onChangeGender('m') } >
+        <RadioButton/>
+        <Text style={{padding:5}}>Male</Text>
+        </TouchableOpacity>
+      </View >
+      <View style={styles.radioF}> 
+      <TouchableOpacity style={{display:'flex', flexDirection:'row'}} onPress={()=>onChangeGender('f')} >
+        <RadioButton/>
+        <Text style={{padding:5}}>Female</Text>
+        </TouchableOpacity>
+      </View>
+
+        
     </SafeAreaView>
-        <View style={styles.arrow}>
+        <View style={styles.arrowscroll}>
         <Icon  
             name="arrow-forward-ios" 
             color="grey"  
-            onPress={()=>
-            {
-
-              axios
-               .post('http://localhost:3000/child', {
-                 admin_username: username,
-                 first_name:text,
-                 last_name : number,
-                 age_months: age,
-                 gender : 'm'
-                })
-                .then((res)=> {
-                  console.log( "created child obj in db",res.data)
-                })
-                .catch((err) => console.log(err));
-               
-             if(children == 2){
-               props.navigation.navigate('complete')
-
-             }
-             else{
-              props.navigation.replace('Q4',{text})
-             }
-              
-            }
-          }
+            onPress={handlePress }
             />
         </View>
         </ScrollView>     
+        </KeyboardAvoidingView>
       </View>
     );
 }
@@ -253,6 +291,29 @@ const Q4 = (props)=>{
     const secondkidname = props.route.params.text
     const children = props.route.params.children
     
+    const handlePress= () =>{
+
+      if(text == null ||text.length < 3 ||  text == ' ' ) {alert('please enter a valid first name'); return;}
+              
+    else if(number == null ||number.length < 3 ||  number == ' ' ) {alert('please enter a valid last name'); return;}
+    
+    else if(age == null || age == '0' ||  age.length > 2) {alert('please enter a valid age'); return;}
+   
+      axios
+                .post('http://localhost:3000/child', {
+                  admin_username: username,
+                  first_name:text,
+                  last_name : number,
+                  age_months: age,
+                  gender : 'm'
+                 })
+                 .then((res)=> {
+                   console.log( "created child obj in db",res.data)
+                 })
+                 .catch((err) => console.log(err));
+                props.navigation.navigate('complete')
+              
+    }
     //const name = '';
     return (
       <View style={styles.container} >
@@ -277,27 +338,7 @@ const Q4 = (props)=>{
         <Icon  
             name="arrow-forward-ios" 
             color="grey"  
-            onPress={()=> 
-              
-              {
-            
-                axios
-                .post('http://localhost:3000/child', {
-                  admin_username: username,
-                  first_name:text,
-                  last_name : number,
-                  age_months: age,
-                  gender : 'm'
-                 })
-                 .then((res)=> {
-                   console.log( "created child obj in db",res.data)
-                 })
-                 .catch((err) => console.log(err));
-                props.navigation.navigate('complete')
-              
-            }
-            
-            }
+            onPress={handlePress}
             />
         </View>
     
@@ -454,10 +495,10 @@ return (
           //marginTop: 120
         },
         fonty: {
-            marginTop:180,
-            marginBottom:30,
+            marginTop:50,
+            marginBottom:20,
             fontFamily: "Academy Engraved LET",
-            fontSize: 50,
+            fontSize: 45,
             
 
         },
@@ -500,7 +541,33 @@ return (
             alignSelf:"flex-end",
             paddingRight: 30,
             
+        },
+          arrowscroll:{
+            marginTop:150 ,
+            alignSelf:"flex-end",
+            paddingRight: 30,
+            
+        },
+        radioM:{
+          display: "flex",
+          flexDirection: "column",
+          margin: 10,
+
+        },
+        radioF:{
+          display: "flex",
+          flexDirection: "column",
+          margin: 10,
+
+        },
+        male:{
+
+        },
+        female:{
+
         }
+
+
 
 
       });

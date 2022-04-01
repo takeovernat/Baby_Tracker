@@ -48,12 +48,18 @@ export default function SignUpScreen({navigation}){
      // the get users function above
     const getUsers = async () => {
         let passer="";
-    axios
+        
+        // const results = (await fetch('http://localhost:3000/Admin')).json
+        // console.log(results)
+    
+        axios
       .get('http://localhost:3000/Admin')
       .then((res)=> {
           setUsers(res.data);
+          
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("There was an error retrirving admins for log in purposes!", err));
+  
 
 
     };

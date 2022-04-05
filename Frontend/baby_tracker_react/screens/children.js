@@ -156,12 +156,12 @@ const ChildrenScreen = (props) => {
  const [isLoading, setLoading] = useState(true);
  useEffect( () => {
   const fetchChildren = async () => {
-  children = (await axios.get(`http://localhost:3000/Child/admin/${props.route.params.username}`)).data[0]
+  children = (await axios.get(`http://10.0.2.2:3000/Child/admin/${props.route.params.username}`)).data[0]
 //  console.log(children)
 
-  children = {...children, ...(await axios.get(`http://localhost:3000/child_health/${children.child_id}`)).data[0]}
+  children = {...children, ...(await axios.get(`http://10.0.2.2:3000/child_health/${children.child_id}`)).data[0]}
 
-  children = {...children, ...(await axios.get(`http://localhost:3000/child_size/${children.child_id}`)).data[0]}
+  children = {...children, ...(await axios.get(`http://10.0.2.2:3000/child_size/${children.child_id}`)).data[0]}
   console.log(children)
 
   setLoading(false)

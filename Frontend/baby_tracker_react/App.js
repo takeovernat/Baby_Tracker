@@ -126,7 +126,7 @@ export default function App({ navigation }) {
 
     React.useEffect(() => {
       axios
-          .get(`http://localhost:3000/child/admin/${state.username}`)
+          .get(`http://10.0.2.2:3000/child/admin/${state.username}`)
           .then((res)=> {
               console.log(res.data);
               props.navigation.navigate('Home');

@@ -37,7 +37,7 @@ const Q1 = (props)=>{
     };
 
           axios
-          .post(`http://localhost:3000/Admin/${name.trim()}` , {
+          .post(`http://10.0.2.2:3000/Admin/${name.trim()}` , {
             age:age,
             children:children
           },config)
@@ -117,7 +117,7 @@ const Q2 = (props)=>{
               else if(age == null || age == '0' ||  age.length > 2) {alert('please enter a valid age'); return;}
               
                axios
-               .post('http://localhost:3000/child', {
+               .post('http://10.0.2.2:3000/child', {
                  admin_username: username,
                  first_name:first,
                  last_name : last,
@@ -203,7 +203,7 @@ const Q3 = (props)=>{
    
 
     axios
-    .post('http://localhost:3000/child', {
+    .post('http://10.0.2.2:3000/child', {
       admin_username: username,
       first_name:text,
       last_name : number,
@@ -300,7 +300,7 @@ const Q4 = (props)=>{
     else if(age == null || age == '0' ||  age.length > 2) {alert('please enter a valid age'); return;}
    
       axios
-                .post('http://localhost:3000/child', {
+                .post('http://10.0.2.2:3000/child', {
                   admin_username: username,
                   first_name:text,
                   last_name : number,
@@ -416,7 +416,7 @@ return (
       //var has
       React.useEffect(() => {
         axios
-            .get(`http://localhost:3000/child/admin/${username}`)
+            .get(`http://10.0.2.2:3000/child/admin/${username}`)
             .then((res)=> {
                 console.log(res.data);
                 {}

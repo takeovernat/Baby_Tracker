@@ -84,8 +84,8 @@ function MainNav(props) {
       <Tab.Navigator initialRouteName="Home"
       inactiveColor={Colors.primary} 
       labeled={true}
-      activeColor="white"
-      barStyle={{backgroundColor:'black'}}
+      activeColor="blue"
+      barStyle={{backgroundColor:'rgba(255, 255, 255, .8)'}}
       >
       <Tab.Screen name="DashBoard" component={MyDrawer}
           initialParams={username}

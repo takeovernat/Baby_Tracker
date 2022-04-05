@@ -4,6 +4,7 @@ import Navstack from "../navigation";
 import FlatButton from "../styles/button";
 import { Dimensions, Linking } from "react-native";
 import fonts from "../styles/fonts";
+import { ScrollView } from "react-native-gesture-handler";
 const welcomescreen = ({ navigation }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [isDark, setDark] = useState(false)
@@ -21,15 +22,10 @@ const welcomescreen = ({ navigation }) => {
   //console.log(navigation);
   
   return (
-    <View>
+    <View style={styles.container}>
         <ImageBackground source={image} resizeMode="cover" style={{flex:1, height:windowHeight, opacity:1}}>
         </ImageBackground>
-      {/* <Image
-        style={styles.image}
-        source={{
-          uri: "https://cdn-icons-png.flaticon.com/512/941/941515.png",
-        }}
-      /> */}
+      <ScrollView>
       <Text style={styles.text}>HealthyBabies©</Text>
       <Text style={styles.note}>
         An interactive way to keep track of your children's health. Click continue
@@ -50,24 +46,16 @@ const welcomescreen = ({ navigation }) => {
         </Text>
       </View>
       
-      
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 30,
-    backgroundColor: "#EDBFB7",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
-  containerDark:{
-    flex: 1,
-    paddingTop: 30,
-    alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: 'space-between',
+    backgroundColor: 'rgba(51,64,83,255)',
+    paddingBottom: 40
   },
   image: {
     height: 300,
@@ -88,7 +76,6 @@ const styles = StyleSheet.create({
     color:"black",
     alignItems:"center",
     marginBottom: 10,
-   // paddingRight: 10
   },
   note: {
     fontFamily: "Noteworthy",

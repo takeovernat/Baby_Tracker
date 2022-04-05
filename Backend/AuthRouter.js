@@ -1,5 +1,9 @@
 const router = require('express').Router()
 let User = require('./Model/user.model')
+const {forgotpassword} = require("../controller/Admin.controller")
+
+
+router.put('/forgot-password', forgotpassword)
 
 router.route('/users').get((req, res) => {
 	User.find()
@@ -12,6 +16,9 @@ router.route('/').get((req, res) => {
 		.then((users) => res.json(users))
 		.catch((err) => res.status(400).json('Error:' + err))
 })
+
+
+
 
 router.route('/users/add').post((req, res) => {
 	const username = req.body.username

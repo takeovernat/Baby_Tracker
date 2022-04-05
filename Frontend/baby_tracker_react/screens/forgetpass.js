@@ -5,16 +5,20 @@ import FlatButton from "../styles/button";
 import { Dimensions, Linking } from "react-native";
 import fonts from "../styles/fonts";
 import emailjs from "emailjs-com";
+import axios from 'axios';
+import AuthContext from '../context';
+import md5 from 'md5'
 
 
 const forgetpass = ({ navigation }) => {
 
-    function sendEmail(e) {
-        e.preventDefault();
-        emailjs.sendForm('service_4xdgyug', 'template_qhxxjcu', e.target, '3veEOlNriNot9smwB').then(res => {
-            console.log(res);
-        }).catch(err => console.log(err));
-    }
+    axios.get('http://localhost:3000/Admin/forgot')
+    .then((response) => {
+        console.log(response.data);
+    })
+
+     
+   };
 
     return (
         <SafeAreaView style={styles.container}>
@@ -33,7 +37,7 @@ const forgetpass = ({ navigation }) => {
             />
             <View style={styles.textInputContainer}>
                 <FlatButton style={{ marginBottom: 100 }} type="submit" text='Recover' onPress={() => {
-                    sendEmail + navigation.navigate('ConfirmCode')
+                    forgetpass + navigation.navigate('ConfirmCode')
                 }} />
             </View>
             <View style={styles.signup}>

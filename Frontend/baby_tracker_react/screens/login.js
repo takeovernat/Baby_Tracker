@@ -131,7 +131,7 @@ export default function SignUpScreen({navigation}){
                 </ImageBackground>
                 <Text style={styles.text}>HealthyBabies©</Text>
                 
-                <View style={styles.open}></View>
+                <ScrollView style={styles.open}>
                 <View style={styles.textInputContainer}>
                     <TextInput
                         //value={username}
@@ -160,9 +160,6 @@ export default function SignUpScreen({navigation}){
                             navigation.navigate('ResetPassword') )}/>
 
                         </View>
-                        <View>
-
-                    </View>
                     </View>
                 </View>
                 <View style={styles.signup}>
@@ -171,6 +168,7 @@ export default function SignUpScreen({navigation}){
                         navigation.navigate('signup')
                     )}/>
                 </View>
+                </ScrollView>
             </SafeAreaView>
         
     );
@@ -183,7 +181,7 @@ export default function SignUpScreen({navigation}){
     container: {
         justifyContent: 'space-between',
         backgroundColor: 'rgba(51,64,83,255)',
-        paddingBottom: 150
+        paddingBottom: 40
     },
     text:{
         alignItems: 'center',

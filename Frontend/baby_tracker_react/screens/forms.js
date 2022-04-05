@@ -114,6 +114,7 @@ const forms = ({navigation})=>{
         <View style={styles.container}>
             <ImageBackground source={bckImage} resizeMode="cover" style={{flex:1, height:windowHeight, opacity:1}}>
             </ImageBackground>
+            <ScrollView>
             <Text style={styles.text}>HealthyBabies©</Text>
             <Text style={styles.textsub}> Monitor and take control of your children's health now</Text>
             <View style={styles.textInputContainer}>
@@ -168,6 +169,7 @@ const forms = ({navigation})=>{
                         selectionColor="#1A374D"
             />
             </View>
+            
             <View style={styles.signup}>
                 <FlatButton style={styles.signup} text="Sign Up" onPress={handlePress} />
                 <View style={{marginBottom:20, marginTop:20}}>
@@ -176,6 +178,7 @@ const forms = ({navigation})=>{
                     navigation.pop())}/>
                 </View>
             </View>
+            </ScrollView>
         </View>
     )
 };
@@ -183,7 +186,7 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'space-between',
         backgroundColor: 'rgba(51,64,83,255)',
-        paddingBottom: 150
+        paddingBottom: 40
     },
     text:{
         alignItems: 'center',

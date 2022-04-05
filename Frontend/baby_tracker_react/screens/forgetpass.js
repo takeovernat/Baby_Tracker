@@ -18,7 +18,7 @@ const forgetpass = ({ navigation }) => {
     })
 
      
-   };
+   
 
     return (
         <SafeAreaView style={styles.container}>
@@ -48,7 +48,7 @@ const forgetpass = ({ navigation }) => {
             )} />
         </SafeAreaView>
     );
-};
+}
 
 
 const styles = StyleSheet.create({

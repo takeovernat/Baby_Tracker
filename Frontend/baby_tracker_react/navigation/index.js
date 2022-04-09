@@ -8,6 +8,7 @@ import forms from '../screens/forms';
 import AuthContext from '../context';
 import forgetpass from '../screens/forgetpass';
 import confirm from '../screens/confirm';
+import newpass from '../screens/newpass';
 
 
 const stack = createNativeStackNavigator();
@@ -28,6 +29,8 @@ const Navstack = () => {
                 name = "ResetPassword" component={forgetpass} options={{headerShown: false}} />
                 <stack.Screen
                 name = "ConfirmCode" component={confirm} options={{headerShown: false}} />
+                <stack.Screen
+                name = "NewPassword" component={newpass} options={{headerShown: false}} />
             </stack.Navigator>
         
     );

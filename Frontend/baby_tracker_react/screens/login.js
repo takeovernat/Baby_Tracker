@@ -53,7 +53,7 @@ export default function SignUpScreen({navigation}){
         // console.log(results)
     
         axios
-      .get('http://10.0.2.2:3000/Admin')
+      .get('http://localhost:3000/Admin')
       .then((res)=> {
           setUsers(res.data);
           

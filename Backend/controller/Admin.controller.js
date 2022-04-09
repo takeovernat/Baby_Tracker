@@ -2,8 +2,8 @@
 
 const jwt = require('jsonwebtoken');
 const mailgun = require("mailgun-js");
-const DOMAIN = 'sandboxf10a8cc7de3545758b8087dfd72b6e5b.mailgun.org';
-const APIKEY= '8ef703a538c5fe1e76728bad47a6bcaf-38029a9d-ad7f1ac3';
+const DOMAIN = 'sandbox7d9d91f47be64e7e8db5054843ffc451.mailgun.org';
+const APIKEY= '5aaa9139c3d63ff93e7aeee234b8a86b-38029a9d-2bbeb46c';
 const mg = mailgun({apiKey: APIKEY, domain: DOMAIN});
 
 
@@ -144,7 +144,7 @@ exports.forgotpassword = (req, res) => {
           from: 'noreply@baby.com',
           to: 'ahmedthaer4@gmail.com',
           subject: 'Account Activation Link',
-          text: 'Testing some Mailgun awesomness!'
+          text: 'Hello User, Your password reset code is 24135'
         };
         mg.messages().send(data, function (error, body) {
           console.log(body);

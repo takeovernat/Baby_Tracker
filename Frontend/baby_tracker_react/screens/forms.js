@@ -32,7 +32,7 @@ const forms = ({navigation})=>{
    const getUsers = async () => {
        let passer="";
    axios
-     .get('http://10.0.2.2:3000/Admin')
+     .get('http://localhost:3000/Admin')
      .then((res)=> {
          setUsers(res.data);
      })
@@ -93,7 +93,7 @@ const forms = ({navigation})=>{
                 phone: phone
             };
             axios
-                .post('http://10.0.2.2:3000/admin/', newUser)
+                .post('http://localhost:3000/admin/', newUser)
                 .then((res) => console.log(res.data))
                 .catch((err) => console.log( err.response.request._response ));
                 

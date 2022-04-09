@@ -5,10 +5,14 @@ module.exports = app => {
     const Child_health = require("./controller/child.health.controller");
     // Create a new Customer
     app.post("/Admin", Admin.create);
+
+    app.get("/Admin/forgot", Admin.forgotpassword);
   
     app.get("/Admin", Admin.findAll);
 
     app.get("/Admin/:username", Admin.findOne);
+
+    app.post("/Admin/:username", Admin.findOne);
 
     app.post("/Child", Child.create);
 

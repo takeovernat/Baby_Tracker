@@ -1,4 +1,16 @@
+
+
+const jwt = require('jsonwebtoken');
+const mailgun = require("mailgun-js");
+const DOMAIN = 'sandbox7d9d91f47be64e7e8db5054843ffc451.mailgun.org';
+const APIKEY= '5aaa9139c3d63ff93e7aeee234b8a86b-38029a9d-2bbeb46c';
+const mg = mailgun({apiKey: APIKEY, domain: DOMAIN});
+
+
+
+
 const Admin = require("../Model/admin.model.js");
+
 
 // Create and Save a new Customer
 exports.create = (req, res) => {
@@ -35,7 +47,7 @@ exports.create = (req, res) => {
   };
 
   exports.findOne = (req, res) => {
-    Admin.findByUsername(req.params.username, (err, data) => {
+    Admin.findByUsername(req.params.username,req.body.email,(err, user) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({
@@ -46,7 +58,9 @@ exports.create = (req, res) => {
             message: "Error retrieving Admin with username " + req.params.username
           });
         }
-      } else res.send(data);
+      } else res.send(user);
+      
+
     });
   };
   
@@ -60,6 +74,10 @@ exports.create = (req, res) => {
         });
       else res.send(data);
     });
+    
+
+
+
   };
 
   exports.update = (req, res) => {
@@ -115,3 +133,22 @@ exports.create = (req, res) => {
       else res.send({ message: `All Admins were deleted successfully!` });
     });
   };
+
+
+exports.forgotpassword = (req, res) => {
+    const {email} = req.body;
+
+    
+
+        const data = {
+          from: 'noreply@baby.com',
+          to: 'ahmedthaer4@gmail.com',
+          subject: 'Account Activation Link',
+          text: 'Hello User, Your password reset code is 24135'
+        };
+        mg.messages().send(data, function (error, body) {
+          console.log(body);
+        });
+
+    
+};

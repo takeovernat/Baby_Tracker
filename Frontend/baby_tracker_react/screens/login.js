@@ -164,7 +164,7 @@ export default function SignUpScreen({navigation}){
                 </View>
                 <View style={styles.signup}>
                     <Text style={styles.note}>Don't have an account?</Text>
-                    <FlatButton style={styles.forgot}  text="Sign Up" onPress={()=> (
+                    <FlatButton style={styles.signup}  text="Sign Up" onPress={()=> (
                         navigation.navigate('signup')
                     )}/>
                 </View>

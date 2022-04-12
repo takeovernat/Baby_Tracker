@@ -28,11 +28,11 @@ const forgetpass = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             
             <Text style={styles.text}>HealthyBabies©</Text>
-            <Text style={styles.note}>Please enter your email to reset your password</Text>
+            <Text style={styles.note}>Please enter your new password</Text>
 
             <TextInput
-                type="email"
-                placeholder='Email'
+                type="password"
+                placeholder='New Password'
                 placeholderTextColor="black"
                 placeholderTextFont="Noteworthy"
                 style={styles.textInput}
@@ -40,17 +40,21 @@ const forgetpass = ({ navigation }) => {
                 name="user_email"
                 selectionColor="#1A374D"
             />
+            <TextInput
+                //value={username}
+                placeholder = 'Re-Enter Password'
+                placeholderTextColor="black"
+                placeholderTextFont="Noteworthy"
+                style={styles.textInput}
+                autoCapitalize='none'
+                onChangeText={(user) => setUsername(user.trim())}
+                selectionColor="#1A374D"
+            />
             <View style={styles.textInputContainer}>
                 <FlatButton style={{ marginBottom: 100 }} type="submit" text='Recover' onPress={() => {
-                    forgetpass + navigation.navigate('ConfirmCode')
+                    
                 }} />
             </View>
-            <View style={styles.signup}>
-                    <Text style={styles.note}>Don't have an account?</Text>
-                    <FlatButton style={styles.forgot}  text="Sign Up" onPress={()=> (
-                        navigation.navigate('signup')
-                    )}/>
-                </View>
         </SafeAreaView>
     );
 }

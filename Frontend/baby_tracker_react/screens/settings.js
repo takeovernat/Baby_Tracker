@@ -135,13 +135,13 @@ const styles = StyleSheet.create({
         fontSize: 37,
         fontWeight: "bold",
         paddingLeft:20,
-        color:"#EDBFB7",
+        color:"white",
         marginBottom: 30
     },
     tab:{
         paddingHorizontal: 10,
         flexDirection: "row",
-        borderColor: "#EDBFB7",
+        borderColor: "white",
         borderWidth: 2,
         borderTopWidth: 0,
         borderLeftWidth: 0,
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     note:{
       fontFamily: 'Noteworthy',
       fontSize: 23,
-      color: "#EDBFB7",
+      color: "white",
       justifyContent: 'center',
       paddingVertical: 20,
       paddingHorizontal: 20

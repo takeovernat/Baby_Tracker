@@ -92,7 +92,7 @@ const Q2 = (props)=>{
         style={styles.input}
         onChangeText={onChangeAge}
         value={age}
-        placeholder="how much water in cups did have?"
+        placeholder="how many cups of water did your child have?"
         
         //keyboardType="numeric"
       />
@@ -148,8 +148,8 @@ const Q3 = (props)=>{
     />
     <TextInput
       style={styles.input}
-      onChangeText={onChangeAge}
-      value={age}
+      onChangeText={onChangeChildren}
+      value={children}
       placeholder="how many soft diaper changes?"
       
       //keyboardType="numeric"
@@ -177,7 +177,7 @@ const Q4 = (props)=>{
 
 
   const handlepress = ()=>{
-      props.navigation.replace('Q4')
+      props.navigation.replace('Home')
     
   }
   return (
@@ -204,8 +204,8 @@ const Q4 = (props)=>{
     />
     <TextInput
       style={styles.input}
-      onChangeText={onChangeAge}
-      value={age}
+      onChangeText={onChangeChildren}
+      value={children}
       placeholder="how many soft diaper changes?"
       
       //keyboardType="numeric"

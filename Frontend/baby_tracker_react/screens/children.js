@@ -11,6 +11,7 @@ import Childstatlist from "../components/childstatlist";
 import dailystat from "../screens/inputdailystat"
 import inputsize from "./inputsize";
 import { VictoryBar, VictoryChart, VictoryLabel } from "victory-native";
+import progressStack from './progressQ';
 
   const cStack = createStackNavigator();
   function ChildrenStack(children) {
@@ -33,6 +34,11 @@ import { VictoryBar, VictoryChart, VictoryLabel } from "victory-native";
        <cStack.Screen name="size input" component={inputsize} 
        options={{ headerShown: false,title: ''}}
        />
+
+       <cStack.Screen name = "progress" component={progressStack}
+       options={{headerShown:false, title:''}} 
+       
+       />
  
      </cStack.Navigator>
    );
@@ -52,8 +58,9 @@ const home = props => {
         </View>
       </TouchableOpacity>
       <View style={{marginTop:30}} >
-        <FlatButton text="Click here to input today's stats" onPress={() => {
-          props.navigation.navigate('input', {children: children})}}/>
+        <FlatButton text="Add today's progress" onPress={()=> props.navigation.navigate('progress', {children: children})}/>
+        {/* <FlatButton text="Click here to input today's stats" onPress={() => {
+          props.navigation.navigate('input', {children: children})}}/> */}
         <FlatButton text="Click here to input size stats" onPress={() => {
         props.navigation.navigate('size input', {children: children})}}/>
       </View>
@@ -209,7 +216,7 @@ if (isLoading)
     container: {
         flex: 1,
         paddingTop: 30,
-        backgroundColor: "#EDBFB7",
+        backgroundColor: "white",
         //alignItems: 'center',
         justifyContent: 'flex-start',
     },

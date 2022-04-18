@@ -6,7 +6,7 @@ const Childstatlist = (props) => {
   if(props.children === undefined)
   {
     return(
-      <List.Section style={{backgroundColor:"#FDEFF4"}}>
+      <List.Section style={{backgroundColor:"#406882"}}>
         <List.Subheader >This weeks' stats for John Doe</List.Subheader>
         <List.Item title="Daily calorie intake          1400 calories" left={() => <List.Icon icon="food-apple" />} />
         <List.Item

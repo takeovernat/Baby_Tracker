@@ -216,7 +216,7 @@ if (isLoading)
     container: {
         flex: 1,
         paddingTop: 30,
-        backgroundColor: "white",
+        backgroundColor: "black",
         //alignItems: 'center',
         justifyContent: 'flex-start',
     },
@@ -231,13 +231,13 @@ if (isLoading)
         fontSize: 36,
         fontWeight: "bold",
         marginTop: 20,
-        color: "black"
+        color: "white"
     },
     smalltext:{
       fontFamily: 'Noteworthy',
       fontSize: 24,
       marginTop: 20,
-      color: 'black',
+      color: 'white',
     },
     note:{
       fontFamily: 'Noteworthy',

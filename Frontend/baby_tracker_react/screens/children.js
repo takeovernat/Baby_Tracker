@@ -8,8 +8,10 @@ import Colors from "../styles/colors";
 import { createStackNavigator } from "@react-navigation/stack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Childstatlist from "../components/childstatlist";
-import { BarChart, graphStyle } from "react-native-chart-kit";
+import dailystat from "../screens/inputdailystat"
+import inputsize from "./inputsize";
 import { VictoryBar, VictoryChart, VictoryLabel } from "victory-native";
+import progressStack from './progressQ';
 
   const cStack = createStackNavigator();
   function ChildrenStack(children) {
@@ -25,10 +27,18 @@ import { VictoryBar, VictoryChart, VictoryLabel } from "victory-native";
        options={{ headerShown: false,title: ''}}
        />
        
-       <cStack.Screen name="input" component={dailyInput} 
+       <cStack.Screen name="input" component={dailystat} 
        options={{ headerShown: false,title: ''}}
        />
-       {/* <cStack.Screen name="Settings" component={ChildrenScreen} /> */}
+
+       <cStack.Screen name="size input" component={inputsize} 
+       options={{ headerShown: false,title: ''}}
+       />
+
+       <cStack.Screen name = "progress" component={progressStack}
+       options={{headerShown:false, title:''}} 
+       
+       />
  
      </cStack.Navigator>
    );
@@ -48,15 +58,20 @@ const home = props => {
         </View>
       </TouchableOpacity>
       <View style={{marginTop:30}} >
-        <FlatButton text="Click here to input today's stats" onPress={() => {
-          props.navigation.navigate('input')}}/>
+        <FlatButton text="Add today's progress" onPress={()=> props.navigation.navigate('progress', {children: children})}/>
+        {/* <FlatButton text="Click here to input today's stats" onPress={() => {
+          props.navigation.navigate('input', {children: children})}}/> */}
+        <FlatButton text="Click here to input size stats" onPress={() => {
+        props.navigation.navigate('size input', {children: children})}}/>
       </View>
     </View>
   )
 }
 const dailyInput = () => {
   return (
-    <View style={styles.container}></View>
+    <View style={styles.container}>
+      
+    </View>
   )
 }
 const childDetails = props => {
@@ -156,14 +171,16 @@ const ChildrenScreen = (props) => {
  const [isLoading, setLoading] = useState(true);
  useEffect( () => {
   const fetchChildren = async () => {
+    
   children = (await axios.get(`http://localhost:3000/Child/admin/${props.route.params.username}`)).data[0]
-//  console.log(children)
 
   children = {...children, ...(await axios.get(`http://localhost:3000/child_health/${children.child_id}`)).data[0]}
-
+  const timecew = children.record
   children = {...children, ...(await axios.get(`http://localhost:3000/child_size/${children.child_id}`)).data[0]}
-  console.log(children)
-
+  if(new Date(timecew).valueOf() > new Date(children.record).valueOf())
+  {
+    children.record = timecew
+  }
   setLoading(false)
   }
   fetchChildren()
@@ -175,8 +192,7 @@ if (isLoading)
       
       <View style={styles.container}>
         <Text style={styles.text}>
-            LOADING... //todo
-            must figure out if loading or user has no children..
+            LOADING... 
         </Text>
       </View>
     )

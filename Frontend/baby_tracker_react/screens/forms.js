@@ -123,6 +123,7 @@ const forms = ({navigation})=>{
                         onChangeText={(name) => setname(name.trim())}
                         placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
+                        autoCapitalize='none'
                         style={styles.textInput}
                         selectionColor="#1A374D"
                     />
@@ -131,6 +132,7 @@ const forms = ({navigation})=>{
                         onChangeText={(user) => setUsername(user.trim())}
                         placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
+                        autoCapitalize='none'
                         style={styles.textInput}
                         selectionColor="#1A374D"
             />
@@ -146,6 +148,7 @@ const forms = ({navigation})=>{
                         placeholder="Email"
                         placeholderTextColor="black"
                         placeholderTextFont="Noteworthy"
+                        autoCapitalize='none'
                         style={styles.textInput}
                         onChangeText={(email) => setemail(email.trim())}
                         selectionColor="#1A374D"

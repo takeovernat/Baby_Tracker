@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StyleSheet, Button, View, Text, Image} from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -13,14 +13,33 @@ import Header from '../components/header';
 import Colors from '../styles/colors';
 import progressStack from './progressQ';
 import { createStackNavigator } from '@react-navigation/stack';
+import axios from 'axios';
  
 function dashStack (props){
   const username = props.route.params.username
   const dashoardStack = createStackNavigator();
+  const [children, setchildren] = useState(null); 
+
+  useEffect(() => {
+  
+    axios
+      .get(`http://localhost:3000/child/Admin/${username}`)
+      .then((res)=> {
+          setchildren(res.data);
+
+          
+      })
+      .catch((err) => console.log(`There was an error retrirving childrens for admin ${username}`, err));
+  
+  
+  }, [])
+  //console.log("user", children)
+
 return(
 
     <dashoardStack.Navigator initialRouteName='home'>
       <dashoardStack.Screen name="home" component={HomeScreen} 
+        initialParams={children}
             options={{   
                 headerMode:'none',
               headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
@@ -42,8 +61,15 @@ function HomeScreen(props) {
     const [Search, setSearch] = useState('')
     const [open, setOpen] = useState(false)
     //const username = props.route.params.username
-    // console.log(props)
+     const children = props.route.params
     const { signOut } = React.useContext(AuthContext);
+    
+    // children.forEach(child => {
+   
+    //   console.log("hey")
+
+    // });
+    console.log(props)
     return (
       <ScrollView style={styles.container}>
 
@@ -70,6 +96,7 @@ function HomeScreen(props) {
         </View>
         </ScrollView>
     );
+
   }
   const New = true
 function NewUser (props)

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, Children } from 'react';
 import { StyleSheet, Button, View, Text, Image} from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -14,11 +14,15 @@ import Colors from '../styles/colors';
 import progressStack from './progressQ';
 import { createStackNavigator } from '@react-navigation/stack';
 import axios from 'axios';
+import Childstatindashboard from '../components/childstatindashboard';
  
 function dashStack (props){
   const username = props.route.params.username
   const dashoardStack = createStackNavigator();
-  const [children, setchildren] = useState(null); 
+  const [children, setchildren] = useState(null);
+  const [childhealth1, sethealth1] = useState(null);
+  const [childhealth2, sethealth2] = useState(null);
+  const [childhealth3, sethealth3] = useState(null); 
   const childrenIds = [];
 
   useEffect(() => {
@@ -36,30 +40,30 @@ function dashStack (props){
       
   
   }, [])
-  //console.log("user", children)
+
+  useEffect(() => {
+  
+    axios
+      .get(`http://localhost:3000/child_health/${childrenIds[0]}`)
+       .then((res)=> {
+       sethealth1(res.data);
+          
+      })
+     .catch((err) => console.log(`There was an error retrirving childrens health for id ${childrenIds[0]}`, err));
+  }, [children])
+  
+  //console.log("healthh ", childhealth1[0])
+  //console.log("healthh ", children[0])
  
   
-
-  // useEffect(() => {
+  if(children !== null){
+  children.map( child=> 
+    childrenIds.push(child.child_id)
+  );
+   console.log("id ", childrenIds[0])
   
-  //   axios
-  //     .get(`http://localhost:3000/child_health/${children}`)
-  //     .then((res)=> {
-  //         setchildren(res.data);
-
-          
-  //     })
-  //     .catch((err) => console.log(`There was an error retrirving childrens for admin ${username}`, err));
-  
-
-      
-  
-  // }, [children])
-
-  // children.map( child=> 
-  //   childrenIds.push(child.child_id)
-  // );
-  
+    
+}
 
 return(
 
@@ -104,12 +108,22 @@ function HomeScreen(props) {
 }
 
 console.log(children)
+//console.log("helth see ", childhealth1[0])
+// const childrenstat = {
+//   "daily_calories" : childhealth1[0].daily_calories,
+//   "diaper_change_soft" : childhealth1[0].ddiaper_change_soft,
+//   "diaper_change_hard" : childhealth1[0].diaper_change_hard,
+//   "water_intake_cups": childhealth1[0].water_intake_cups,
+//   "sleep_time": childhealth1[0].sleep_time,
+//   "record": childhealth1[0].record,
+// }
 
 if(children !== null){
 
   childrenDash = children.map( child =>
    <> 
    <Childrencomponent cardtitle={child.first_name + " " + child.last_name} cardsub="child 1" title={"age: "+child.age_months+" months"} Content="status - healthy"> </Childrencomponent>
+   {/* <Childstatindashboard childrenstat={childrenstat} ></Childstatindashboard> */}
    <Childstatlist></Childstatlist>
    </>
     

@@ -91,7 +91,7 @@ exports.create = (req, res) => {
     Admin.updateByUsername(
       req.params.username,
       new Admin(req.body),
-      (err, data) => {
+      (err, user) => {
         if (err) {
           if (err.kind === "not_found") {
             res.status(404).send({
@@ -102,12 +102,12 @@ exports.create = (req, res) => {
               message: "Error updating Admin with username " + req.params.username
             });
           }
-        } else res.send(data);
+        } else res.send(user);
       }
     );
   };
 
-  exports.delete = (req, res) => {
+  exports.remove = (req, res) => {
     Admin.remove(req.params.id, (err, data) => {
       if (err) {
         if (err.kind === "not_found") {

@@ -7,6 +7,8 @@ module.exports = app => {
     app.post("/Admin", Admin.create);
 
     app.get("/Admin/forgot", Admin.forgotpassword);
+
+    app.post("/Admin/Remove/:username", Admin.remove);
   
     app.get("/Admin", Admin.findAll);
 
@@ -35,6 +37,9 @@ module.exports = app => {
     app.get("/Child_health/:child_id", Child_health.findOne);
 
     app.post("/Admin/:username",Admin.update);
+
+   
+    app.post("/Admin/updatingpass", Admin.updateByUsername);
 
     
   };

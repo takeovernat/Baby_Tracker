@@ -115,28 +115,19 @@ Admin.findByUsername = (username, result) => {
 };
 
 //update admin by username
-  Admin.updateByUsername = (username, Admin, result) => {
-    sql.query(
-      "UPDATE Admin SET age = ?, children = ? WHERE username = ?",
-      [Admin.age, Admin.children, username],
-      (err, res) => {
-        if (err) {
-          console.log("error: ", err);
-          result(null, err);
-          return;
-        }
-  
-        if (res.affectedRows == 0) {
-          // not found admin with the id
-          result({ kind: "not_found" }, null);
-          return;
-        }
-  
-        console.log("updated Admin: ", { username: username, ...Admin });
-        result(null, { username: username, ...Admin });
+Admin.updateByUsername = (username, Admin, result) => {
+  sql.query(
+    "UPDATE Admin SET password = MD5('testing69') WHERE username = ? ;", Admin.username, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
       }
-    );
-  };
+      console.log("updated Admin: ", { username: res.username, ...Admin });
+      result(null, { username: res.username, ...Admin });
+    }
+  );
+};
   
 
 module.exports = Admin;

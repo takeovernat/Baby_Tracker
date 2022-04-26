@@ -19,6 +19,7 @@ function dashStack (props){
   const username = props.route.params.username
   const dashoardStack = createStackNavigator();
   const [children, setchildren] = useState(null); 
+  const childrenIds = [];
 
   useEffect(() => {
   
@@ -31,21 +32,47 @@ function dashStack (props){
       })
       .catch((err) => console.log(`There was an error retrirving childrens for admin ${username}`, err));
   
+
+      
   
   }, [])
   //console.log("user", children)
+ 
+  
+
+  // useEffect(() => {
+  
+  //   axios
+  //     .get(`http://localhost:3000/child_health/${children}`)
+  //     .then((res)=> {
+  //         setchildren(res.data);
+
+          
+  //     })
+  //     .catch((err) => console.log(`There was an error retrirving childrens for admin ${username}`, err));
+  
+
+      
+  
+  // }, [children])
+
+  // children.map( child=> 
+  //   childrenIds.push(child.child_id)
+  // );
+  
 
 return(
 
     <dashoardStack.Navigator initialRouteName='home'>
       <dashoardStack.Screen name="home" component={HomeScreen} 
-        initialParams={children}
+        initialParams={username}
             options={{   
                 headerMode:'none',
               headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
               title: ''}}
             />
             <dashoardStack.Screen name='progress' component={progressStack}
+            initialParams={username}
             options={{   
                 headerMode:'none',
               headerStyle:{backgroundColor:Colors.primary, shadowColor: "transparent" } ,
@@ -54,55 +81,102 @@ return(
 
       </dashoardStack.Navigator>
 );
-}
+//
+
 
 function HomeScreen(props) {
 
-    const [Search, setSearch] = useState('')
-    const [open, setOpen] = useState(false)
-    //const username = props.route.params.username
-     const children = props.route.params
-    const { signOut } = React.useContext(AuthContext);
-    
-    // children.forEach(child => {
-   
-    //   console.log("hey")
+  const [Search, setSearch] = useState('')
+  const [open, setOpen] = useState(false)
+  //const username = props.route.params.username
+  const { signOut } = React.useContext(AuthContext);
+  let childrenDash = null;
 
-    // });
-    console.log(props)
+  const getCurrentDate=()=>{
+
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+
+    //Alert.alert(date + '-' + month + '-' + year);
+    // You can turn it in to your desired format
+    return date + '-' + month + '-' + year;//format: dd-mm-yyyy;
+}
+
+console.log(children)
+
+if(children !== null){
+
+  childrenDash = children.map( child =>
+   <> 
+   <Childrencomponent cardtitle={child.first_name + " " + child.last_name} cardsub="child 1" title={"age: "+child.age_months+" months"} Content="status - healthy"> </Childrencomponent>
+   <Childstatlist></Childstatlist>
+   </>
+    
+     );   
+}
+
+  
+//console.log("ch", children)
+
+  if (children === null){
     return (
       <ScrollView style={styles.container}>
-
+  
       
         <View >
-            <Header title={"welcome "+ ''}subtitle="calm down"></Header>
+            <Header title={"welcome "+ ''}subtitle="error retrieving data"></Header>
             
       <View style={styles.stats}>
-
+  
       <Image onPress={()=> props.navigate.navigation('progress')} style={styles.image} source={require("../assets/checkin.png")}  />
       <Button title="check in for 10/18/2022${date()}" onPress={()=> props.navigation.navigate('progress')}/>
-
+      {/* {childrenDash} */}
         <Childstatlist>
-
+  
         </Childstatlist>
         </View>
      
         <View style={styles.children}>
           <Childrencomponent cardtitle="John Doe" cardsub="child 1" title="Day #1" Content="status - healthy">
-
+  
           </Childrencomponent>
         </View>
             
         </View>
         </ScrollView>
     );
+   
+
 
   }
-  const New = true
-function NewUser (props)
-{
+  else{
+    return (
+      <ScrollView style={styles.container}>
+  
+      
+        <View >
+            <Header title={"welcome "+ username}subtitle=""></Header>
+            
+      <View style={styles.stats}>
+  
+      <Image onPress={()=> props.navigate.navigation('progress')} style={styles.image} source={require("../assets/checkin.png")}  />
+      <Button title= {"check in for " + getCurrentDate()} onPress={()=> props.navigation.navigate('progress')}/>
+      {childrenDash}
+        </View>      
+        </View>
+        </ScrollView>
+    );
+   
+  }
+
+  
 
 }
+
+///
+}//dashstack
+
   const styles = StyleSheet.create({
     container: {
         flex: 1,

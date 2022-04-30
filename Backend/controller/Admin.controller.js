@@ -47,7 +47,7 @@ exports.create = (req, res) => {
   };
 
   exports.findOne = (req, res) => {
-    Admin.findByUsername(req.params.username,req.body.email,(err, user) => {
+    Admin.findByUsername(req.params.username,(err, user) => {
       if (err) {
         if (err.kind === "not_found") {
           res.status(404).send({

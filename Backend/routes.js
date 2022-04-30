@@ -12,7 +12,7 @@ module.exports = app => {
 
     app.get("/Admin/:username", Admin.findOne);
 
-    app.post("/Admin/:username", Admin.findOne);
+    app.post("/Admin/:username", Admin.update);
 
     app.post("/Child", Child.create);
 

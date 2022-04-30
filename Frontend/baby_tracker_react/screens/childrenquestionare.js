@@ -12,7 +12,8 @@ import axios from "axios";
 import { Dimensions } from "react-native";
 import { Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import RadioButton from "../components/radiobutton"
+//mport RadioButton from "../components/radiobutton"
+import { RadioButton } from 'react-native-paper';
 
 const Q1 = (props)=>{
     const [age, onChangeAge] = React.useState(null);
@@ -106,6 +107,7 @@ const Q2 = (props)=>{
     //const name = '';
     const username = props.route.params.name;
     const nav = props.route.params;
+    const [checked, setChecked] = React.useState('first');
    //console.log(props.route.params)
     //console.log(username)
     const handlePress = ()=>{
@@ -122,7 +124,7 @@ const Q2 = (props)=>{
                  first_name:first,
                  last_name : last,
                  age_months: age,
-                 gender : 'm'
+                 gender : checked == 'first' ? 'm' : 'f' 
                 })
                 .then((res)=> {
                   console.log(res.data)
@@ -144,7 +146,7 @@ const Q2 = (props)=>{
     return (
       <View style={styles.container} >
           <ScrollView keyboardShouldPersistTaps='handled'> 
-          <Text style={styles.fonty}> Tell us more about your child👶🏼</Text>
+          <Text style={styles.fonty}> Tell us more about your child 👶🏼</Text>
           <SafeAreaView>
       <TextInput
         style={styles.input}
@@ -168,6 +170,28 @@ const Q2 = (props)=>{
         keyboardType="numeric"
         
         />
+
+      <View style={styles.radioM}>
+       <Text>Male </Text> 
+      <RadioButton
+        uncheckedColor = "yellow"
+        color = "red"
+        value="first"
+        status={ checked === 'first' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('first')}
+      />
+      </View>
+
+      <View style={styles.radioF}>
+      <Text>Female </Text> 
+      <RadioButton
+        value="second"
+        status={ checked === 'second' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('second')}
+      />
+      </View>
+
+
     </SafeAreaView>
         <View style={styles.arrow}>
         <Icon  
@@ -190,6 +214,7 @@ const Q3 = (props)=>{
     const nav = props.route.params;
     const firstkidname = props.route.params.first;
     const children = props.route.params.children;
+    const [checked, setChecked] = React.useState('first');
 
     //console.log(props)
    //23console.log( props)
@@ -208,7 +233,7 @@ const Q3 = (props)=>{
       first_name:text,
       last_name : number,
       age_months: age,
-      gender : 'm'
+      gender : checked == 'first' ? 'm' : 'f' 
      })
      .then((res)=> {
        console.log( "created child obj in db",res.data)
@@ -254,18 +279,26 @@ const handleGender=()=>{
         placeholder="age in months" keyboardType="numeric"
         />
       
-      <View style={styles.radioM}> 
-      <TouchableOpacity style={{display:'flex', flexDirection:'row'}} onPress={()=>onChangeGender('m') } >
-        <RadioButton/>
-        <Text style={{padding:5}}>Male</Text>
-        </TouchableOpacity>
-      </View >
-      <View style={styles.radioF}> 
-      <TouchableOpacity style={{display:'flex', flexDirection:'row'}} onPress={()=>onChangeGender('f')} >
-        <RadioButton/>
-        <Text style={{padding:5}}>Female</Text>
-        </TouchableOpacity>
+      <View style={styles.radioM}>
+       <Text>Male </Text> 
+      <RadioButton
+        uncheckedColor = "yellow"
+        color = "red"
+        value="first"
+        status={ checked === 'first' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('first')}
+      />
       </View>
+
+      <View style={styles.radioF}>
+      <Text>Female </Text> 
+      <RadioButton
+        value="second"
+        status={ checked === 'second' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('second')}
+      />
+      </View>
+    
 
         
     </SafeAreaView>
@@ -290,6 +323,7 @@ const Q4 = (props)=>{
     const nav = props.route.params;
     const secondkidname = props.route.params.text
     const children = props.route.params.children
+    const [checked, setChecked] = React.useState('first');
     
     const handlePress= () =>{
 
@@ -305,7 +339,7 @@ const Q4 = (props)=>{
                   first_name:text,
                   last_name : number,
                   age_months: age,
-                  gender : 'm'
+                  gender : checked == 'first' ? 'm' : 'f' 
                  })
                  .then((res)=> {
                    console.log( "created child obj in db",res.data)
@@ -333,6 +367,26 @@ const Q4 = (props)=>{
         style={styles.input} onChangeText={onChangeAge} value={age}
         placeholder="age in months" keyboardType="numeric"
         />
+
+    <View style={styles.radioM}>
+       <Text>Male </Text> 
+      <RadioButton
+        uncheckedColor = "yellow"
+        color = "red"
+        value="first"
+        status={ checked === 'first' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('first')}
+      />
+      </View>
+
+      <View style={styles.radioF}>
+      <Text>Female </Text> 
+      <RadioButton
+        value="second"
+        status={ checked === 'second' ? 'checked' : 'unchecked' }
+        onPress={() => setChecked('second')}
+      />
+      </View>
     </SafeAreaView>
         <View style={styles.arrow}>
         <Icon  

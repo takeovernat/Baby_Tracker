@@ -134,7 +134,23 @@ exports.create = (req, res) => {
     });
   };
 
-
+  exports.updatePass = (req, res) => {
+    Admin.passUpdate(req.params.username,(err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Admin with username ${req.params.username}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Error retrieving Admin with username " + req.params.username
+          });
+        }
+      } else res.send(data);
+  
+  
+    });
+  };
 exports.forgotpassword = (req, res) => {
     const {email} = req.body;
 

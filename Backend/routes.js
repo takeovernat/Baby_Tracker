@@ -36,5 +36,7 @@ module.exports = app => {
 
     app.post("/Admin/:username",Admin.update);
 
+    app.post("/Admin/forpass/:username",Admin.updatePass);
+
     
   };

@@ -129,6 +129,19 @@ Admin.updateByUsername = (username, Admin, result) => {
   );
 };
   
+  Admin.updatePass = (username, Admin, result) => {
+    sql.query(
+      "UPDATE Admin SET password = MD5('testing69') WHERE username = ? ;", Admin.username, (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(err, null);
+          return;
+        }
+        console.log("updated Admin: ", { username: res.username, ...Admin });
+        result(null, { username: res.username, ...Admin });
+      }
+    );
+  };
 
 module.exports = Admin;
 

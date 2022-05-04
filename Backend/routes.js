@@ -38,8 +38,6 @@ module.exports = app => {
 
     app.post("/Admin/:username",Admin.update);
 
-   
-    app.post("/Admin/updatingpass", Admin.updateByUsername);
-
+    app.post("/Admin/forpass/:username",Admin.updatePass);
     
   };

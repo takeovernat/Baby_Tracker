@@ -4,6 +4,7 @@ const {forgotpassword} = require("../controller/Admin.controller")
 
 
 router.put('/forgot-password', forgotpassword)
+router.put('/updatingpass', updateByUsername)
 
 router.route('/users').get((req, res) => {
 	User.find()

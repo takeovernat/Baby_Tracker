@@ -13,6 +13,7 @@ import ChildrenScreen from '../screens/children';
 import Dashboard from '../screens/Dashboard'
 import { createStackNavigator } from '@react-navigation/stack';
 import Colors from '../styles/colors';
+import Notification from '../screens/notification';
 
 
 const usernamepass = "";
@@ -54,9 +55,9 @@ function MyDrawer(props) {
               />
            ),
         }} />
-      <Drawer.Screen name = "notifications" component={SettingsScreen}
+      <Drawer.Screen name = "notifications" component={Notification}
         options={{ headerStyle:{backgroundColor:"black", shadowColor: "transparent"},
-        title:"",
+        title:"Notifications",
         drawerLabelStyle:{ 
           color: "white"
         },

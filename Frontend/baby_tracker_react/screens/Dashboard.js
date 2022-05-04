@@ -24,20 +24,17 @@ function dashStack (props){
   const [childhealth2, sethealth2] = useState(null);
   const [childhealth3, sethealth3] = useState(null); 
   const childrenIds = [];
+  
 
   useEffect(() => {
   
     axios
       .get(`http://localhost:3000/child/Admin/${username}`)
       .then((res)=> {
-          setchildren(res.data);
-
-          
+          setchildren(res.data);  
       })
       .catch((err) => console.log(`There was an error retrirving childrens for admin ${username}`, err));
-  
 
-      
   
   }, [])
 
@@ -122,9 +119,10 @@ if(children !== null){
 
   childrenDash = children.map( child =>
    <> 
-   <Childrencomponent cardtitle={child.first_name + " " + child.last_name} cardsub="child 1" title={"age: "+child.age_months+" months"} Content="status - healthy"> </Childrencomponent>
+  <Button title= {"check in for " + child.first_name + " "+ getCurrentDate()} onPress={()=> props.navigation.navigate('progress')}/>
+   <Childrencomponent cardtitle={child.first_name + " " + child.last_name} cardsub={(child.gender).toUpperCase()} title={"age: "+child.age_months+" months"} Content="status - healthy"></Childrencomponent>
    {/* <Childstatindashboard childrenstat={childrenstat} ></Childstatindashboard> */}
-   <Childstatlist></Childstatlist>
+   
    </>
     
      );   
@@ -175,7 +173,8 @@ if(children !== null){
       <View style={styles.stats}>
   
       <Image onPress={()=> props.navigate.navigation('progress')} style={styles.image} source={require("../assets/checkin.png")}  />
-      <Button title= {"check in for " + getCurrentDate()} onPress={()=> props.navigation.navigate('progress')}/>
+     
+      {/* <Button title= {"check in for " + children[0].first_name + " "+ getCurrentDate()} onPress={()=> props.navigation.navigate('progress')}/> */}
       {childrenDash}
         </View>      
         </View>

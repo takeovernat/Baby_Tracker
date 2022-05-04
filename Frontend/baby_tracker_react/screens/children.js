@@ -191,8 +191,8 @@ if (isLoading)
     return(
       
       <View style={styles.container}>
-        <Text style={styles.text}>
-            LOADING... 
+        <Text style={styles.loading}>
+            you must update your children's progress atleast once to see charts and statistics, please use the dashboard to enter the required data. 
         </Text>
       </View>
     )
@@ -246,6 +246,13 @@ if (isLoading)
       paddingVertical: 20,
       paddingHorizontal: 20
   },
+  loading:{
+        fontFamily: 'Noteworthy',
+        fontSize: 30,
+        marginTop: 200,
+        alignSelf: "center" ,
+        color: "white"
+  }
 });
 
 export default ChildrenScreen

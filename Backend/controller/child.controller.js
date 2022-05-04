@@ -16,7 +16,8 @@ exports.create = (req, res) => {
     age : req.body.age,
     first_name : req.body.first_name,
     last_name : req.body.last_name,
-    age_months : req.body.age_months
+    age_months : req.body.age_months,
+    gender : req.body.gender
 
     });
   

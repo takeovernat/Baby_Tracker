@@ -10,16 +10,109 @@ import AuthContext from '../context';
 import md5 from 'md5'
 
 
-const bckImage = {uri:"https://www.xtrafondos.com/wallpapers/vertical/baby-yoda-el-mandaloriano-4240.jpg"}
-const windowHeight = Dimensions.get('window').height;
-const windowWidth = Dimensions.get('window').width;
+export default function forgetPass({navigation}){
+    const [username, setUsername] = React.useState(''); //holds username
+    const [users, setUsers] = React.useState([]); //holds all admins from axios request
+    const { signIn } = React.useContext(AuthContext); //usecontext forch signing in user
+    const bckImage = {uri:"https://www.xtrafondos.com/wallpapers/vertical/baby-yoda-el-mandaloriano-4240.jpg"}
+    const windowHeight = Dimensions.get('window').height;
+    const windowWidth = Dimensions.get('window').width;
+    //const [passwordhash, setPasswordHash] = React.useState('');
+    //use effect makes sure the func inside is executed as soon as the page is rendered
+    React.useEffect(() => {
+         getUsers();
+         //console.log(users)
+     }, []);
 
-const forgetpass = ({ navigation }) => {
+     // the get users function above
+    const getUsers = async () => {
+        let passer="";
+        
+        // const results = (await fetch('http://localhost:3000/Admin')).json
+        // console.log(results)
+    
+        axios
+      .get('http://localhost:3000/Admin')
+      .then((res)=> {
+          setUsers(res.data);
+          
+      })
+      .catch((err) => console.log("There was an error retrirving admins for log in purposes!", err));
+  
 
-    axios.get('http://localhost:3000/Admin/forgot')
-    .then((response) => {
-        console.log(response.data);
-    })
+
+    };
+
+    //login function // authenticates user easy to understand
+    const fgtPass = async (username) => {
+
+        
+        if(username.length === 0){
+               Alert.alert('Invalid entry!', 'Username or password cannot be empty.', [
+                    {text: 'Okay'}
+                  ]);
+                  return;
+                  }
+        else if (username.length < 5){
+            Alert.alert('Invalid entry!', 'Username must be atleast 6 characters.', [
+                {text: 'Okay'}
+              ]);
+              return;
+        }
+        try{
+            var found = false;
+            let passer='';
+            users.forEach((user) => {
+                
+                if (user.username === username) {
+                    found= true;
+                    console.log("success!!!")
+                }
+                else{
+                    Alert.alert('Invalid entry!', 'Username or password is wrong.', [
+                        {text: 'Okay'}
+                        ]);
+                    console.log("fail")
+                }
+
+                
+                
+            });
+            }
+            catch(e){
+                console.log(e);
+            }
+            if(!found){
+                Alert.alert('Invalid entry!', 'Username or password is wrong.', [
+                    {text: 'Okay'}
+                  ]);
+            }
+            
+        
+    };
+
+
+
+
+/*function dashStack (props){
+    const username = props.route.params.username
+  
+    useEffect(() => {
+    
+      axios
+        .get(`http://localhost:3000/Admin/${username}`)
+        .then((res)=> {
+            console.log(res.data);
+  
+            
+        })
+        .catch((err) => console.log(`There was an error retrirving user for admin ${username}`, err));
+    
+  
+        
+    
+    }, [])
+*/
 
      
    
@@ -31,18 +124,17 @@ const forgetpass = ({ navigation }) => {
             <Text style={styles.note}>Please enter your email to reset your password</Text>
 
             <TextInput
-                type="email"
-                placeholder='Email'
+                placeholder='Username'
+                onChangeText={(user) => setUsername(user.trim())}
                 placeholderTextColor="black"
                 placeholderTextFont="Noteworthy"
                 style={styles.textInput}
                 autoCapitalize='none'
-                name="user_email"
                 selectionColor="#1A374D"
             />
             <View style={styles.textInputContainer}>
                 <FlatButton style={{ marginBottom: 100 }} type="submit" text='Recover' onPress={() => {
-                    forgetpass + navigation.navigate('ConfirmCode')
+                    fgtPass(username) + navigation.navigate('ConfirmCode')
                 }} />
             </View>
             <View style={styles.signup}>
@@ -124,5 +216,3 @@ const styles = StyleSheet.create({
 
 });
 
-
-export default forgetpass;

@@ -25,7 +25,7 @@ const forgetpass = ({ navigation }) => {
    
 
     return (
-        <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.container}>
             
             <Text style={styles.text}>HealthyBabies©</Text>
             <Text style={styles.note}>Please enter your email to reset your password</Text>
@@ -51,7 +51,7 @@ const forgetpass = ({ navigation }) => {
                         navigation.navigate('signup')
                     )}/>
                 </View>
-        </SafeAreaView>
+        </ScrollView>
     );
 }
 

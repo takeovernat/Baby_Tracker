@@ -9,6 +9,7 @@ import AuthContext from '../context';
 import { Ionicons } from '@expo/vector-icons';
 import axios from "axios";
 import { Dimensions } from "react-native";
+import { Alert } from "react-native";
 
 
 const Q1 = (props)=>{
@@ -17,6 +18,15 @@ const Q1 = (props)=>{
 
 
     const handlepress = ()=>{
+
+        if(age == null || age == '' || age == " "){
+          alert('please enter a valid meal');
+          return
+        }
+        else if(children == null || children == '' ||  children == " "){
+          alert('please enter a valid calorie count');
+          return
+        }
         props.navigation.replace('Q2')
       
     }
@@ -38,7 +48,7 @@ const Q1 = (props)=>{
         style={styles.input}
         onChangeText={onChangeAge}
         value={age}
-        placeholder=" how many meals did eat today?"
+        placeholder=" how many times did you feed your child today?"
         //keyboardType="numeric"
       />
 
@@ -46,7 +56,7 @@ const Q1 = (props)=>{
         style={styles.input}
         onChangeText={onChangeChildren}
         value={children}
-        placeholder="aproximately how many calories did eat today?"
+        placeholder="aproximately how many calories did they consume?"
         //keyboardType="numeric"
         />
     </SafeAreaView>
@@ -70,6 +80,11 @@ const Q2 = (props)=>{
 
 
     const handlepress = ()=>{
+      if(age == null || age == '' || age == " "){
+        alert('please enter a valid water intake');
+        return
+      }
+      
         props.navigation.replace('Q3')
       
     }
@@ -85,7 +100,7 @@ const Q2 = (props)=>{
       <View style={styles.container} >
         <ScrollView keyboardShouldPersistTaps='handled'> 
            <Image style={styles.img} source={require("../assets/water-1542.png")}/>
-          <Text style={styles.fontyQ2}>remember the recomended water intake for kids under 12 months is 0.5 to 1 cup a day </Text>
+          <Text style={styles.fontyQ2}>remember the recomended water intake for kids under 12 months is 0.5 to 1 cup a day, make sure they stay hydrated  </Text>
           
           <SafeAreaView>
       <TextInput
@@ -121,6 +136,14 @@ const Q3 = (props)=>{
 
 
   const handlepress = ()=>{
+    if(age == null || age == '' || age == " "){
+      alert('please enter a valid value');
+      return
+    }
+    else if(children == null || children == '' ||  children == " "){
+      alert('please enter a valid value');
+      return
+    }
       props.navigation.replace('Q4')
     
   }
@@ -177,6 +200,14 @@ const Q4 = (props)=>{
 
 
   const handlepress = ()=>{
+    if(age == null || age == '' || age == " "){
+      alert('please enter a valid value');
+      return
+    }
+    else if(children == null || children == '' ||  children == " "){
+      alert('please enter a valid value');
+      return
+    }
       props.navigation.replace('Home')
     
   }
@@ -191,7 +222,7 @@ const Q4 = (props)=>{
     <View style={styles.container} >
       <ScrollView keyboardShouldPersistTaps='handled'> 
          <Image style={styles.imgsleep} source={require("../assets/sleepbaby.png")}/>
-        <Text style={styles.fontyQ2}>toddlers should get atleast 12 hours asleep, see your doctor if your toddler sleeps less than 10 </Text>
+        <Text style={styles.fontyQ2}>toddlers should get atleast 12 hours asleep, see your doctor if your toddler/infant sleeps for less than 8 </Text>
         
         <SafeAreaView>
     <TextInput

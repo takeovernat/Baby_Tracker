@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ImageBackground, StyleSheet, Text, View, Button, Image, Switch, TextInput, currency, SafeAreaView,ScrollView,TouchableOpacity,Alert, } from "react-native";
+import { ImageBackground, StyleSheet, Text, View, Button, Image, Switch, TextInput, currency, SafeAreaView,ScrollView,TouchableOpacity,Alert,alignItems,justifyContent } from "react-native";
 import Navstack from "../navigation";
 import FlatButton from "../styles/button";
 import { Dimensions, Linking } from "react-native";
